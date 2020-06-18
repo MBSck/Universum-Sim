@@ -43,8 +43,6 @@ BLOCK_SIZE = 50
 CIRCLE_RADIUS = int(BLOCK_SIZE/2)
 
 
-
-
 def text_format(message, textFont, textSize, textColor):
     """Gets a message and renders its size, text, font and color"""
     newFont = pg.font.Font(textFont, textSize)
@@ -139,9 +137,9 @@ def main_menu():
 def editor_mode():
     """This intializes the mode where you can create Planets and such.
     And drag them around and delete them again"""
-    global CIRCLE_RADIUS
+    global CIRCLE_RADIUS#
     SCREEN.fill(BLACK)
-    objects = []
+    objects, radius = [], []
     selected = None
     edit = True
 
@@ -163,6 +161,7 @@ def editor_mode():
                 if event.button == 1:
                     action = "create"
                     objects.append(pg.Rect(event.pos[0], event.pos[1], BLOCK_SIZE, BLOCK_SIZE))
+                    radius.append(CIRCLE_RADIUS)
 
                 # Checks if it is the middle mouse button
                 elif (event.button == 2) or (event.button == 3):
@@ -188,13 +187,16 @@ def editor_mode():
                 elif event.button == 4:
                     if selected is not None:
                         if action == "move":
-                            CIRCLE_RADIUS += 35
+                            radius[selected] += 35
 
                 # Checks if wheel is turned backward
                 elif event.button == 5:
                     if selected is not None:
                         if action == "move":
-                            CIRCLE_RADIUS -= 35
+                            if CIRCLE_RADIUS <= 35:
+                                radius[selected] = CIRCLE_RADIUS
+                            else:
+                                radius[selected] -= 35
 
             # Checks if mouse button is let loose
             elif event.type == pg.MOUSEBUTTONUP:
@@ -209,6 +211,7 @@ def editor_mode():
                         objects[selected].y = event.pos[1] + selected_offset_y
                     if action == "destroy":
                         del objects[selected]
+                        del radius[selected]
                         selected = None
 
         # Fill screen with black
@@ -220,8 +223,8 @@ def editor_mode():
         SCREEN.blit(title, (SCREEN_WIDTH / 2 - (title_rect[2] / 2), 0))
 
         # Draws the circles
-        for o in objects:
-            pg.draw.circle(SCREEN, RED, o.center, CIRCLE_RADIUS)
+        for i, o in enumerate(objects):
+            pg.draw.circle(SCREEN, RED, o.center, radius[i])
 
         # Updates the screen
         pg.display.update()
