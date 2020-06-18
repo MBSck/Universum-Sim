@@ -1,0 +1,8 @@
+System for drag motion in pygame:
+https://github.com/furas/python-examples/blob/master/pygame/drag-rectangles-circles/drag_circles.py
+
+Font-Site:
+https://www.1001freefonts.com/search.php?q=game&search.x=0&search.y=0
+
+Structured Game:
+https://github.com/Mekire/pygame-mutiscene-template-with-movie/tree/master/data
