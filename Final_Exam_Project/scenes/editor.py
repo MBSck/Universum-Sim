@@ -1,12 +1,7 @@
 import sys
 import pygame as pg
 from pygame.locals import *
-
-# Selects the files from different folders to be included
-sys.path.append("/home/marten/PycharmProjects/Python_Class_Project/Final_Exam_Project/assets")
-
 import menu
-# Import the utility
 from utility import *
 
 
