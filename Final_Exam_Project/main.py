@@ -7,12 +7,14 @@ black holes and such"""
 
 # Startbedigungen für planeten z.B. mit Pfeil in Richtung usw.
 
-# Planeten können per Click erstellt werden
-
 # Sollen sich gravitationstechnisch richtig verhalten
 
 # Make main menu and editor function so that you can create new planets and destroy them and soo forth and drag them
 # around
+
+# Make objects not being able to leave the screen via drag and also not bigger, add options for bigger screen size
+# Make objects not being able to be created inside another object
+# Make objects be created at tip of cursor not in the middle
 
 # Center the application
 os.environ["SDL_VIDEO_CENTERED"] = "1"
@@ -29,7 +31,7 @@ BLACK, WHITE = (0, 0, 0), (255, 255, 255)
 RED, GREEN, BLUE = (255, 0, 0), (0, 255, 0), (0, 0, 255)
 
 # Font
-font = "Gameplay.ttf"
+font = "assets/Gameplay.ttf"
 
 # Get screen size
 info = pg.display.Info()
@@ -49,6 +51,26 @@ def text_format(message, textFont, textSize, textColor):
     newText = newFont.render(message, 0, textColor)
 
     return newText
+
+
+def mouse_collison(objects, radius):
+    """Gets the position of the mouse and checks if it collides with any objects in the game"""
+    pos_x, pos_y = pg.mouse.get_pos()
+    selected, selected_offset_x, selected_offset_y = None, 0, 0
+    # Checks if the mouse collides with element
+    for i, o in enumerate(objects):
+        # Pythagoras a^2 + b^2 = c^2
+        dx = o.centerx - pos_x
+        dy = o.centery - pos_y
+        distance_square = dx ** 2 + dy ** 2
+
+        # Checks the distance between the cursor and the circle
+        if distance_square <= radius[i] ** 2:
+            selected = i
+            selected_offset_x = o.x - pos_x
+            selected_offset_y = o.y - pos_y
+
+    return selected, selected_offset_x, selected_offset_y
 
 
 def main_menu():
@@ -72,7 +94,7 @@ def main_menu():
 
                 # Checks if down arrow is pressed
                 elif event.key == pg.K_DOWN:
-                    if counter < 2:
+                    if counter < 3:
                         counter += 1
 
                 # Checks if up arrow is pressed
@@ -86,6 +108,8 @@ def main_menu():
                 elif counter == 1:
                     selected = "help"
                 elif counter == 2:
+                    selected = "options"
+                elif counter == 3:
                     selected = "quit"
 
                 # Checks if the return key is pressed and acts on it
@@ -94,6 +118,8 @@ def main_menu():
                         menu = False
                         editor_mode()
                     if selected == "help":
+                        menu = False
+                    if selected == "options":
                         menu = False
                     if selected == "quit":
                         menu = False
@@ -112,6 +138,10 @@ def main_menu():
             text_help = text_format("HELP", font, 75, GREEN)
         else:
             text_help = text_format("HELP", font, 75, WHITE)
+        if selected == "options":
+            text_options = text_format("OPTIONS", font, 75, GREEN)
+        else:
+            text_options = text_format("OPTIONS", font, 75, WHITE)
         if selected == "quit":
             text_quit = text_format("QUIT", font, 75, GREEN)
         else:
@@ -120,13 +150,15 @@ def main_menu():
         title_rect = title.get_rect()
         start_rect = text_start.get_rect()
         help_rect = text_help.get_rect()
+        options_rect = text_options.get_rect()
         quit_rect = text_quit.get_rect()
 
         # Main Menu Text
         SCREEN.blit(title, (SCREEN_WIDTH / 2 - (title_rect[2] / 2), 80))
         SCREEN.blit(text_start, (SCREEN_WIDTH / 2 - (start_rect[2] / 2), 300))
         SCREEN.blit(text_help, (SCREEN_WIDTH / 2 - (help_rect[2] / 2), 380))
-        SCREEN.blit(text_quit, (SCREEN_WIDTH / 2 - (quit_rect[2] / 2), 460))
+        SCREEN.blit(text_options, (SCREEN_WIDTH / 2 - (options_rect[2] / 2), 460))
+        SCREEN.blit(text_quit, (SCREEN_WIDTH / 2 - (quit_rect[2] / 2), 540))
 
         # Update screen and set fps as well as title
         pg.display.update()
@@ -137,7 +169,7 @@ def main_menu():
 def editor_mode():
     """This intializes the mode where you can create Planets and such.
     And drag them around and delete them again"""
-    global CIRCLE_RADIUS#
+    global CIRCLE_RADIUS
     SCREEN.fill(BLACK)
     objects, radius = [], []
     selected = None
@@ -157,46 +189,24 @@ def editor_mode():
 
             # Checks for mouse button press
             elif event.type == MOUSEBUTTONDOWN:
+                selected = mouse_collison(objects, radius)[0]
                 # Checks if it is the left mouse button
                 if event.button == 1:
-                    action = "create"
-                    objects.append(pg.Rect(event.pos[0], event.pos[1], BLOCK_SIZE, BLOCK_SIZE))
-                    radius.append(CIRCLE_RADIUS)
+                    if selected is None:
+                        action = "create"
+                        objects.append(pg.Rect(event.pos[0], event.pos[1], BLOCK_SIZE, BLOCK_SIZE))
+                        radius.append(CIRCLE_RADIUS)
 
                 # Checks if it is the middle mouse button
-                elif (event.button == 2) or (event.button == 3):
-                    for i, o in enumerate(objects):
-                        # Pythagoras a^2 + b^2 = c^2
-                        dx = o.centerx - event.pos[0]
-                        dy = o.centery - event.pos[1]
-                        distance_square = dx ** 2 + dy ** 2
+                elif event.button == 2:
+                    action = "move"
 
-                        # Checks the distance between the cursor and the circle
-                        if distance_square <= CIRCLE_RADIUS ** 2:
-                            selected = i
-                            selected_offset_x = o.x - event.pos[0]
-                            selected_offset_y = o.y - event.pos[1]
-
-                    # Checks which button is pressed and adjusts the action
-                    if event.button == 2:
-                        action = "move"
-                    if event.button == 3:
-                        action = "destroy"
-
-                # Checks if wheel is turned forward
-                elif event.button == 4:
+                # Checks if right mouse button is pressed
+                elif event.button == 3:
                     if selected is not None:
-                        if action == "move":
-                            radius[selected] += 35
-
-                # Checks if wheel is turned backward
-                elif event.button == 5:
-                    if selected is not None:
-                        if action == "move":
-                            if CIRCLE_RADIUS <= 35:
-                                radius[selected] = CIRCLE_RADIUS
-                            else:
-                                radius[selected] -= 35
+                        del objects[selected]
+                        del radius[selected]
+                        selected = None
 
             # Checks if mouse button is let loose
             elif event.type == pg.MOUSEBUTTONUP:
@@ -207,12 +217,24 @@ def editor_mode():
             elif event.type == pg.MOUSEMOTION:
                 if selected is not None:
                     if action == "move":
-                        objects[selected].x = event.pos[0] + selected_offset_x
-                        objects[selected].y = event.pos[1] + selected_offset_y
-                    if action == "destroy":
-                        del objects[selected]
-                        del radius[selected]
-                        selected = None
+                        objects[selected].x = event.pos[0] + mouse_collison(objects, radius)[1]
+                        objects[selected].y = event.pos[1] + mouse_collison(objects, radius)[2]
+
+            # Checks if mousewheel is scrolled
+            elif event.type == pg.MOUSEWHEEL:
+                # Checks if wheel is turned upward
+                if (event.wheel.y > 0) or (event.wheel.y < 0):
+                    selected = mouse_collison(objects, radius)[0]
+                    if selected is not None:
+                        radius[selected] += 35
+
+                # Checks if wheel is turned downward
+                    if event.wheel < 0:
+                        if selected is not None:
+                            if radius[selected] <= 35:
+                                radius[selected] = CIRCLE_RADIUS
+                            else:
+                                radius[selected] -= 35
 
         # Fill screen with black
         SCREEN.fill(BLACK)
