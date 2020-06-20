@@ -20,14 +20,15 @@ def main_menu():
         for event in pg.event.get():
             # Checks if the user presses the 'X' or closes the window
             if event.type == QUIT:
-                menu = False
+                pg.quit()
+                sys.exit()
 
             # Checks for keypress
             if event.type == KEYDOWN:
-
                 # Closes the window if 'esc' is pressed
                 if event.key == pg.K_ESCAPE:
-                    menu = False
+                    pg.quit()
+                    sys.exit()
 
                 # Checks if down arrow is pressed
                 elif event.key == pg.K_DOWN:
@@ -54,12 +55,15 @@ def main_menu():
                     if selected == "start":
                         menu = False
                         editor.editor_mode()
+                        pg.display.quit()
+                        break
                     if selected == "help":
                         menu = False
                     if selected == "options":
                         menu = False
                     if selected == "quit":
-                        menu = False
+                        pg.quit()
+                        sys.exit()
 
         # Main menu UI
         # Fills screen

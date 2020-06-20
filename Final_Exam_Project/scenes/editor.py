@@ -5,6 +5,7 @@ from pygame.locals import *
 # Selects the files from different folders to be included
 sys.path.append("/home/marten/PycharmProjects/Python_Class_Project/Final_Exam_Project/assets")
 
+import menu
 # Import the utility
 from utility import *
 
@@ -15,28 +16,31 @@ def editor_mode():
     global CIRCLE_RADIUS
     SCREEN.fill(BLACK)
     objects, radius = [], []
-    selected = None
+    selected, action = None, None
     edit = True
 
     while edit:
         for event in pg.event.get():
             # Checks if the user presses the 'X' or closes the window
             if event.type == QUIT:
-                edit = False
+                pg.quit()
+                sys.exit()
 
             # Checks if the user presses a key
             elif event.type == KEYDOWN:
                 # Closes the window if 'esc' is pressed
                 if event.key == pg.K_ESCAPE:
                     edit = False
+                    menu.main_menu()
+                    pg.display.quit()
 
             # Checks for mouse button press
             elif event.type == MOUSEBUTTONDOWN:
+                # Checks if object is selected, returns None if not
                 selected = mouse_collison(objects, radius)[0]
                 # Checks if it is the left mouse button
                 if event.button == 1:
                     if selected is None:
-                        action = "create"
                         objects.append(pg.Rect(event.pos[0], event.pos[1], BLOCK_SIZE, BLOCK_SIZE))
                         radius.append(CIRCLE_RADIUS)
 
@@ -54,6 +58,7 @@ def editor_mode():
             # Checks if mouse button is let loose
             elif event.type == pg.MOUSEBUTTONUP:
                 if event.button == 2:
+                    action = None
                     selected = None
 
             # Checks if mouse is moved
@@ -62,7 +67,7 @@ def editor_mode():
                     if action == "move":
                         objects[selected].x = event.pos[0] + mouse_collison(objects, radius)[1]
                         objects[selected].y = event.pos[1] + mouse_collison(objects, radius)[2]
-
+            """
             # Checks if mousewheel is scrolled
             elif event.type == pg.MOUSEWHEEL:
                 # Checks if wheel is turned upward
@@ -78,18 +83,19 @@ def editor_mode():
                                 radius[selected] = CIRCLE_RADIUS
                             else:
                                 radius[selected] -= 35
+            """
 
         # Fill screen with black
         SCREEN.fill(BLACK)
 
-        # Main loop UI
+        # Editor UI
         title = text_format("Editing Mode", font, 75, GREEN)
         title_rect = title.get_rect()
         SCREEN.blit(title, (SCREEN_WIDTH / 2 - (title_rect[2] / 2), 0))
 
         # Draws the circles
         for i, o in enumerate(objects):
-            pg.draw.circle(SCREEN, RED, o.center, radius[i])
+            pg.draw.circle(SCREEN, WHITE, o.center, radius[i])
 
         # Updates the screen
         pg.display.update()
