@@ -89,9 +89,21 @@ def editor_mode():
         SCREEN.fill(BLACK)
 
         # Editor UI
+        # Sets the text of the non interactable UI elements
         title = text_format("Editing Mode", font, 75, GREEN)
+        info_mouse_left = text_format("Left click creates object", font, 25, GREEN)
+        info_mouse_middle = text_format("Middle click and hold drags object", font, 25, GREEN)
+        info_mouse_right = text_format("Right click removes object", font, 25, GREEN)
+
+        # Gets the game elements of the non interactable UI
         title_rect = title.get_rect()
+        info_left_rect = info_mouse_left.get_rect()
+        info_middle_rect = info_mouse_middle.get_rect()
+        info_right_rect = info_mouse_right.get_rect()
+
+        # Sets the position of the non interactable UI elements
         SCREEN.blit(title, (SCREEN_WIDTH / 2 - (title_rect[2] / 2), 0))
+        SCREEN.blit(info_mouse_left, (SCREEN_WIDTH / 2 - (info_left_rect[2] / 2), 0))
 
         # Draws the circles
         for i, o in enumerate(objects):
