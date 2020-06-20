@@ -4,6 +4,7 @@ import pygame as pg
 # Selects the files from different folders to be included
 sys.path.append(os.path.abspath("scenes"))
 sys.path.append(os.path.abspath("assets"))
+sys.path.append(os.path.abspath("functionality"))
 
 import menu
 from utility import *
@@ -13,7 +14,6 @@ from utility import *
 black holes and such"""
 
 # Startbedigungen für planeten z.B. mit Pfeil in Richtung usw.
-
 # Sollen sich gravitationstechnisch richtig verhalten
 
 # Make main menu and editor function so that you can create new planets and destroy them and soo forth and drag them

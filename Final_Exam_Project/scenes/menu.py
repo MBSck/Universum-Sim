@@ -1,7 +1,7 @@
 import sys
 import pygame as pg
 from pygame.locals import *
-import editor
+import editor, helper, options
 from utility import *
 
 
@@ -54,8 +54,12 @@ def main_menu():
                         break
                     if selected == "help":
                         menu = False
+                        helper.help_menu()
+                        pg.display.quit()
+                        break
                     if selected == "options":
-                        menu = False
+                        pg.quit()
+                        sys.exit()
                     if selected == "quit":
                         pg.quit()
                         sys.exit()
@@ -98,5 +102,9 @@ def main_menu():
 
         # Update screen and set fps as well as title
         pg.display.update()
+
+        # Sets the fps time
         clock.tick(FPS)
+
+        # Sets the caption of the window
         pg.display.set_caption("Planetary Simulation")
