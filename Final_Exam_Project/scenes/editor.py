@@ -1,6 +1,7 @@
 import sys
 import pygame as pg
 from pygame.locals import *
+import solarsystem as ss
 import menu
 from utility import *
 
