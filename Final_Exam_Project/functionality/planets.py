@@ -1,4 +1,5 @@
 import math
+from variables import *
 
 # The gravitational constant in m**3 kg**-1 s**-2
 gravitational_constant = 6.67408e-11
@@ -10,7 +11,8 @@ gravitational_constant = 6.67408e-11
 
 class Planet:
     """This checks the values and the behaviour of the planet"""
-    def __init__(self, name: str, mass: int, radius: int, pos_x: int, pos_y: int, v_x: int, v_y:int):
+    def __init__(self, name: str, mass: int, pos_x: int, pos_y: int,
+                 radius: int = CIRCLE_RADIUS, v_x: int = 0, v_y:int = 0):
         """Initializes the planets values"""
         self.name = name
         self.m = mass

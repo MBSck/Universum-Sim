@@ -50,7 +50,7 @@ def editor_mode():
                             objects.append(pg.Rect(mouse_pos[0], mouse_pos[1], BLOCK_SIZE, BLOCK_SIZE))
                             radius.append(CIRCLE_RADIUS)
                             # Creates a new planet object if object is created
-                            ss.add_planet(solar.planets.Planet("Earth", 10, CIRCLE_RADIUS, mouse_pos[0], mouse_pos[1]))
+                            ss.add_planet(solar.planets.Planet("Earth", 10, mouse_pos[0], mouse_pos[1]))
                         else:
                             # Display some error message
                             ...
