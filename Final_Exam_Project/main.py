@@ -21,7 +21,6 @@ black holes and such"""
 # Make objects not being able to be created inside another object
 # Make objects be created at tip of cursor not in the middle
 
-
 if __name__ == "__main__":
     # Initializes pygame
     pg.init()

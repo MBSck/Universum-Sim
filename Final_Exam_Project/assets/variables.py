@@ -10,6 +10,7 @@ SCREEN = pg.display.set_mode((0, 0), pg.FULLSCREEN)
 # Get screen size
 info = pg.display.Info()
 SCREEN_WIDTH, SCREEN_HEIGHT = info.current_w, info.current_h
+MAX_RESOLUTION = (info.current_w, info.current_h)
 
 # Set fps and clock
 FPS, clock = 25, pg.time.Clock()
