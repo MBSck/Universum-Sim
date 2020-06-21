@@ -1,7 +1,5 @@
 import math
 
-__name__ = "__planets__"
-
 # The gravitational constant in m**3 kg**-1 s**-2
 gravitational_constant = 6.67408e-11
 
@@ -17,17 +15,17 @@ class Planet:
         self.name = name
         self.m = mass
         self.r = radius
-        self.a = 0
-        self.pos_x, self.pos_y = pos_x, pos_y
+        self.a, self.v = [], []
+        self.pos = [pos_x, pos_y]
 
     def __repr__(self):
         return self.name
 
     def distance_to_other(self, other):
         """Calculates the euclidic distance of the pixels, split into x and y values"""
-        distance_squared = math.sqrt((self.pos_x - other.pos_x)**2 + (self.pos_y - other.pos_y)**2)
-        return (self.pos_x - other.pos_x)/(distance_squared**3),\
-               (self.pos_x - other.pos_y)/(distance_squared**3)
+        distance_squared = math.sqrt((self.pos[0] - other.pos_x)**2 + (self.pos[1] - other.pos_y)**2)
+        return (self.pos[0] - other.pos_x)/(distance_squared**3),\
+               (self.pos[1] - other.pos_y)/(distance_squared**3)
 
     def alien_acceleration(self, other):
         """The acceleration this body enacts on another"""
@@ -38,4 +36,3 @@ class Planet:
 if __name__ == "__main__":
     earth = Planet("Earth", 1000000000, 3000, 10, 15)
     satellite = Planet("Satellite", 100, 12, 30, 35)
-

@@ -1,7 +1,7 @@
 import sys
 import pygame as pg
 from pygame.locals import *
-import solarsystem as ss
+import solarsystem as solar
 import menu
 from utility import *
 
@@ -14,6 +14,8 @@ def editor_mode():
     objects, radius = [], []
     selected, action = None, None
     edit = True
+    # Create solar system
+    ss = solar.SolarSystem()
 
     while edit:
         for event in pg.event.get():
@@ -39,6 +41,8 @@ def editor_mode():
                     if selected is None:
                         objects.append(pg.Rect(event.pos[0], event.pos[1], BLOCK_SIZE, BLOCK_SIZE))
                         radius.append(CIRCLE_RADIUS)
+                        # Creates a new planet object if object is created
+                        ss.add_planet(solar.planets.Planet("Earth", 10, CIRCLE_RADIUS, event.pos[0], event.pos[1]))
 
                 # Checks if it is the middle mouse button
                 elif event.button == 2:
@@ -96,7 +100,7 @@ def editor_mode():
 
         # Draws the circles
         for i, o in enumerate(objects):
-            pg.draw.circle(SCREEN, WHITE, o.center, radius[i])
+            pg.draw.circle(SCREEN, RED, o.center, radius[i])
 
         # Updates the screen
         pg.display.update()
@@ -109,3 +113,5 @@ def simulation_mode():
     """This is the main loop of the program that simulates the planets movement"""
     # Defines game state
     is_running = True
+
+
