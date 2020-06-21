@@ -3,6 +3,35 @@ from variables import *
 
 # Useful tools for calculation and display
 
+# ----- Classes ------
+
+
+class Button(pg.sprite.Sprite):
+    """Class that creates button that takes custom command input"""
+    def __init__(self, pos, color, text, action, font=font):
+        super().__init__()
+        self.color = color
+        self.action = action
+        self.text = text
+        self.font = font
+        self.image = pg.Surface((150, 40))
+        self.rect = self.image.get_rect(bottomleft=pos)
+        self.fill_surf(self.color)
+
+    def fill_surf(self, color):
+        self.image.fill(pg.Color(color))
+        self.image.blit(self.font.render(self.text, True, pg.Color('White')), (10, 10))
+
+    def update(self, events, dt):
+        for event in events:
+            if event.type == pg.MOUSEBUTTONDOWN:
+                if self.rect.collidepoint(event.pos):
+                    # if the player clicked the button, the action is invoked
+                    self.action()
+
+
+# ----- Methods ------
+
 
 def text_format(text, text_size, text_color, text_font=font):
     """Template for creating text in pygame"""
@@ -10,12 +39,6 @@ def text_format(text, text_size, text_color, text_font=font):
     new_text = new_font.render(text, 0, text_color)
 
     return new_text
-
-
-def button(button_text, button_color, coords, surface=SCREEN, text_font=font):
-    """Template for creating buttons with plaintext in pygame"""
-    button_rectangle = pg.Rect(coords)
-    pg.draw.rect(surface, button_color, button_rectangle)
 
 
 def mouse_collison(objects, radius):

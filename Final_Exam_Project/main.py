@@ -15,10 +15,7 @@ black holes and such"""
 
 # Startbedigungen für planeten z.B. mit Pfeil in Richtung usw.
 # Sollen sich gravitationstechnisch richtig verhalten
-# Matrix method
-
-# Make main menu and editor function so that you can create new planets and destroy them and soo forth and drag them
-# around
+# Matrix method?
 
 # Make objects not being able to leave the screen via drag and also not bigger, add options for bigger screen size
 # Make objects not being able to be created inside another object

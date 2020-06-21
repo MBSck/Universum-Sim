@@ -28,3 +28,5 @@ CIRCLE_RADIUS = int(BLOCK_SIZE/2)
 # max_number of objects and object_counter
 max_object_number = 20
 object_counter = 0
+
+# Temporarly sprite host, make functions into classes and use sprite functionality
