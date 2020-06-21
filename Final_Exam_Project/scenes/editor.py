@@ -34,18 +34,22 @@ def editor_mode():
 
             # Checks for mouse button press
             elif event.type == MOUSEBUTTONDOWN:
+                # Gets the mouse position
+                mouse_pos = event.pos
+
                 # Checks if object is selected, returns None if not
                 selected = mouse_collison(objects, radius)[0]
+
                 # Checks if it is the left mouse button
                 if event.button == 1:
                     if selected is None:
                         # Checks if number of planet under max number
                         if object_counter < max_object_number:
                             object_counter += 1
-                            objects.append(pg.Rect(event.pos[0], event.pos[1], BLOCK_SIZE, BLOCK_SIZE))
+                            objects.append(pg.Rect(mouse_pos[0], mouse_pos[1], BLOCK_SIZE, BLOCK_SIZE))
                             radius.append(CIRCLE_RADIUS)
                             # Creates a new planet object if object is created
-                            ss.add_planet(solar.planets.Planet("Earth", 10, CIRCLE_RADIUS, event.pos[0], event.pos[1]))
+                            ss.add_planet(solar.planets.Planet("Earth", 10, CIRCLE_RADIUS, mouse_pos[0], mouse_pos[1]))
                         else:
                             # Display some error message
                             ...
@@ -70,10 +74,13 @@ def editor_mode():
 
             # Checks if mouse is moved
             elif event.type == pg.MOUSEMOTION:
+                # Gets the mouse position
+                mouse_pos = event.pos
+
                 if selected is not None:
                     if action == "move":
-                        objects[selected].x = event.pos[0] + mouse_collison(objects, radius)[1]
-                        objects[selected].y = event.pos[1] + mouse_collison(objects, radius)[2]
+                        objects[selected].x = mouse_pos[0] + mouse_collison(objects, radius)[1]
+                        objects[selected].y = mouse_pos[1] + mouse_collison(objects, radius)[2]
             """
             # Checks if mousewheel is scrolled
             elif event.type == pg.MOUSEWHEEL:
@@ -97,7 +104,7 @@ def editor_mode():
 
         # Editor UI
         # Sets the text of the non interactable UI elements
-        title = text_format("Editing Mode", font, 90, GREEN)
+        title = text_format("Editing Mode", 90, GREEN)
 
         # Gets the game elements of the non interactable UI
         title_rect = title.get_rect()

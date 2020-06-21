@@ -30,12 +30,17 @@ max_object_number = 20
 object_counter = 0
 
 
-def text_format(message, textFont, textSize, textColor):
-    """Gets a message and renders its size, text, font and color"""
-    newFont = pg.font.Font(textFont, textSize)
-    newText = newFont.render(message, 0, textColor)
+def text_format(text, text_size, text_color, text_font=font):
+    """Template for creating text in pygame"""
+    new_font = pg.font.Font(text_font, text_size)
+    new_text = new_font.render(text, 0, text_color)
 
-    return newText
+    return new_text
+
+
+def button(text, coords, surface=SCREEN, text_font=font):
+    """Template for creating buttons with plaintext in pygame"""
+    ...
 
 
 def mouse_collison(objects, radius):

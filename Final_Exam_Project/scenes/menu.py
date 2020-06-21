@@ -69,23 +69,23 @@ def main_menu():
         SCREEN.fill(BLACK)
 
         # Sets titles and main menu options
-        title = text_format("Universum - Sim", font, 90, RED)
+        title = text_format("Universum - Sim", 90, RED)
         if selected == "start":
-            text_start = text_format("START", font, 75, GREEN)
+            text_start = text_format("START", 75, GREEN)
         else:
-            text_start = text_format("START", font, 75, WHITE)
+            text_start = text_format("START", 75, WHITE)
         if selected == "help":
-            text_help = text_format("HELP", font, 75, GREEN)
+            text_help = text_format("HELP", 75, GREEN)
         else:
-            text_help = text_format("HELP", font, 75, WHITE)
+            text_help = text_format("HELP", 75, WHITE)
         if selected == "options":
-            text_options = text_format("OPTIONS", font, 75, GREEN)
+            text_options = text_format("OPTIONS", 75, GREEN)
         else:
-            text_options = text_format("OPTIONS", font, 75, WHITE)
+            text_options = text_format("OPTIONS", 75, WHITE)
         if selected == "quit":
-            text_quit = text_format("QUIT", font, 75, GREEN)
+            text_quit = text_format("QUIT", 75, GREEN)
         else:
-            text_quit = text_format("QUIT", font, 75, WHITE)
+            text_quit = text_format("QUIT", 75, WHITE)
 
         title_rect = title.get_rect()
         start_rect = text_start.get_rect()
