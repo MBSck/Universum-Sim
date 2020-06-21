@@ -22,8 +22,12 @@ RED, GREEN, BLUE = (255, 0, 0), (0, 255, 0), (0, 0, 255)
 font = "assets/Gameplay.ttf"
 
 # Size of the circles/planets
-BLOCK_SIZE = 50
+BLOCK_SIZE = 25
 CIRCLE_RADIUS = int(BLOCK_SIZE/2)
+
+# max_number of objects and object_counter
+max_object_number = 20
+object_counter = 0
 
 
 def text_format(message, textFont, textSize, textColor):

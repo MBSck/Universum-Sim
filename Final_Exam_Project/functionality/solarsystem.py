@@ -13,12 +13,10 @@ class SolarSystem:
 
     def add_planet(self, *args):
         """Adds planets or objects to the solarsystem"""
-        # Max size of system is 20 planets
-        if len(self.planets_list) < 20:
-            for i in args:
-                self.planets_list.append(i)
+        for i in args:
+            self.planets_list.append(i)
 
-    def remove_planet(self):
+    def remove_planet(self, *args):
         """Removes planet from the solarsystem"""
         ...
 
@@ -43,7 +41,6 @@ class SolarSystem:
         for i, o in enumerate(self.planets_list):
             self.position_list.append([tools.verlet_algorithm()[0], tools.verlet_algorithm()[0]])
             self.velocity_list.append([tools.verlet_algorithm()[1], tools.verlet_algorithm()[1]])
-
 
 
 if __name__ == "__main__":

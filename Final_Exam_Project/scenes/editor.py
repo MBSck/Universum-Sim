@@ -9,7 +9,7 @@ from utility import *
 def editor_mode():
     """This intializes the mode where you can create Planets and such.
     And drag them around and delete them again"""
-    global CIRCLE_RADIUS
+    global CIRCLE_RADIUS, object_counter
     SCREEN.fill(BLACK)
     objects, radius = [], []
     selected, action = None, None
@@ -39,10 +39,16 @@ def editor_mode():
                 # Checks if it is the left mouse button
                 if event.button == 1:
                     if selected is None:
-                        objects.append(pg.Rect(event.pos[0], event.pos[1], BLOCK_SIZE, BLOCK_SIZE))
-                        radius.append(CIRCLE_RADIUS)
-                        # Creates a new planet object if object is created
-                        ss.add_planet(solar.planets.Planet("Earth", 10, CIRCLE_RADIUS, event.pos[0], event.pos[1]))
+                        # Checks if number of planet under max number
+                        if object_counter < max_object_number:
+                            object_counter += 1
+                            objects.append(pg.Rect(event.pos[0], event.pos[1], BLOCK_SIZE, BLOCK_SIZE))
+                            radius.append(CIRCLE_RADIUS)
+                            # Creates a new planet object if object is created
+                            ss.add_planet(solar.planets.Planet("Earth", 10, CIRCLE_RADIUS, event.pos[0], event.pos[1]))
+                        else:
+                            # Display some error message
+                            ...
 
                 # Checks if it is the middle mouse button
                 elif event.button == 2:
@@ -51,6 +57,7 @@ def editor_mode():
                 # Checks if right mouse button is pressed
                 elif event.button == 3:
                     if selected is not None:
+                        object_counter -= 1
                         del objects[selected]
                         del radius[selected]
                         selected = None
