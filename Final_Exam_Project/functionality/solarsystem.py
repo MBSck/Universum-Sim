@@ -63,7 +63,7 @@ if __name__ == "__main__":
     print(satellite.pos_x, satellite.pos_y)
 
     plt.plot(x_list, y_list)
-    plt.show()
+    plt.savefig("../assets/planet_position.png")
 
 
 
