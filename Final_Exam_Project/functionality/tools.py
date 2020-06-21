@@ -1,7 +1,7 @@
 # Useful tools for calculation
 
 
-def verlet_algorithm(position: int, velocity: int, acceleration: int, dt: int = 0.1):
+def verlet_algorithm(position: int, velocity: int, acceleration: int, dt: int = 0.5):
     """This calculats the second order Taylor solution to the newton DGLs"""
     # Maybe use scipy.integrate to solve newton DGLs
 
