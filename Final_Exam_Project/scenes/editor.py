@@ -105,7 +105,7 @@ def editor_mode():
 
         # Editor UI
         # Sets the text of the non interactable UI elements
-        title = text_format("Editing Mode", 90, GREEN)
+        title = tools.text_format("Editing Mode", 90, GREEN)
 
         # Gets the game elements of the non interactable UI
         title_rect = title.get_rect()
@@ -114,7 +114,6 @@ def editor_mode():
         SCREEN.blit(title, (SCREEN_WIDTH / 2 - (title_rect[2] / 2), 80))
 
         # Draws the start simulation button
-        d
 
         # Draws the circles
         for i, o in enumerate(objects):

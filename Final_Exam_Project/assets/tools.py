@@ -1,4 +1,5 @@
 import pygame as pg
+from variables import *
 
 # Useful tools for calculation and display
 
