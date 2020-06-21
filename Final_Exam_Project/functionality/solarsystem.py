@@ -8,8 +8,8 @@ class SolarSystem:
         """Initializes the intrastellar objects and their changing attributes"""
         self.planets_list = []
         self.acceleration_list = []
-        self.velocity_list = []
         self.position_list = []
+        self.velocity_list = []
 
     def add_planet(self, *args):
         """Adds planets or objects to the solarsystem"""
@@ -25,27 +25,24 @@ class SolarSystem:
     def planetary_interaction(self):
         """Calculates the new accelerations of each of the planets"""
         self.acceleration_list = []
+
         for i in self.planets_list:
-            i.a_x, i.a_y = 0, 0
+            a_x, a_y = i.a[0]. i.a[1]
             for j in self.planets_list:
                 if i != j:
-                    i.a_x += j.alien_acceleration(i)[0]
-                    i.a_y += j.alien_acceleration(i)[1]
+                    a_x += j.alien_acceleration(i)[0]
+                    a_y += j.alien_acceleration(i)[1]
 
-            self.acceleration_list.append([i.a_x, i.a_y])
+            self.acceleration_list.append([a_x, a_y])
 
         return self.acceleration_list
 
-    def planetary_positions(self, dt: int = 0.1):
+    def planetary_positions(self, start_time):
         """Utilizes Verlet integration to get the next positions of all planets for a certain timestep period"""
-        ...
 
-    def update_set(self):
-        """Updates the objects attributes"""
         for i, o in enumerate(self.planets_list):
-            o.a = self.acceleration_list[i]
-            o.v = self.velocity_list[i]
-            o.pos = self.position_list[i]
+            self.position_list.append([tools.verlet_algorithm()[0], tools.verlet_algorithm()[0]])
+            self.velocity_list.append([tools.verlet_algorithm()[1], tools.verlet_algorithm()[1]])
 
 
 
