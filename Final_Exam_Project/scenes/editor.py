@@ -1,9 +1,10 @@
 import sys
 import pygame as pg
 from pygame.locals import *
+from variables import *
+import tools
 import solarsystem as solar
 import menu
-from utility import *
 
 
 def editor_mode():
@@ -38,7 +39,7 @@ def editor_mode():
                 mouse_pos = event.pos
 
                 # Checks if object is selected, returns None if not
-                selected = mouse_collison(objects, radius)[0]
+                selected = tools.mouse_collison(objects, radius)[0]
 
                 # Checks if it is the left mouse button
                 if event.button == 1:
@@ -79,8 +80,8 @@ def editor_mode():
 
                 if selected is not None:
                     if action == "move":
-                        objects[selected].x = mouse_pos[0] + mouse_collison(objects, radius)[1]
-                        objects[selected].y = mouse_pos[1] + mouse_collison(objects, radius)[2]
+                        objects[selected].x = mouse_pos[0] + tools.mouse_collison(objects, radius)[1]
+                        objects[selected].y = mouse_pos[1] + tools.mouse_collison(objects, radius)[2]
             """
             # Checks if mousewheel is scrolled
             elif event.type == pg.MOUSEWHEEL:
@@ -111,6 +112,9 @@ def editor_mode():
 
         # Sets the position of the non interactable UI elements
         SCREEN.blit(title, (SCREEN_WIDTH / 2 - (title_rect[2] / 2), 80))
+
+        # Draws the start simulation button
+        d
 
         # Draws the circles
         for i, o in enumerate(objects):

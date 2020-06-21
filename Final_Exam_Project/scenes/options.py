@@ -1,4 +1,5 @@
 import sys
 from pygame.locals import *
-import utility
+from variables import *
+import tools
 import menu

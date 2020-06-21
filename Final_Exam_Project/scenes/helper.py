@@ -1,8 +1,9 @@
 import sys
 import pygame as pg
-import menu
 from pygame.locals import *
-from utility import *
+from variables import *
+import tools
+import menu
 
 
 def help_menu():
@@ -30,15 +31,15 @@ def help_menu():
         SCREEN.fill(BLACK)
 
         # Sets titles UI
-        title = text_format("Help", 90, GREEN)
-        general = text_format("General:", 75, GREEN)
-        editor = text_format("Editor:", 75, GREEN)
+        title = tools.text_format("Help", 90, GREEN)
+        general = tools.text_format("General:", 75, GREEN)
+        editor = tools.text_format("Editor:", 75, GREEN)
 
         # Sets text UI
-        escape = text_format("Use escape to go back to main menu", 50, GREEN)
-        info_mouse_left = text_format("Left click creates object", 50, GREEN)
-        info_mouse_middle = text_format("Middle click and hold drags object", 50, GREEN)
-        info_mouse_right = text_format("Right click removes object", 50, GREEN)
+        escape = tools.text_format("Use escape to go back to main menu", 50, GREEN)
+        info_mouse_left = tools.text_format("Left click creates object", 50, GREEN)
+        info_mouse_middle = tools.text_format("Middle click and hold drags object", 50, GREEN)
+        info_mouse_right = tools.text_format("Right click removes object", 50, GREEN)
 
         # Sets the UI elements
         title_rect = title.get_rect()

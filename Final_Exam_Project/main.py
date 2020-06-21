@@ -7,7 +7,7 @@ sys.path.append(os.path.abspath("assets"))
 sys.path.append(os.path.abspath("functionality"))
 
 import menu
-from utility import *
+from variables import *
 
 
 """This is a planet creating tool that leads to a functioning solar system, add some future features like
