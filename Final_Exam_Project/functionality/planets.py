@@ -3,7 +3,7 @@ import pygame as pg
 from variables import *
 
 # The gravitational constant in m**3 kg**-1 s**-2
-gravitational_constant = 6.67408e-11
+gravitational_constant = 1000*6.67408e-11
 
 # make iterators for planets so values can be called
 # optimize with the g in front
@@ -31,19 +31,15 @@ class Planet:
     @property
     def rect(self):
         """Gets the rect object"""
-        return pg.Rect(int(self.pos_x), int(self.pos_y), self.rect_size_x, self.rect_size_y)
-
-    def distance_to_other(self, other):
-        """Calculates the euclidic distance of the pixels, split into x and y values"""
-        distance_squared = math.sqrt((self.pos_x - other.pos_x)**2 + (self.pos_y - other.pos_y)**2)
-        # Fix division by zero mistake
-        return (self.pos_x - other.pos_x)/(distance_squared**3),\
-               (self.pos_y - other.pos_y)/(distance_squared**3)
+        return pg.Rect(self.pos_x, self.pos_y, self.rect_size_x, self.rect_size_y)
 
     def alien_acceleration(self, other):
         """The acceleration this body enacts on another"""
-        return gravitational_constant * (self.mass / ((self.distance_to_other(other)[0]) ** 2)),\
-            gravitational_constant * (self.mass / ((self.distance_to_other(other)[1]) ** 2))
+        distance_squared = math.sqrt((self.pos_x - other.pos_x) ** 2 + (self.pos_y - other.pos_y) ** 2)
+        nominator_x, nominator_y = self.mass * (self.pos_x - other.pos_x), self.mass * (self.pos_y - other.pos_y)
+
+        return gravitational_constant * nominator_x / (distance_squared ** 3), \
+            gravitational_constant * nominator_y / (distance_squared ** 3)
 
 
 if __name__ == "__main__":

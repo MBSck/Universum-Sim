@@ -4,10 +4,12 @@ import tools
 # For testing
 import matplotlib.pyplot as plt
 
+__name__ = "solar"
 
 # Make solar system into Singleton
 # Also add logger to code
 # make rect size and radius into properties
+
 
 class SolarSystem(metaclass=tools.Singleton):
     """This creates the space in which the objects interact with each other.
@@ -16,6 +18,7 @@ class SolarSystem(metaclass=tools.Singleton):
         """Initializes the intrastellar objects and their changing attributes"""
         self.planets_list = []
         self.max_objects = 20
+        self.system_time = 0
 
     def add_planet(self, *args):
         """Adds planets or objects to the solarsystem"""
@@ -47,8 +50,8 @@ class SolarSystem(metaclass=tools.Singleton):
             a_x, a_y = 0, 0
             for j in self.planets_list:
                 if i != j:
-                    a_x += j.alien_acceleration(i)[0]
-                    a_y += j.alien_acceleration(i)[1]
+                    a_x += i.alien_acceleration(j)[0]
+                    a_y += i.alien_acceleration(j)[1]
 
             acceleration_list.append([a_x, a_y])
 
@@ -63,27 +66,30 @@ class SolarSystem(metaclass=tools.Singleton):
             o.pos_y, o.v_y = tools.verlet_algorithm(o.pos_y, o.v_y, self.planetary_interaction()[i][1])
 
 
-if __name__ == "__main__":
-    earth = planets.Planet("Earth", 150, 200, 10, 15, 1, 0)
-    satellite = planets.Planet("Satellite", 100, 12, 30, 35, 0, 0)
+if __name__ == "solar":
+    earth = planets.Planet("Earth", 1, 5, 0)
+    satellite = planets.Planet("Satellite", 1, 10, 0)
+    moon = planets.Planet("Moon", 1, 15, 0)
     ss = SolarSystem()
-    ss.add_planet(earth, satellite)
+    ss.add_planet(earth, satellite, moon)
     print(ss.planetary_interaction())
 
     print(ss.planets_list)
-    print(satellite.pos_x, satellite.pos_y)
+    for i in ss.planets_list:
+        print(i.pos_x, i.pos_y)
 
     # Checking trajectories with matplotlib
     x_list, y_list = [], []
-    for i in range(100):
+    for i in range(1):
         ss.planetary_positions()
         x_list.append(satellite.pos_x)
         y_list.append(satellite.pos_y)
 
-    print(satellite.pos_x, satellite.pos_y)
+    for i in ss.planets_list:
+        print(i.pos_x, i.pos_y)
 
     plt.plot(x_list, y_list)
-    plt.savefig("../assets/planet_position.png")
+    plt.show()
 
 
 

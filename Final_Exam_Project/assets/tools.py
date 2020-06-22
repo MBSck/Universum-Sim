@@ -75,7 +75,10 @@ def verlet_algorithm(position: int, velocity: int, acceleration: int, dt: int = 
     """This calculats the second order Taylor solution to the newton DGLs"""
     # Maybe use scipy.integrate to solve newton DGLs
 
-    position = position - velocity * dt + (acceleration * (dt**2) * 0.5)
+    # Calcuate verlet for every point and add it to list
+    # Only then update it
+
+    position = position + velocity * dt + (acceleration * (dt**2) * 0.5)
     velocity = velocity + acceleration * dt
 
     return position, velocity

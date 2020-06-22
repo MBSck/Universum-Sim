@@ -5,6 +5,7 @@ from variables import *
 import tools
 import solarsystem as solar
 import menu
+import time
 
 
 def editor_mode():
@@ -129,7 +130,6 @@ def simulation_mode():
     SCREEN.fill(BLACK)
     is_simulating = True
     ss = solar.SolarSystem()
-    print(ss.planets_list)
 
     while is_simulating:
         for event in pg.event.get():
@@ -143,6 +143,7 @@ def simulation_mode():
                 # Closes the window if 'esc' is pressed
                 if event.key == pg.K_ESCAPE:
                     is_simulating = False
+                    menu.main_menu()
                     pg.display.quit()
 
                 # For testing and debugging, toggles the simulation
@@ -152,6 +153,7 @@ def simulation_mode():
                     break
 
         # Calculates the paths the planets take
+        time.sleep(1)
         ss.planetary_positions()
 
         # Fill screen with black
