@@ -128,6 +128,7 @@ def simulation_mode():
     # Defines game state
     SCREEN.fill(BLACK)
     is_simulating = True
+    ss = solar.SolarSystem()
 
     while is_simulating:
 
@@ -153,9 +154,9 @@ def simulation_mode():
         # Fill screen with black
         SCREEN.fill(BLACK)
 
-        # Editor UI
+        # Simulation UI
         # Sets the text of the non interactable UI elements
-        title = tools.text_format("Editing Mode", 90, GREEN)
+        title = tools.text_format("Simulation", 90, RED)
 
         # Gets the game elements of the non interactable UI
         title_rect = title.get_rect()
@@ -164,13 +165,11 @@ def simulation_mode():
         SCREEN.blit(title, (SCREEN_WIDTH / 2 - (title_rect[2] / 2), 80))
 
         # Draws the circles
-        for i, o in enumerate(objects):
-            pg.draw.circle(SCREEN, RED, o.center, radius[i])
+        for i, o in enumerate(ss.planets_list):
+            pg.draw.circle(SCREEN, RED, o.rect.center, o.radius)
 
         # Updates the screen
         pg.display.update()
 
         # Sets the fps
         clock.tick(FPS)
-
-

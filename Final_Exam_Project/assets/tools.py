@@ -6,6 +6,15 @@ from variables import *
 # ----- Classes ------
 
 
+class Singleton(type):
+    _instances = {}
+
+    def __call__(cls, *args, **kwargs):
+        if cls not in cls._instances:
+            cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
+        return cls._instances[cls]
+
+
 class Button(pg.sprite.Sprite):
     """Class that creates button that takes custom command input"""
     def __init__(self, pos, color, text, action, font=font):
@@ -55,6 +64,7 @@ def mouse_collison(objects):
         # Checks the distance between the cursor and the circle
         if distance_square <= i.radius ** 2:
             selected = i
+            # Maybe different approach needed instead of .rect.x
             selected_offset_x = i.rect.x - pos_x
             selected_offset_y = i.rect.y - pos_y
 

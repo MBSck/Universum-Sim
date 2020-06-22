@@ -9,8 +9,9 @@ import matplotlib.pyplot as plt
 # Also add logger to code
 # make rect size and radius into properties
 
-class SolarSystem:
-    """This creates the space in which the objects interact with each other"""
+class SolarSystem(metaclass=tools.Singleton):
+    """This creates the space in which the objects interact with each other.
+    Singleton so it can be used in different functions and keeps all functionality"""
     def __init__(self):
         """Initializes the intrastellar objects and their changing attributes"""
         self.planets_list = []
