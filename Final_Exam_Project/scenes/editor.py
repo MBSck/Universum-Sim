@@ -30,6 +30,7 @@ def editor_mode():
                 # Closes the window if 'esc' is pressed
                 if event.key == pg.K_ESCAPE:
                     edit = False
+                    menu.main_menu()
                     pg.display.quit()
 
                 # For testing and debugging, toggles the simulation
@@ -78,8 +79,8 @@ def editor_mode():
 
                 if selected is not None:
                     if action == "move":
-                        ss.planets_list[selected].rect.x = mouse_pos[0] + tools.mouse_collison(ss.planets_list)[1]
-                        ss.planets_list[selected].rect.y = mouse_pos[1] + tools.mouse_collison(ss.planets_list)[2]
+                        ss.get_planet(selected).rect.x = mouse_pos[0] + tools.mouse_collison(ss.planets_list)[1]
+                        ss.get_planet(selected).rect.y = mouse_pos[1] + tools.mouse_collison(ss.planets_list)[2]
             """
             # Checks if mousewheel is scrolled
             elif event.type == pg.MOUSEWHEEL:

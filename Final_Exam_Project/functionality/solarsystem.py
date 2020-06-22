@@ -29,6 +29,12 @@ class SolarSystem:
         """Removes planet from the solarsystem"""
         self.planets_list.remove(planet)
 
+    def get_planet(self, planet):
+        """Gets specific planet from planet list"""
+        for i in self.planets_list:
+            if i == planet:
+                return i
+
     def number_of_intrastellar_objects(self):
         """Returns the number of objects in list"""
         return len(self.planets_list)
