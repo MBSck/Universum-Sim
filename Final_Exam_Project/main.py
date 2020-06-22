@@ -4,7 +4,7 @@ import pygame as pg
 # Selects the files from different folders to be included
 sys.path.append(os.path.abspath("scenes"))
 sys.path.append(os.path.abspath("assets"))
-sys.path.append(os.path.abspath("functionality"))
+sys.path.append(os.path.abspath("functio_nality"))
 
 import menu
 from variables import *

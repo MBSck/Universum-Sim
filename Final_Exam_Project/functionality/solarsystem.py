@@ -5,20 +5,33 @@ import tools
 import matplotlib.pyplot as plt
 
 
+# Make solar system into Singleton
+# Also add logger to code
+# make rect size and radius into properties
+
 class SolarSystem:
     """This creates the space in which the objects interact with each other"""
     def __init__(self):
         """Initializes the intrastellar objects and their changing attributes"""
         self.planets_list = []
+        self.max_objects = 20
 
     def add_planet(self, *args):
         """Adds planets or objects to the solarsystem"""
-        for i in args:
-            self.planets_list.append(i)
+        if self.number_of_intrastellar_objects() < self.max_objects:
+            for i in args:
+                self.planets_list.append(i)
+        else:
+            # Display some error message
+            ...
 
-    def remove_planet(self, *args):
+    def remove_planet(self, planet):
         """Removes planet from the solarsystem"""
-        ...
+        self.planets_list.remove(planet)
+
+    def number_of_intrastellar_objects(self):
+        """Returns the number of objects in list"""
+        return len(self.planets_list)
 
     def planetary_interaction(self):
         """Calculates the new accelerations of each of the planets"""

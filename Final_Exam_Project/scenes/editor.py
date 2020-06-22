@@ -10,9 +10,9 @@ import menu
 def editor_mode():
     """This intializes the mode where you can create Planets and such.
     And drag them around and delete them again"""
-    global CIRCLE_RADIUS, object_counter
+    global CIRCLE_RADIUS
+
     SCREEN.fill(BLACK)
-    objects, radius = [], []
     selected, action = None, None
     edit = True
     # Create solar system
@@ -30,13 +30,13 @@ def editor_mode():
                 # Closes the window if 'esc' is pressed
                 if event.key == pg.K_ESCAPE:
                     edit = False
-                    menu.main_menu()
                     pg.display.quit()
 
                 # For testing and debugging, toggles the simulation
                 if event.key == K_1:
                     edit = False
-                    pg.display.quit()
+                    simulation_mode()
+                    break
 
             # Checks for mouse button press
             elif event.type == MOUSEBUTTONDOWN:
@@ -44,21 +44,16 @@ def editor_mode():
                 mouse_pos = event.pos
 
                 # Checks if object is selected, returns None if not
-                selected = tools.mouse_collison(objects, radius)[0]
+                selected = tools.mouse_collison(ss.planets_list)[0]
 
                 # Checks if it is the left mouse button
                 if event.button == 1:
                     if selected is None:
-                        # Checks if number of planet under max number
-                        if object_counter < max_object_number:
-                            object_counter += 1
-                            objects.append(pg.Rect(mouse_pos[0], mouse_pos[1], BLOCK_SIZE, BLOCK_SIZE))
-                            radius.append(CIRCLE_RADIUS)
-                            # Creates a new planet object if object is created
-                            ss.add_planet(solar.planets.Planet("Earth", 10, mouse_pos[0], mouse_pos[1]))
-                        else:
-                            # Display some error message
-                            ...
+                        # Creates a new object and adds it to the solar system
+                        ss.add_planet(solar.planets.Planet("Earth", 10, mouse_pos[0], mouse_pos[1]))
+                    else:
+                        # Display some error message
+                        ...
 
                 # Checks if it is the middle mouse button
                 elif event.button == 2:
@@ -67,9 +62,7 @@ def editor_mode():
                 # Checks if right mouse button is pressed
                 elif event.button == 3:
                     if selected is not None:
-                        object_counter -= 1
-                        del objects[selected]
-                        del radius[selected]
+                        ss.remove_planet(selected)
                         selected = None
 
             # Checks if mouse button is let loose
@@ -85,8 +78,8 @@ def editor_mode():
 
                 if selected is not None:
                     if action == "move":
-                        objects[selected].x = mouse_pos[0] + tools.mouse_collison(objects, radius)[1]
-                        objects[selected].y = mouse_pos[1] + tools.mouse_collison(objects, radius)[2]
+                        ss.planets_list[selected].rect.x = mouse_pos[0] + tools.mouse_collison(ss.planets_list)[1]
+                        ss.planets_list[selected].rect.y = mouse_pos[1] + tools.mouse_collison(ss.planets_list)[2]
             """
             # Checks if mousewheel is scrolled
             elif event.type == pg.MOUSEWHEEL:
@@ -119,8 +112,8 @@ def editor_mode():
         SCREEN.blit(title, (SCREEN_WIDTH / 2 - (title_rect[2] / 2), 80))
 
         # Draws the circles
-        for i, o in enumerate(objects):
-            pg.draw.circle(SCREEN, RED, o.center, radius[i])
+        for i, o in enumerate(ss.planets_list):
+            pg.draw.circle(SCREEN, RED, o.rect.center, o.radius)
 
         # Updates the screen
         pg.display.update()
@@ -132,6 +125,51 @@ def editor_mode():
 def simulation_mode():
     """This is the main loop of the program that simulates the planets movement"""
     # Defines game state
-    is_running = True
+    SCREEN.fill(BLACK)
+    is_simulating = True
+
+    while is_simulating:
+
+        for event in pg.event.get():
+            # Checks if the user presses the 'X' or closes the window
+            if event.type == QUIT:
+                pg.quit()
+                sys.exit()
+
+            # Checks if the user presses a key
+            elif event.type == KEYDOWN:
+                # Closes the window if 'esc' is pressed
+                if event.key == pg.K_ESCAPE:
+                    is_simulating = False
+                    pg.display.quit()
+
+                # For testing and debugging, toggles the simulation
+                if event.key == K_1:
+                    is_simulating = False
+                    editor_mode()
+                    break
+
+        # Fill screen with black
+        SCREEN.fill(BLACK)
+
+        # Editor UI
+        # Sets the text of the non interactable UI elements
+        title = tools.text_format("Editing Mode", 90, GREEN)
+
+        # Gets the game elements of the non interactable UI
+        title_rect = title.get_rect()
+
+        # Sets the position of the non interactable UI elements
+        SCREEN.blit(title, (SCREEN_WIDTH / 2 - (title_rect[2] / 2), 80))
+
+        # Draws the circles
+        for i, o in enumerate(objects):
+            pg.draw.circle(SCREEN, RED, o.center, radius[i])
+
+        # Updates the screen
+        pg.display.update()
+
+        # Sets the fps
+        clock.tick(FPS)
 
 

@@ -41,22 +41,22 @@ def text_format(text, text_size, text_color, text_font=font):
     return new_text
 
 
-def mouse_collison(objects, radius):
+def mouse_collison(objects):
     """Gets the position of the mouse and checks if it collides with any objects in the game"""
     pos_x, pos_y = pg.mouse.get_pos()
     selected, selected_offset_x, selected_offset_y = None, 0, 0
     # Checks if the mouse collides with element
-    for i, o in enumerate(objects):
+    for i in objects:
         # Pythagoras a^2 + b^2 = c^2
-        dx = o.centerx - pos_x
-        dy = o.centery - pos_y
+        dx = i.rect.centerx - pos_x
+        dy = i.rect.centery - pos_y
         distance_square = dx ** 2 + dy ** 2
 
         # Checks the distance between the cursor and the circle
-        if distance_square <= radius[i] ** 2:
+        if distance_square <= i.radius ** 2:
             selected = i
-            selected_offset_x = o.x - pos_x
-            selected_offset_y = o.y - pos_y
+            selected_offset_x = i.rect.x - pos_x
+            selected_offset_y = i.rect.y - pos_y
 
     return selected, selected_offset_x, selected_offset_y
 
