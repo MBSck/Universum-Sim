@@ -33,6 +33,11 @@ def editor_mode():
                     menu.main_menu()
                     pg.display.quit()
 
+                # For testing and debugging, toggles the simulation
+                if event.key == K_1:
+                    edit = False
+                    pg.display.quit()
+
             # Checks for mouse button press
             elif event.type == MOUSEBUTTONDOWN:
                 # Gets the mouse position
@@ -113,9 +118,6 @@ def editor_mode():
         # Sets the position of the non interactable UI elements
         SCREEN.blit(title, (SCREEN_WIDTH / 2 - (title_rect[2] / 2), 80))
 
-        # Draws the start simulation button
-        tools.Button((10, 50), GREEN, "START", start_simulation)
-
         # Draws the circles
         for i, o in enumerate(objects):
             pg.draw.circle(SCREEN, RED, o.center, radius[i])
@@ -125,10 +127,6 @@ def editor_mode():
 
         # Sets the fps
         clock.tick(FPS)
-
-
-def start_simulation(game_obj):
-    simulation_mode()
 
 
 def simulation_mode():

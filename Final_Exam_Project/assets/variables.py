@@ -1,6 +1,8 @@
 import os
 import pygame as pg
 
+# implement class that keeps check of colors and globals etc.
+
 # Center the application
 os.environ["SDL_VIDEO_CENTERED"] = "1"
 
