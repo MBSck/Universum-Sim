@@ -24,10 +24,14 @@ class Planet:
         self.v_x, self.v_y = v_x, v_y
         self.pos_x, self.pos_y = pos_x, pos_y
         self.rect_size_x, self.rect_size_y = rect_size_x, rect_size_y
-        self.rect = pg.Rect(self.pos_x, self.pos_y, self.rect_size_x, self.rect_size_y)
 
     def __repr__(self):
         return self.name
+
+    @property
+    def rect(self):
+        """Gets the rect object"""
+        return pg.Rect(self.pos_x, self.pos_y, self.rect_size_x, self.rect_size_y)
 
     def distance_to_other(self, other):
         """Calculates the euclidic distance of the pixels, split into x and y values"""
