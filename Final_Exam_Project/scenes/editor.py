@@ -113,8 +113,8 @@ def editor_mode():
         SCREEN.blit(title, (SCREEN_WIDTH / 2 - (title_rect[2] / 2), 80))
 
         # Draws the circles
-        for i, o in enumerate(ss.planets_list):
-            pg.draw.circle(SCREEN, RED, o.rect.center, o.radius)
+        for i in ss.planets_list:
+            pg.draw.circle(SCREEN, RED, i.rect.center, i.radius)
 
         # Updates the screen
         pg.display.update()
@@ -129,9 +129,9 @@ def simulation_mode():
     SCREEN.fill(BLACK)
     is_simulating = True
     ss = solar.SolarSystem()
+    print(ss.planets_list)
 
     while is_simulating:
-
         for event in pg.event.get():
             # Checks if the user presses the 'X' or closes the window
             if event.type == QUIT:
@@ -151,6 +151,9 @@ def simulation_mode():
                     editor_mode()
                     break
 
+        # Calculates the paths the planets take
+        ss.planetary_positions()
+
         # Fill screen with black
         SCREEN.fill(BLACK)
 
@@ -165,8 +168,8 @@ def simulation_mode():
         SCREEN.blit(title, (SCREEN_WIDTH / 2 - (title_rect[2] / 2), 80))
 
         # Draws the circles
-        for i, o in enumerate(ss.planets_list):
-            pg.draw.circle(SCREEN, RED, o.rect.center, o.radius)
+        for i in ss.planets_list:
+            pg.draw.circle(SCREEN, RED, i.rect.center, i.radius)
 
         # Updates the screen
         pg.display.update()

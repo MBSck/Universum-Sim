@@ -31,11 +31,12 @@ class Planet:
     @property
     def rect(self):
         """Gets the rect object"""
-        return pg.Rect(self.pos_x, self.pos_y, self.rect_size_x, self.rect_size_y)
+        return pg.Rect(int(self.pos_x), int(self.pos_y), self.rect_size_x, self.rect_size_y)
 
     def distance_to_other(self, other):
         """Calculates the euclidic distance of the pixels, split into x and y values"""
         distance_squared = math.sqrt((self.pos_x - other.pos_x)**2 + (self.pos_y - other.pos_y)**2)
+        # Fix division by zero mistake
         return (self.pos_x - other.pos_x)/(distance_squared**3),\
                (self.pos_y - other.pos_y)/(distance_squared**3)
 
