@@ -1,4 +1,3 @@
-import pygame as pg
 from Final_Exam_Project.assets.variables import *
 from Final_Exam_Project.scenes import menu
 
@@ -17,10 +16,11 @@ black holes and such"""
 def main(starting_scene, screen=SCREEN, fps=FPS):
     """Runs the scenes and is therefore the main game loop"""
     pg.init()
-    SCREEN.fill(BLACK)
+    screen.fill(BLACK)
     active_scene = starting_scene
 
     while True:
+        # Gets the pressed keys
         pressed_keys = pg.key.get_pressed()
 
         # Event filtering
@@ -30,13 +30,22 @@ def main(starting_scene, screen=SCREEN, fps=FPS):
         for event in pg.event.get():
             quit_attempt = False
 
+            # Checks if 'x' on window is pressed
             if event.type == pg.QUIT:
                 quit_attempt = True
+
+            # Checks oif key is pressed
             elif event.type == pg.KEYDOWN:
+
+                # Checks if either the left or right alt key is pressed
                 alt_pressed = pressed_keys[pg.K_LALT] or \
                     pressed_keys[pg.K_RALT]
+
+                # If 'alt+F4' is pressed quits
                 if event.key == pg.K_F4 and alt_pressed:
                     quit_attempt = True
+
+                # If 'F11' is pressed fullscreen toggles on/off
                 elif event.key == pg.K_F11:
                     pg.display.toggle_fullscreen()
 
@@ -49,7 +58,7 @@ def main(starting_scene, screen=SCREEN, fps=FPS):
         # Updates the scene with new content
         active_scene.process_input(filtered_events, pressed_keys)
         active_scene.update()
-        active_scene.render(screen=SCREEN)
+        active_scene.render(screen=screen)
 
         # switches to next scene if it changed
         active_scene = active_scene.next
