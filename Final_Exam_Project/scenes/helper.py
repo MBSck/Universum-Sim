@@ -6,6 +6,21 @@ import tools
 import menu
 
 
+class Help(tools.SceneBase):
+    """Creates the help menu"""
+    def __init__(self):
+        tools.SceneBase.__init__(self)
+
+    def process_input(self, events, pressed_keys):
+        ...
+
+    def update(self):
+        pass
+
+    def render(self,  screen=SCREEN, screen_width=SCREEN_WIDTH, screen_height=SCREEN_HEIGHT):
+        ...
+
+
 def help_menu():
     """This is the help, which explains how to use the simulator"""
     helper = True

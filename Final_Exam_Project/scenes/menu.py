@@ -32,9 +32,9 @@ class MainMenu(tools.SceneBase):
     def update(self):
         pass
 
-    def render(self, screen):
+    def render(self,  screen=SCREEN, screen_width=SCREEN_WIDTH, screen_height=SCREEN_HEIGHT):
         # Fills screen
-        SCREEN.fill(BLACK)
+        screen.fill(BLACK)
 
         # Sets titles and main menu options
         title = tools.text_format("Universum - Sim", 90, RED)
@@ -62,10 +62,10 @@ class MainMenu(tools.SceneBase):
         quit_rect = text_quit.get_rect()
 
         # Main Menu Text
-        SCREEN.blit(title, (SCREEN_WIDTH / 2 - (title_rect[2] / 2), 80))
-        SCREEN.blit(text_start, (SCREEN_WIDTH / 2 - (start_rect[2] / 2), 300))
-        SCREEN.blit(text_help, (SCREEN_WIDTH / 2 - (help_rect[2] / 2), 380))
-        SCREEN.blit(text_options, (SCREEN_WIDTH / 2 - (options_rect[2] / 2), 460))
-        SCREEN.blit(text_quit, (SCREEN_WIDTH / 2 - (quit_rect[2] / 2), 540))
+        screen.blit(title, (screen_width / 2 - (title_rect[2] / 2), 80))
+        screen.blit(text_start, (screen_width / 2 - (start_rect[2] / 2), 300))
+        screen.blit(text_help, (screen_width / 2 - (help_rect[2] / 2), 380))
+        screen.blit(text_options, (screen_width / 2 - (options_rect[2] / 2), 460))
+        screen.blit(text_quit, (screen_width / 2 - (quit_rect[2] / 2), 540))
 
 
