@@ -6,7 +6,7 @@ sys.path.append(os.path.abspath("scenes"))
 sys.path.append(os.path.abspath("assets"))
 sys.path.append(os.path.abspath("functionality"))
 
-# import menu
+import menu
 from variables import *
 
 
@@ -20,7 +20,7 @@ black holes and such"""
 # Make objects not being able to leave the screen via drag and also not bigger, add options for bigger screen size
 # Make objects not being able to be created inside another object
 # Make objects be created at tip of cursor not in the middle
-"""
+
 if __name__ == "__main__":
     # Initializes pygame
     pg.init()
@@ -33,4 +33,3 @@ if __name__ == "__main__":
 
     # Quits pygame
     pg.quit()
-"""

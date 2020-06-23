@@ -4,8 +4,6 @@ import tools
 # For testing
 import matplotlib.pyplot as plt
 
-__name__ = "solar"
-
 # Make solar system into Singleton
 # Also add logger to code
 # make rect size and radius into properties
@@ -59,14 +57,26 @@ class SolarSystem(metaclass=tools.Singleton):
 
     def planetary_positions(self):
         """Utilizes Verlet integration to get the next positions of all planets for a certain timestep period"""
-
+        temp_pos_list, temp_vel_list = [], []
         for i, o in enumerate(self.planets_list):
             # Calculates the position and velocity for each step and saves it to the planet
-            o.pos_x, o.v_x = tools.verlet_algorithm(o.pos_x, o.v_x, self.planetary_interaction()[i][0])
-            o.pos_y, o.v_y = tools.verlet_algorithm(o.pos_y, o.v_y, self.planetary_interaction()[i][1])
+            temp_pos_x, temp_v_x = tools.verlet_algorithm(o.pos_x, o.v_x, self.planetary_interaction()[i][0])
+            temp_pos_y, temp_v_y = tools.verlet_algorithm(o.pos_y, o.v_y, self.planetary_interaction()[i][1])
+
+            # Saves it to a temporary list as to not corrupt positional data for each step
+            temp_pos_list.append([temp_pos_x, temp_pos_y])
+            temp_vel_list.append([temp_v_x, temp_v_y])
+
+        return temp_pos_list, temp_vel_list
+
+    def update(self):
+        """"Updates the calculated data and stores it inside the planets itself"""
+        for i, o in enumerate(self.planets_list):
+            o.pos_x, o.pos_y = self.planetary_positions()[0][i]
+            o.v_x, o.v_y = self.planetary_positions()[1][i]
 
 
-if __name__ == "solar":
+if __name__ == "__main__":
     earth = planets.Planet("Earth", 1, 5, 0)
     satellite = planets.Planet("Satellite", 1, 10, 0)
     moon = planets.Planet("Moon", 1, 15, 0)

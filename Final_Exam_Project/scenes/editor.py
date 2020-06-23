@@ -155,6 +155,7 @@ def simulation_mode():
         # Calculates the paths the planets take
         time.sleep(1)
         ss.planetary_positions()
+        ss.update()
 
         # Fill screen with black
         SCREEN.fill(BLACK)
