@@ -1,10 +1,15 @@
 import sys, os
 import pygame as pg
 
+# Import all needed modules for the different submodules
+import sys, os
+
 # Selects the files from different folders to be included
 sys.path.append(os.path.abspath("scenes"))
 sys.path.append(os.path.abspath("assets"))
 sys.path.append(os.path.abspath("functionality"))
+
+from assets.variables import *
 
 import menu
 from variables import *
