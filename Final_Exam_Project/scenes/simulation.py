@@ -3,6 +3,7 @@ import pygame as pg
 import tools
 import solarsystem as solar
 import menu, editor
+from variables import *
 
 
 class Simulation(tools.SceneBase):
@@ -29,9 +30,8 @@ class Simulation(tools.SceneBase):
                     self.switch_to_scene(editor.Editor())
 
         # Calculates the paths the planets take
-        time.sleep(1)
-        ss.planetary_positions()
-        ss.update()
+        self.ss.planetary_positions()
+        self.ss.update()
 
     def update(self):
         time.sleep(0.5)
