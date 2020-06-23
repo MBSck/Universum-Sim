@@ -6,6 +6,7 @@ import menu, editor
 
 
 class Simulation(tools.SceneBase):
+    """This class simulates the planets movement"""
     def __init__(self):
         tools.SceneBase.__init__(self)
 
@@ -20,11 +21,12 @@ class Simulation(tools.SceneBase):
 
                 # Closes the window if 'esc' is pressed
                 if event.key == pg.K_ESCAPE:
+                    self.ss.reset()
                     self.switch_to_scene(menu.MainMenu())
 
                 # For testing and debugging, toggles the simulation
                 if event.key == pg.K_1:
-                    editor_mode()
+                    self.switch_to_scene(editor.Editor())
 
         # Calculates the paths the planets take
         time.sleep(1)
@@ -35,19 +37,8 @@ class Simulation(tools.SceneBase):
         time.sleep(0.5)
 
     def render(self, screen):
-        ...
-
-def simulation_mode():
-    """This is the main loop of the program that simulates the planets movement"""
-    # Defines game state
-    SCREEN.fill(BLACK)
-    is_simulating = True
-
-
-
-
         # Fill screen with black
-        SCREEN.fill(BLACK)
+        screen.fill(BLACK)
 
         # Simulation UI
         # Sets the text of the non interactable UI elements
@@ -57,14 +48,8 @@ def simulation_mode():
         title_rect = title.get_rect()
 
         # Sets the position of the non interactable UI elements
-        SCREEN.blit(title, (SCREEN_WIDTH / 2 - (title_rect[2] / 2), 80))
+        screen.blit(title, (SCREEN_WIDTH / 2 - (title_rect[2] / 2), 80))
 
         # Draws the circles
-        for i in ss.planets_list:
-            pg.draw.circle(SCREEN, RED, i.rect.center, i.radius)
-
-        # Updates the screen
-        pg.display.update()
-
-        # Sets the fps
-        clock.tick(FPS)
+        for i in self.ss.planets_list:
+            pg.draw.circle(screen, RED, i.rect.center, i.radius)

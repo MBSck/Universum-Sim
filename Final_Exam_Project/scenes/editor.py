@@ -26,6 +26,7 @@ class Editor(tools.SceneBase):
 
                 # Closes the window if 'esc' is pressed
                 if event.key == pg.K_ESCAPE:
+                    self.ss.reset()
                     self.switch_to_scene(menu.MainMenu())
 
                 # For testing and debugging, toggles the simulation
