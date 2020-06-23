@@ -39,6 +39,29 @@ class Button(pg.sprite.Sprite):
                     self.action()
 
 
+class SceneBase:
+    """Base class for the different scenes used in the games gui"""
+    def __init__(self):
+        """Sets the actual scene as the class inheriting this"""
+        self.next = self
+
+    def process_input(self, events):
+        pass
+
+    def update(self):
+        pass
+
+    def render(self):
+        pass
+
+    def switch_to_scene(self, next_scene):
+        """Switches to the next scene"""
+        self.next = next_scene
+
+    def terminate_self(self):
+        """Terminates the game"""
+        self.switch_to_scene(None)
+
 # ----- Methods ------
 
 
