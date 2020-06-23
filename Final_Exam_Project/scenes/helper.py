@@ -1,7 +1,6 @@
-import pygame as pg
-from variables import *
-import tools
-import menu
+from ..assets.variables import *
+from ..assets import tools
+from . import menu
 
 
 class Help(tools.SceneBase):

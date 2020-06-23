@@ -1,7 +1,6 @@
-import pygame as pg
-from variables import *
-import tools
-import editor, helper, options
+from ..assets.variables import *
+from ..assets import tools
+from . import editor, helper, options
 
 
 class MainMenu(tools.SceneBase):

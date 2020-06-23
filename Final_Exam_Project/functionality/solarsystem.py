@@ -1,5 +1,5 @@
-import planets
-import tools
+from ..assets import tools
+from . import planets
 
 # For testing
 import matplotlib.pyplot as plt

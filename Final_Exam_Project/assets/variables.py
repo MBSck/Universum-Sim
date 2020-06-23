@@ -1,5 +1,6 @@
 import os
 import pygame as pg
+import time, math
 
 # implement class that keeps check of colors and globals etc.
 

@@ -1,9 +1,7 @@
-import time
-import pygame as pg
-import tools
-import solarsystem as solar
-import menu, editor
-from variables import *
+from ..assets import tools
+from ..assets.variables import *
+from ..functionality import solarsystem as solar
+from . import menu, editor
 
 
 class Simulation(tools.SceneBase):

@@ -1,6 +1,4 @@
-import math
-import pygame as pg
-from variables import *
+from ..assets.variables import *
 
 # The gravitational constant in m**3 kg**-1 s**-2
 gravitational_constant = 1000*6.67408e-11

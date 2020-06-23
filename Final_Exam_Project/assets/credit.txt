@@ -10,3 +10,8 @@ https://github.com/Mekire/pygame-mutiscene-template-with-movie/tree/master/data
 https://nerdparadise.com/programming/pygame/part7
 
 https://github.com/levidsmith/PythonProjects/tree/master/koikoi
+
+Package/Module Structure:
+# __init__.py indicates that folder should be a package
+
+https://timothybramlett.com/How_to_create_a_Python_Package_with___init__py.html

@@ -59,7 +59,7 @@ class SceneBase(abc.ABC):
         pass
 
     @abc.abstractmethod
-    def render(self, screen, screen_width, screen_height):
+    def render(self, screen):
         """Renders the screen depending on events and or user input"""
         pass
 
