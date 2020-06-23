@@ -82,9 +82,9 @@ class SolarSystem(metaclass=tools.Singleton):
 
 
 if __name__ == "__main__":
-    earth = planets.Planet("Earth", 1, 5, 0)
-    satellite = planets.Planet("Satellite", 1, 10, 0)
-    moon = planets.Planet("Moon", 1, 15, 0)
+    earth = planets.Planet("Earth", 1e20, 5, 0)
+    satellite = planets.Planet("Satellite", 1e20, 10, 0)
+    moon = planets.Planet("Moon", 1e20, 15, 0)
     ss = SolarSystem()
     ss.add_planet(earth, satellite, moon)
     print(ss.planetary_interaction())

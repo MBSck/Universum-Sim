@@ -3,6 +3,8 @@ import Final_Exam_Project.assets.tools as tools
 from Final_Exam_Project.scenes import menu, editor
 from Final_Exam_Project.assets.variables import *
 
+# Make Reset button for simulation
+# Make two modes mass addition for planets and also
 
 
 class Simulation(tools.SceneBase):
@@ -33,7 +35,7 @@ class Simulation(tools.SceneBase):
         self.ss.update()
 
     def update(self):
-        time.sleep(0.5)
+        ...
 
     def render(self, screen):
         # Fill screen with black

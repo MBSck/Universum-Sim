@@ -12,7 +12,7 @@ gravitational_constant = 1000*6.67408e-11
 
 class Planet:
     """This checks the values and the behaviour of the planet"""
-    def __init__(self, name: str, mass: int, pos_x: int, pos_y: int,
+    def __init__(self, name: str, mass: float, pos_x: int, pos_y: int,
                  rect_size_x: int = BLOCK_SIZE, rect_size_y: int = BLOCK_SIZE,
                  radius: int = CIRCLE_RADIUS, v_x: int = 0, v_y: int = 0):
         """Initializes the planets values"""

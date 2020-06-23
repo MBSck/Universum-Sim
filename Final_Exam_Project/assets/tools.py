@@ -112,7 +112,7 @@ def verlet_algorithm(position: int, velocity: int, acceleration: int, dt: int = 
     # Calcuate verlet for every point and add it to list
     # Only then update it
 
-    position = position + velocity * dt + (acceleration * (dt**2) * 0.5)
+    position = position - velocity * dt + (acceleration * (dt**2) * 0.5)
     velocity = velocity + acceleration * dt
 
     return position, velocity
