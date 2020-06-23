@@ -1,5 +1,5 @@
-from ..assets import tools
-from . import planets
+import Final_Exam_Project.functionality.planets as planets
+import Final_Exam_Project.assets.tools as tools
 
 # For testing
 import matplotlib.pyplot as plt

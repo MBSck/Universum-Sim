@@ -1,6 +1,6 @@
+from Final_Exam_Project.assets.variables import *
 import pygame as pg
 import abc, sys
-from variables import *
 
 
 # Useful tools for calculation and display

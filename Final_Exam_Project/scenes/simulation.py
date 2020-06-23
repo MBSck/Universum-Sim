@@ -1,7 +1,8 @@
-from ..assets import tools
-from ..assets.variables import *
-from ..functionality import solarsystem as solar
-from . import menu, editor
+import Final_Exam_Project.functionality.solarsystem as solar
+import Final_Exam_Project.assets.tools as tools
+from Final_Exam_Project.scenes import menu, editor
+from Final_Exam_Project.assets.variables import *
+
 
 
 class Simulation(tools.SceneBase):

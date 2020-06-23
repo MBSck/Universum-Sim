@@ -1,4 +1,4 @@
-from ..assets.variables import *
+from Final_Exam_Project.assets.variables import *
 
 # The gravitational constant in m**3 kg**-1 s**-2
 gravitational_constant = 1000*6.67408e-11

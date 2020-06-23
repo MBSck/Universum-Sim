@@ -1,5 +1,6 @@
 import pygame as pg
-from .scenes import menu
+from Final_Exam_Project.assets.variables import *
+from Final_Exam_Project.scenes import menu
 
 """This is a planet creating tool that leads to a functioning solar system, add some future features like
 black holes and such"""
