@@ -8,6 +8,7 @@ from variables import *
 
 
 class Singleton(type):
+    """Creates a singleton ~ Global Class"""
     _instances = {}
 
     def __call__(cls, *args, **kwargs):
@@ -17,7 +18,7 @@ class Singleton(type):
 
 
 class Button(pg.sprite.Sprite):
-    """Class that creates button that takes custom command input"""
+    """Class that creates button that takes custom command input - work in progress"""
     def __init__(self, pos, color, text, action, font=font):
         super().__init__()
         self.color = color
@@ -40,31 +41,35 @@ class Button(pg.sprite.Sprite):
                     self.action()
 
 
-class SceneBase:
+class SceneBase(abc.ABC):
     """Base class for the different scenes used in the games gui"""
     def __init__(self):
         """Sets the actual scene as the class inheriting this"""
         self.next = self
 
     @abc.abstractmethod
-    def process_input(self, events):
+    def process_input(self, events, pressed_keys):
+        """Takes the user input and acts on it"""
         pass
 
     @abc.abstractmethod
     def update(self):
+        """Update method for events - takes game logic"""
         pass
 
     @abc.abstractmethod
     def render(self):
+        """Renders the screen depending on events and or user input"""
         pass
 
     def switch_to_scene(self, next_scene):
         """Switches to the next scene"""
         self.next = next_scene
 
-    def terminate_self(self):
+    def terminate(self):
         """Terminates the game"""
         self.switch_to_scene(None)
+
 
 # ----- Methods ------
 
@@ -109,5 +114,9 @@ def verlet_algorithm(position: int, velocity: int, acceleration: int, dt: int = 
     velocity = velocity + acceleration * dt
 
     return position, velocity
+
+
+if __name__ == "__main__":
+    pass
 
 

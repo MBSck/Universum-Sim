@@ -1,5 +1,6 @@
 import sys, os
 import pygame as pg
+from pygame.locals import *
 
 # Selects the files from different folders to be included
 sys.path.append(os.path.abspath("scenes"))
@@ -22,10 +23,10 @@ black holes and such"""
 # Make objects be created at tip of cursor not in the middle
 
 
-def main(self, starting_scene, screen=SCREEN, fps=FPS):
+def main(starting_scene, screen=SCREEN, fps=FPS):
     """Runs the scenes and is therefore the main game loop"""
     pg.init()
-
+    SCREEN.fill(BLACK)
     active_scene = starting_scene
 
     while active_scene is not None:
@@ -58,19 +59,12 @@ def main(self, starting_scene, screen=SCREEN, fps=FPS):
         active_scene.update()
         active_scene.render(screen)
 
+        pg.display.set_caption("Planetary Simulation")
+
         pg.display.flip()
         clock.tick(fps)
 
 
 if __name__ == "__main__":
-    # Initializes pygame
-    pg.init()
+    main(menu.MainMenu())
 
-    # Fill the background of the screen
-    SCREEN.fill(BLACK)
-
-    # Runs the main menu
-    menu.main_menu()
-
-    # Quits pygame
-    pg.quit()

@@ -1,4 +1,3 @@
-import sys
 import pygame as pg
 from pygame.locals import *
 from variables import *
@@ -6,84 +5,52 @@ import tools
 import editor, helper, options
 
 
-def main_menu():
-    """This is the intro of our program, starting menu"""
-    menu = True
-    selected = "start"
-    counter = 0
+class MainMenu(tools.SceneBase):
+    """Class that creates the main menu screen"""
+    def __init__(self):
+        tools.SceneBase.__init__(self)
 
-    while menu:
-        for event in pg.event.get():
-            # Checks if the user presses the 'X' or closes the window
-            if event.type == QUIT:
-                pg.quit()
-                sys.exit()
+        # Sets the counter
+        self.counter = 0
+        self.selection = {0: "start", 1: "help",
+                          2: "options", 3: "quit"}
 
-            # Checks for keypress
+    def process_input(self, events, pressed_keys):
+        for event in events:
             if event.type == KEYDOWN:
-                # Closes the window if 'esc' is pressed
-                if event.key == pg.K_ESCAPE:
-                    pg.quit()
-                    sys.exit()
 
                 # Checks if down arrow is pressed
-                elif event.key == pg.K_DOWN:
-                    if counter < 3:
-                        counter += 1
+                if event.key == pg.K_DOWN:
+                    if self.counter < 3:
+                        self.counter += 1
 
                 # Checks if up arrow is pressed
                 elif event.key == pg.K_UP:
-                    if counter > 0:
-                        counter -= 1
+                    if self.counter > 0:
+                        self.counter -= 1
 
-                # Checks what is selected
-                if counter == 0:
-                    selected = "start"
-                elif counter == 1:
-                    selected = "help"
-                elif counter == 2:
-                    selected = "options"
-                elif counter == 3:
-                    selected = "quit"
+    def update(self):
+        pass
 
-                # Checks if the return key is pressed and acts on it
-                if event.key == pg.K_RETURN:
-                    if selected == "start":
-                        menu = False
-                        editor.editor_mode()
-                        pg.display.quit()
-                        break
-                    if selected == "help":
-                        menu = False
-                        helper.help_menu()
-                        pg.display.quit()
-                        break
-                    if selected == "options":
-                        pg.quit()
-                        sys.exit()
-                    if selected == "quit":
-                        pg.quit()
-                        sys.exit()
-
-        # Main menu UI
+    def render(self, screen):
         # Fills screen
         SCREEN.fill(BLACK)
 
         # Sets titles and main menu options
         title = tools.text_format("Universum - Sim", 90, RED)
-        if selected == "start":
+        if self.selection[self.counter] == "start":
             text_start = tools.text_format("START", 75, GREEN)
         else:
             text_start = tools.text_format("START", 75, WHITE)
-        if selected == "help":
+        if self.selection[self.counter] == "help":
             text_help = tools.text_format("HELP", 75, GREEN)
         else:
             text_help = tools.text_format("HELP", 75, WHITE)
-        if selected == "options":
+        if self.selection[self.counter] == "options":
             text_options = tools.text_format("OPTIONS", 75, GREEN)
         else:
             text_options = tools.text_format("OPTIONS", 75, WHITE)
-        if selected == "quit":
+        if self.selection[self.counter] == "quit":
             text_quit = tools.text_format("QUIT", 75, GREEN)
         else:
             text_quit = tools.text_format("QUIT", 75, WHITE)
@@ -101,11 +68,4 @@ def main_menu():
         SCREEN.blit(text_options, (SCREEN_WIDTH / 2 - (options_rect[2] / 2), 460))
         SCREEN.blit(text_quit, (SCREEN_WIDTH / 2 - (quit_rect[2] / 2), 540))
 
-        # Update screen and set fps as well as title
-        pg.display.update()
 
-        # Sets the fps time
-        clock.tick(FPS)
-
-        # Sets the caption of the window
-        pg.display.set_caption("Planetary Simulation")
