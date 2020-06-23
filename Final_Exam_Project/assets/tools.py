@@ -1,4 +1,5 @@
 import pygame as pg
+import abc
 from variables import *
 
 # Useful tools for calculation and display
@@ -45,12 +46,15 @@ class SceneBase:
         """Sets the actual scene as the class inheriting this"""
         self.next = self
 
+    @abc.abstractmethod
     def process_input(self, events):
         pass
 
+    @abc.abstractmethod
     def update(self):
         pass
 
+    @abc.abstractmethod
     def render(self):
         pass
 

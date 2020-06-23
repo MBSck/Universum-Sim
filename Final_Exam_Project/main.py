@@ -23,7 +23,7 @@ black holes and such"""
 
 
 def main(self, starting_scene, screen=SCREEN, fps=FPS):
-    """Runs the scene"""
+    """Runs the scenes and is therefore the main game loop"""
     pg.init()
 
     active_scene = starting_scene
@@ -33,6 +33,8 @@ def main(self, starting_scene, screen=SCREEN, fps=FPS):
 
         # Event filtering
         filtered_events = []
+
+        # Checks if user pressed alt+f4, 'x' or escape
         for event in pg.event.get():
             quit_attempt = False
             if event.type == QUIT:
@@ -45,11 +47,13 @@ def main(self, starting_scene, screen=SCREEN, fps=FPS):
                 elif event.key == K_F4 and alt_pressed:
                     quit_attempt = True
 
+            # Quits if any quit conditions are met
             if quit_attempt:
                 active_scene.terminate()
             else:
                 filtered_events.append(event)
 
+        # Updates the scene with new content
         active_scene.process_input(filtered_events, pressed_keys)
         active_scene.update()
         active_scene.render(screen)
