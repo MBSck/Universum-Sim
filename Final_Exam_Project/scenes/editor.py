@@ -1,10 +1,8 @@
-import sys
 import pygame as pg
 from variables import *
 import tools
 import solarsystem as solar
 import menu, simulation
-import time
 
 
 class Editor(tools.SceneBase):
@@ -106,7 +104,9 @@ class Editor(tools.SceneBase):
         # Sets the fps
         clock.tick(FPS)
 
+
 """
+# Code for resizing objects, adapt later on
 # Checks if mousewheel is scrolled
 elif event.type == pg.MOUSEWHEEL:
     # Checks if wheel is turned upward

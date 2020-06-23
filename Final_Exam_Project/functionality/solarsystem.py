@@ -75,6 +75,11 @@ class SolarSystem(metaclass=tools.Singleton):
             o.pos_x, o.pos_y = self.planetary_positions()[0][i]
             o.v_x, o.v_y = self.planetary_positions()[1][i]
 
+    def reset(self):
+        """This resets the class back to its empty state"""
+        self.planets_list = []
+        self.system_time = 0
+
 
 if __name__ == "__main__":
     earth = planets.Planet("Earth", 1, 5, 0)

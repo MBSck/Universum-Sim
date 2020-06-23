@@ -1,40 +1,50 @@
+import time
+import pygame as pg
 import tools
+import solarsystem as solar
+import menu, editor
+
 
 class Simulation(tools.SceneBase):
-    pass
+    def __init__(self):
+        tools.SceneBase.__init__(self)
+
+        # Reinitializes the solar system class
+        self.ss = solar.SolarSystem()
+
+    def process_input(self, events, pressed_keys):
+        for event in events:
+
+            # Checks if the user presses a key
+            if event.type == pg.KEYDOWN:
+
+                # Closes the window if 'esc' is pressed
+                if event.key == pg.K_ESCAPE:
+                    self.switch_to_scene(menu.MainMenu())
+
+                # For testing and debugging, toggles the simulation
+                if event.key == pg.K_1:
+                    editor_mode()
+
+        # Calculates the paths the planets take
+        time.sleep(1)
+        ss.planetary_positions()
+        ss.update()
+
+    def update(self):
+        time.sleep(0.5)
+
+    def render(self, screen):
+        ...
 
 def simulation_mode():
     """This is the main loop of the program that simulates the planets movement"""
     # Defines game state
     SCREEN.fill(BLACK)
     is_simulating = True
-    ss = solar.SolarSystem()
 
-    while is_simulating:
-        for event in pg.event.get():
-            # Checks if the user presses the 'X' or closes the window
-            if event.type == QUIT:
-                pg.quit()
-                sys.exit()
 
-            # Checks if the user presses a key
-            elif event.type == KEYDOWN:
-                # Closes the window if 'esc' is pressed
-                if event.key == pg.K_ESCAPE:
-                    is_simulating = False
-                    menu.main_menu()
-                    pg.display.quit()
 
-                # For testing and debugging, toggles the simulation
-                if event.key == K_1:
-                    is_simulating = False
-                    editor_mode()
-                    break
-
-        # Calculates the paths the planets take
-        time.sleep(1)
-        ss.planetary_positions()
-        ss.update()
 
         # Fill screen with black
         SCREEN.fill(BLACK)
