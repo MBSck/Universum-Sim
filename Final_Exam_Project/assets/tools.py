@@ -1,6 +1,7 @@
 import pygame as pg
-import abc
+import abc, sys
 from variables import *
+
 
 # Useful tools for calculation and display
 
@@ -68,7 +69,8 @@ class SceneBase(abc.ABC):
 
     def terminate(self):
         """Terminates the game"""
-        self.switch_to_scene(None)
+        pg.quit()
+        sys.exit()
 
 
 # ----- Methods ------

@@ -7,7 +7,8 @@ import pygame as pg
 os.environ["SDL_VIDEO_CENTERED"] = "1"
 
 # Set screen
-SCREEN = pg.display.set_mode((0, 0), pg.FULLSCREEN)
+FULLSCREEN = pg.display.set_mode((0, 0), pg.FULLSCREEN)
+SCREEN = FULLSCREEN
 
 # Get screen size
 info = pg.display.Info()

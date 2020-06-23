@@ -1,6 +1,5 @@
 import sys, os
 import pygame as pg
-from pygame.locals import *
 
 # Selects the files from different folders to be included
 sys.path.append(os.path.abspath("scenes"))
@@ -9,7 +8,6 @@ sys.path.append(os.path.abspath("functionality"))
 
 import menu
 from variables import *
-
 
 """This is a planet creating tool that leads to a functioning solar system, add some future features like
 black holes and such"""
@@ -29,7 +27,7 @@ def main(starting_scene, screen=SCREEN, fps=FPS):
     SCREEN.fill(BLACK)
     active_scene = starting_scene
 
-    while active_scene is not None:
+    while True:
         pressed_keys = pg.key.get_pressed()
 
         # Event filtering
@@ -38,15 +36,16 @@ def main(starting_scene, screen=SCREEN, fps=FPS):
         # Checks if user pressed alt+f4, 'x' or escape
         for event in pg.event.get():
             quit_attempt = False
-            if event.type == QUIT:
+
+            if event.type == pg.QUIT:
                 quit_attempt = True
-            elif event.type == KEYDOWN:
-                alt_pressed = pressed_keys[K_LALT] or \
-                    pressed_keys[K_RALT]
-                if event.key == K_ESCAPE:
+            elif event.type == pg.KEYDOWN:
+                alt_pressed = pressed_keys[pg.K_LALT] or \
+                    pressed_keys[pg.K_RALT]
+                if event.key == pg.K_F4 and alt_pressed:
                     quit_attempt = True
-                elif event.key == K_F4 and alt_pressed:
-                    quit_attempt = True
+                elif event.key == pg.K_F11:
+                    pg.display.toggle_fullscreen()
 
             # Quits if any quit conditions are met
             if quit_attempt:
@@ -57,11 +56,18 @@ def main(starting_scene, screen=SCREEN, fps=FPS):
         # Updates the scene with new content
         active_scene.process_input(filtered_events, pressed_keys)
         active_scene.update()
-        active_scene.render(screen)
+        active_scene.render(screen=SCREEN)
 
+        # switches to next scene if it changed
+        active_scene = active_scene.next
+
+        # Sets the caption of the window
         pg.display.set_caption("Planetary Simulation")
 
-        pg.display.flip()
+        # Updates the whole display, like pg.display.flip()
+        pg.display.update()
+
+        # Sets the games clock
         clock.tick(fps)
 
 

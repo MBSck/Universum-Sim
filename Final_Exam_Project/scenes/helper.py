@@ -1,49 +1,32 @@
-import sys
 import pygame as pg
-from pygame.locals import *
 from variables import *
 import tools
 import menu
 
 
 class Help(tools.SceneBase):
-    """Creates the help menu"""
+    """Creates the help menu, which explains how to use the simulator"""
     def __init__(self):
         tools.SceneBase.__init__(self)
 
+        self.general_pos, self.editor_pos = 240, 480
+        self.left_pos = 300
+
     def process_input(self, events, pressed_keys):
-        ...
+        for event in events:
+            # Checks if the user presses a key
+            if event.type == pg.KEYDOWN:
+                # Closes the window if 'esc' is pressed
+                if event.key == pg.K_ESCAPE:
+                    self.switch_to_scene(menu.MainMenu())
 
     def update(self):
         pass
 
-    def render(self,  screen=SCREEN, screen_width=SCREEN_WIDTH, screen_height=SCREEN_HEIGHT):
-        ...
-
-
-def help_menu():
-    """This is the help, which explains how to use the simulator"""
-    helper = True
-    general_pos, editor_pos = 240, 480
-    left_pos = 300
-
-    while helper:
-        for event in pg.event.get():
-            # Checks if the user presses the 'X' or closes the window
-            if event.type == QUIT:
-                pg.quit()
-                sys.exit()
-
-            # Checks if the user presses a key
-            elif event.type == KEYDOWN:
-                # Closes the window if 'esc' is pressed
-                if event.key == pg.K_ESCAPE:
-                    helper = False
-                    menu.main_menu()
-                    pg.display.quit()
+    def render(self, screen):
         # Help UI
         # Fills screen
-        SCREEN.fill(BLACK)
+        screen.fill(BLACK)
 
         # Sets titles UI
         title = tools.text_format("Help", 90, GREEN)
@@ -65,17 +48,11 @@ def help_menu():
         info_right_rect = info_mouse_right.get_rect()
 
         # Help Text layout
-        SCREEN.blit(title, (SCREEN_WIDTH / 2 - (title_rect[2] / 2), 80))
-        SCREEN.blit(general, (left_pos - (general_rect[2] / 2), general_pos))
-        SCREEN.blit(editor, (left_pos - (general_rect[2] / 2), editor_pos))
+        screen.blit(title, (SCREEN_WIDTH / 2 - (title_rect[2] / 2), 80))
+        screen.blit(general, (self.left_pos - (general_rect[2] / 2), self.general_pos))
+        screen.blit(editor, (self.left_pos - (general_rect[2] / 2), self.editor_pos))
 
-        SCREEN.blit(escape, (SCREEN_WIDTH / 2 - (info_middle_rect[2] / 2), general_pos + 130))
-        SCREEN.blit(info_mouse_left, (SCREEN_WIDTH / 2 - (info_left_rect[2] / 2), editor_pos + 130))
-        SCREEN.blit(info_mouse_middle, (SCREEN_WIDTH / 2 - (info_middle_rect[2] / 2), editor_pos + 260))
-        SCREEN.blit(info_mouse_right, (SCREEN_WIDTH / 2 - (info_right_rect[2] / 2), editor_pos + 390))
-
-        # Update screen and set fps as well as title
-        pg.display.update()
-
-        # Sets the fps time
-        clock.tick(FPS)
+        screen.blit(escape, (SCREEN_WIDTH / 2 - (info_middle_rect[2] / 2), self.general_pos + 130))
+        screen.blit(info_mouse_left, (SCREEN_WIDTH / 2 - (info_left_rect[2] / 2), self.editor_pos + 130))
+        screen.blit(info_mouse_middle, (SCREEN_WIDTH / 2 - (info_middle_rect[2] / 2), self.editor_pos + 260))
+        screen.blit(info_mouse_right, (SCREEN_WIDTH / 2 - (info_right_rect[2] / 2), self.editor_pos + 390))
