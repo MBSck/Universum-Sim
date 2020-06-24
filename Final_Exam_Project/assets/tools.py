@@ -2,6 +2,8 @@ from Final_Exam_Project.assets.variables import *
 import pygame as pg
 import abc, sys
 
+# Make class that creates empty rectangle for menu option
+# Create menu to change planet names and so on
 
 # Useful tools for calculation and display
 

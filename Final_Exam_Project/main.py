@@ -4,13 +4,12 @@ from Final_Exam_Project.scenes import menu
 """This is a planet creating tool that leads to a functioning solar system, add some future features like
 black holes and such"""
 
-# Startbedigungen für planeten z.B. mit Pfeil in Richtung usw.
-# Sollen sich gravitationstechnisch richtig verhaltens
+# Start options for planets, like speed etc. should be shown visually by arrow into direction
 # Matrix method?
 
 # Make objects not being able to leave the screen via drag and also not bigger, add options for bigger screen size
-# Make objects not being able to be created inside another object
 # Make objects be created at tip of cursor not in the middle
+# Maybe make zoom function so that you can see all of the system
 
 
 def main(starting_scene, screen=SCREEN, fps=FPS):

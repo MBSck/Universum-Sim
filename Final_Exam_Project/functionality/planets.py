@@ -1,5 +1,7 @@
 from Final_Exam_Project.assets.variables import *
 
+# Make planets names show under their dots
+
 
 class Planet:
     """This checks the values and the behaviour of the planet"""
