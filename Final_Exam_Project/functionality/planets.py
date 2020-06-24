@@ -18,18 +18,20 @@ class Planet:
         """Shows the class name if outputted"""
         return self.name
 
+    @property
     def pos_x(self):
-        """Gets the pixel position after the physical has been calculated"""
+        """Gets the pixels x position after the physical value has been calculated"""
         return self.pos_x_real/PIXEL_REAL
 
+    @property
     def pos_y(self):
-        """Gets the pixel position after the physical has been calculated"""
+        """Gets the pixels y position after the physical value has been calculated"""
         return self.pos_y_real/PIXEL_REAL
 
     @property
     def rect(self):
         """Gets the rect object"""
-        return pg.Rect(self.pos_x(), self.pos_y(), self.rect_size_x, self.rect_size_y)
+        return pg.Rect(self.pos_x, self.pos_y, self.rect_size_x, self.rect_size_y)
 
     def alien_acceleration(self, other):
         """The acceleration this body enacts on another"""
