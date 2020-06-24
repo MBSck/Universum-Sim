@@ -43,7 +43,7 @@ def main(starting_scene, screen=SCREEN, fps=FPS):
 
                 # If 'esc' is pressed either returns to main menu or quits
                 if event.key == pg.K_ESCAPE:
-                    if active_scene == START_SCENE:
+                    if active_scene == menu.MainMenu():
                         quit_attempt = True
                     else:
                         # Switches Scene and resets the SolarSystem
@@ -83,9 +83,6 @@ def main(starting_scene, screen=SCREEN, fps=FPS):
 
 
 if __name__ == "__main__":
-    # Somehow this works for quitting with the 'esc' press, but no idea why?
-    START_SCENE = menu.MainMenu()
-
     # Start the main game loop
-    main(START_SCENE)
+    main(menu.MainMenu())
 
