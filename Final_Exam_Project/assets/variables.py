@@ -42,7 +42,7 @@ gravitational_constant = 6.67408e-11
 au = 149597870.7e03
 
 # Set a Pixel to be roughly equal to 1/10 of an au
-PIXEL_INCREMENT = 1000
+PIXEL_INCREMENT = 1e08
 PIXEL_REAL = au/PIXEL_INCREMENT
 
 # make solarsystem objects accesible via options menu via singleton

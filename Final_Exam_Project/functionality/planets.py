@@ -11,10 +11,11 @@ class Planet:
         self.mass = mass
         self.radius = radius
         self.v_x, self.v_y = v_x, v_y
-        self.pos_x_real, self.pos_y_real = pos_x*PIXEL_REAL, pos_y*PIXEL_INCREMENT
+        self.pos_x_real, self.pos_y_real = pos_x*PIXEL_REAL, pos_y*PIXEL_REAL
         self.rect_size_x, self.rect_size_y = rect_size_x, rect_size_y
 
     def __repr__(self):
+        """Shows the class name if outputted"""
         return self.name
 
     def pos_x(self):
@@ -28,12 +29,14 @@ class Planet:
     @property
     def rect(self):
         """Gets the rect object"""
-        return pg.Rect(self.pos_x, self.pos_y, self.rect_size_x, self.rect_size_y)
+        return pg.Rect(self.pos_x(), self.pos_y(), self.rect_size_x, self.rect_size_y)
 
     def alien_acceleration(self, other):
         """The acceleration this body enacts on another"""
-        distance_squared = math.sqrt((self.pos_x - other.pos_x) ** 2 + (self.pos_y - other.pos_y) ** 2)
-        nominator_x, nominator_y = self.mass * (self.pos_x - other.pos_x), self.mass * (self.pos_y - other.pos_y)
+        distance_squared = math.sqrt((self.pos_x_real - other.pos_x_real) ** 2
+                                     + (self.pos_y_real - other.pos_y_real) ** 2)
+        nominator_x, nominator_y = self.mass * (self.pos_x_real - other.pos_x_real), \
+                                   self.mass * (self.pos_y_real - other.pos_y_real)
 
         return gravitational_constant * nominator_x / (distance_squared ** 3), \
             gravitational_constant * nominator_y / (distance_squared ** 3)
