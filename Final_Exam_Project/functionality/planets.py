@@ -6,12 +6,16 @@ from Final_Exam_Project.assets.variables import *
 class Planet:
     """This checks the values and the behaviour of the planet"""
     def __init__(self, name: str, mass: float, pos_x: int, pos_y: int,
-                 rect_size_x: int = BLOCK_SIZE, rect_size_y: int = BLOCK_SIZE,
-                 radius: int = CIRCLE_RADIUS, v_x: int = 0, v_y: int = 0):
+                 v_x: int = 0, v_y: int = 0, rect_size_x: int = BLOCK_SIZE,
+                 rect_size_y: int = BLOCK_SIZE, radius: int = CIRCLE_RADIUS,
+                 color: tuple = RED):
         """Initializes the planets values"""
         self.name = name
         self.mass = mass
         self.radius = radius
+        self.color = color
+        self.trace = []
+        self.trace_size = BLOCK_SIZE/10
         self.v_x, self.v_y = v_x, v_y
         self.pos_x_real, self.pos_y_real = pos_x*PIXEL_REAL, pos_y*PIXEL_REAL
         self.rect_size_x, self.rect_size_y = rect_size_x, rect_size_y
@@ -34,6 +38,12 @@ class Planet:
     def rect(self):
         """Gets the rect object"""
         return pg.Rect(self.pos_x, self.pos_y, self.rect_size_x, self.rect_size_y)
+    '''
+    def draw_trace(self, screen):
+        """Draws a trace of all the planets in the solar system"""
+        for i, o in enumerate(self.trace):
+            pg.draw.circle(screen, self.color, o[i], self.radius)
+    '''
 
     def alien_acceleration(self, other):
         """The acceleration this body enacts on another"""

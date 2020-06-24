@@ -5,11 +5,13 @@ from Final_Exam_Project.scenes import menu
 black holes and such"""
 
 # Start options for planets, like speed etc. should be shown visually by arrow into direction
-# Matrix method?
+# Matrix method?<
 
 # Make objects not being able to leave the screen via drag and also not bigger, add options for bigger screen size
 # Make objects be created at tip of cursor not in the middle
 # Maybe make zoom function so that you can see all of the system
+# Fix collision problem of planets if collide, then merge
+# Implement sprite classes into code
 
 
 def main(starting_scene, screen=SCREEN, fps=FPS):

@@ -41,6 +41,9 @@ gravitational_constant = 6.67408e-11
 # One astronomical unit in meters
 au = 149597870.7e03
 
+# Timesteps for integration i=1
+TIMESTEP = 0.15
+
 # Set a Pixel to be roughly equal to 1/10 of an au
 PIXEL_INCREMENT = 1e08
 PIXEL_REAL = au/PIXEL_INCREMENT

@@ -72,6 +72,8 @@ class SolarSystem(metaclass=tools.Singleton):
             o.pos_x_real, o.pos_y_real = self.planetary_positions()[0][i]
             o.v_x, o.v_y = self.planetary_positions()[1][i]
 
+            o.trace.append(o.rect.center)
+
     def reset(self):
         """This resets the class back to its empty state"""
         self.planets_list = []

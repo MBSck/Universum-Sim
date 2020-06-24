@@ -107,7 +107,7 @@ def mouse_collison(objects):
     return selected, selected_offset_x, selected_offset_y
 
 
-def verlet_algorithm(position: int, velocity: int, acceleration: int, dt: int = 0.5):
+def verlet_algorithm(position: int, velocity: int, acceleration: int, dt: int = TIMESTEP):
     """This calculats the second order Taylor solution to the newton DGLs"""
     # Maybe use scipy.integrate to solve newton DGLs
 

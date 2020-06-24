@@ -49,4 +49,7 @@ class Simulation(tools.SceneBase):
 
         # Draws the circles
         for i in self.ss.planets_list:
-            pg.draw.circle(screen, RED, i.rect.center, i.radius)
+            pg.draw.circle(screen, i.color, i.rect.center, i.radius)
+            i.draw_trace(screen)
+
+
