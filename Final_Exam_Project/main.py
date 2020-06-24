@@ -43,15 +43,15 @@ def main(starting_scene, screen=SCREEN, fps=FPS):
 
                 # If 'esc' is pressed either returns to main menu or quits
                 if event.key == pg.K_ESCAPE:
-                    if active_scene == menu.MainMenu:
+                    if active_scene == START_SCENE:
                         quit_attempt = True
                     else:
                         # Switches Scene and resets the SolarSystem
-                        active_scene = active_scene.next
+                        active_scene.next = menu.MainMenu()
                         menu.editor.solar.SolarSystem().reset()
 
                 # If 'alt+F4' is pressed quits
-                if event.key == pg.K_F4 and alt_pressed:
+                elif event.key == pg.K_F4 and alt_pressed:
                     quit_attempt = True
 
                 # If 'F11' is pressed fullscreen toggles on/off
@@ -83,5 +83,9 @@ def main(starting_scene, screen=SCREEN, fps=FPS):
 
 
 if __name__ == "__main__":
-    main(menu.MainMenu())
+    # Somehow this works for quitting with the 'esc' press, but no idea why?
+    START_SCENE = menu.MainMenu()
+
+    # Start the main game loop
+    main(START_SCENE)
 
