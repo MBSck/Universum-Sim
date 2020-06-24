@@ -15,7 +15,7 @@ class SolarSystem(metaclass=tools.Singleton):
     def __init__(self):
         """Initializes the intrastellar objects and their changing attributes"""
         self.planets_list = []
-        self.max_objects = 20
+        self.max_objects = 10
         self.system_time = 0
 
     def add_planet(self, *args):

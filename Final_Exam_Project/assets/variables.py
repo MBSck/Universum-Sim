@@ -31,10 +31,15 @@ BLOCK_SIZE = 25
 CIRCLE_RADIUS = int(BLOCK_SIZE/2)
 
 # max_number of objects and object_counter
-max_object_number = 20
 object_counter = 0
 objects = []
 radius = []
+
+# The gravitational constant in m**3 kg**-1 s**-2
+gravitational_constant = 6.67408e-11
+
+# One astronomical unit in meters
+au = 149597870.7e03
 
 # make solarsystem objects accesible via options menu via singleton
 

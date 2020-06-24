@@ -1,6 +1,6 @@
 import Final_Exam_Project.functionality.solarsystem as solar
 import Final_Exam_Project.assets.tools as tools
-from Final_Exam_Project.scenes import menu, editor
+from Final_Exam_Project.scenes import editor
 from Final_Exam_Project.assets.variables import *
 
 # Make Reset button for simulation

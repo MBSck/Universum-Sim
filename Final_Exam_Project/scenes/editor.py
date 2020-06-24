@@ -1,6 +1,6 @@
 import Final_Exam_Project.functionality.solarsystem as solar
 import Final_Exam_Project.assets.tools as tools
-from Final_Exam_Project.scenes import menu, simulation
+from Final_Exam_Project.scenes import simulation
 from Final_Exam_Project.assets.variables import *
 
 # Make start button so simulation commences
@@ -41,7 +41,7 @@ class Editor(tools.SceneBase):
                 if event.button == 1:
                     if self.selected is None:
                         # Creates a new object and adds it to the solar system
-                        self.ss.add_planet(solar.planets.Planet("Earth", 1e11, mouse_pos[0], mouse_pos[1]))
+                        self.ss.add_planet(solar.planets.Planet("Earth", 1e24, mouse_pos[0], mouse_pos[1]))
                     else:
                         # Display some error message
                         ...
