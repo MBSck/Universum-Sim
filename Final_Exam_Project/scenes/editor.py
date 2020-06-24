@@ -3,7 +3,7 @@ import Final_Exam_Project.assets.tools as tools
 from Final_Exam_Project.scenes import simulation
 from Final_Exam_Project.assets.variables import *
 
-# Make start button so simulation commences
+# Think about button usability and about scaling of all the UI elements, with Screen size
 
 
 class Editor(tools.SceneBase):
@@ -38,6 +38,10 @@ class Editor(tools.SceneBase):
                     # Checks if collision with button is given
                     if self.menu.start_stop_button.collidepoint(mouse_pos[0], mouse_pos[1]):
                         self.switch_to_scene(simulation.Simulation())
+
+                    # Resets the Solar system planet list
+                    elif self.menu.reset_button.collidepoint(mouse_pos[0], mouse_pos[1]):
+                        self.ss.reset()
 
                     elif self.selected is None:
                         # Creates a new object and adds it to the solar system
