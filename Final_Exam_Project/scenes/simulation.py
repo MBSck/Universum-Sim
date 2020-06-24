@@ -16,15 +16,21 @@ class Simulation(tools.SceneBase):
         # Re-initializes the solar system class
         self.ss = solar.SolarSystem()
 
+        # Initializes the editor menu
+        self.menu = tools.SelectionMenu()
+
     def process_input(self, events, pressed_keys):
         for event in events:
 
-            # Checks if the user presses a key
-            if event.type == pg.KEYDOWN:
+            # Checks if mousbutton is pressed
+            if event.type == pg.MOUSEBUTTONDOWN:
+                mouse_pos = event.pos
 
-                # For testing and debugging, toggles the simulation
-                if event.key == pg.K_1:
-                    self.switch_to_scene(editor.Editor())
+                # Checks if it is the left mouse button
+                if event.button == 1:
+                    # Checks if collision with button is given
+                    if self.menu.start_stop_button.collidepoint(mouse_pos[0], mouse_pos[1]):
+                        self.switch_to_scene(editor.Editor())
 
         # Calculates the paths the planets take
         self.ss.planetary_positions()
@@ -47,9 +53,12 @@ class Simulation(tools.SceneBase):
         # Sets the position of the non interactable UI elements
         screen.blit(title, (SCREEN_WIDTH / 2 - (title_rect[2] / 2), 80))
 
+        # Draw quit button
+        self.menu.draw_button(SCREEN, self.menu.start_stop_button, RED, "STOP", self.menu.stop_pos[1], 50)
+
         # Draws the circles
         for i in self.ss.planets_list:
             pg.draw.circle(screen, i.color, i.rect.center, i.radius)
-            i.draw_trace(screen)
+            # i.draw_trace(screen)
 
 

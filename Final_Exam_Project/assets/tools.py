@@ -20,30 +20,6 @@ class Singleton(type):
         return cls._instances[cls]
 
 
-class Button(pg.sprite.Sprite):
-    """Class that creates button that takes custom command input - work in progress"""
-    def __init__(self, pos, color, text, action, font=font):
-        super().__init__()
-        self.color = color
-        self.action = action
-        self.text = text
-        self.font = font
-        self.image = pg.Surface((150, 40))
-        self.rect = self.image.get_rect(bottomleft=pos)
-        self.fill_surf(self.color)
-
-    def fill_surf(self, color):
-        self.image.fill(pg.Color(color))
-        self.image.blit(self.font.render(self.text, True, pg.Color('White')), (10, 10))
-
-    def update(self, events, dt):
-        for event in events:
-            if event.type == pg.MOUSEBUTTONDOWN:
-                if self.rect.collidepoint(event.pos):
-                    # if the player clicked the button, the action is invoked
-                    self.action()
-
-
 class SceneBase(abc.ABC):
     """Base class for the different scenes used in the games gui"""
     def __init__(self):
@@ -73,6 +49,24 @@ class SceneBase(abc.ABC):
         """Terminates the game"""
         pg.quit()
         sys.exit()
+
+
+class SelectionMenu:
+    """Implements selection menu to change the values of the planets"""
+    def __init__(self):
+        self.start_pos = (150, 950)
+        self.stop_pos = (150, 950)
+        self.reset_pos = (1550, 950)
+
+        self.start_stop_button = pg.Rect(self.start_pos[0], self.start_pos[1], 200, 50)
+        self.reset_button = pg.Rect(self.reset_pos[0], self.reset_pos[1], 200, 50)
+
+    def draw_button(self, screen, button_rect, color, text, pos_y, offset_x=0, offset_y=1.5):
+        """Draw button with text on it that is in black"""
+        pg.draw.rect(screen, color, button_rect)
+        button_text = text_format(text, text_size=45, text_color=BLACK)
+        button_rect = button_text.get_rect()
+        screen.blit(button_text, (button_rect[2] + offset_x, pos_y - offset_y))
 
 
 # ----- Methods ------

@@ -19,18 +19,14 @@ class Editor(tools.SceneBase):
         self.selected = None
         self.action = None
 
+        # Initializes the editor menu
+        self.menu = tools.SelectionMenu()
+
     def process_input(self, events, pressed_keys):
         for event in events:
 
-            # Checks if the user presses a key
-            if event.type == pg.KEYDOWN:
-
-                # For testing and debugging, toggles the simulation
-                if event.key == pg.K_1:
-                    self.switch_to_scene(simulation.Simulation())
-
             # Checks for mouse button press
-            elif event.type == pg.MOUSEBUTTONDOWN:
+            if event.type == pg.MOUSEBUTTONDOWN:
                 # Gets the mouse position
                 mouse_pos = event.pos
 
@@ -39,9 +35,14 @@ class Editor(tools.SceneBase):
 
                 # Checks if it is the left mouse button
                 if event.button == 1:
-                    if self.selected is None:
+                    # Checks if collision with button is given
+                    if self.menu.start_stop_button.collidepoint(mouse_pos[0], mouse_pos[1]):
+                        self.switch_to_scene(simulation.Simulation())
+
+                    elif self.selected is None:
                         # Creates a new object and adds it to the solar system
                         self.ss.add_planet(solar.planets.Planet("Earth", 1e24, mouse_pos[0], mouse_pos[1]))
+
                     else:
                         # Display some error message
                         ...
@@ -90,6 +91,10 @@ class Editor(tools.SceneBase):
 
         # Sets the position of the non interactable UI elements
         screen.blit(title, (SCREEN_WIDTH / 2 - (title_rect[2] / 2), 80))
+
+        # Draw menu
+        self.menu.draw_button(SCREEN, self.menu.start_stop_button, GREEN, "START", self.menu.start_pos[1])
+        self.menu.draw_button(SCREEN, self.menu.reset_button, GREEN, "RESET", self.menu.reset_pos[1], 1400)
 
         # Draws the circles
         for i in self.ss.planets_list:

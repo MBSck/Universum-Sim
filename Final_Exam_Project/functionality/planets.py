@@ -38,6 +38,7 @@ class Planet:
     def rect(self):
         """Gets the rect object"""
         return pg.Rect(self.pos_x, self.pos_y, self.rect_size_x, self.rect_size_y)
+
     '''
     def draw_trace(self, screen):
         """Draws a trace of all the planets in the solar system"""

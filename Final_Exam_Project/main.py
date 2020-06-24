@@ -20,6 +20,10 @@ def main(starting_scene, screen=SCREEN, fps=FPS):
     screen.fill(BLACK)
     active_scene = starting_scene
 
+    # Music
+    pg.mixer_music.load(songs[0])
+    pg.mixer_music.play(-1)
+
     while True:
         # Gets the pressed keys
         pressed_keys = pg.key.get_pressed()
@@ -85,6 +89,7 @@ def main(starting_scene, screen=SCREEN, fps=FPS):
 
 
 if __name__ == "__main__":
+
     # Start the main game loop
     main(menu.MainMenu())
 

@@ -11,6 +11,11 @@ os.environ["SDL_VIDEO_CENTERED"] = "1"
 FULLSCREEN = pg.display.set_mode((0, 0), pg.FULLSCREEN)
 SCREEN = FULLSCREEN
 
+# Implementation for music and setting song that is being played
+songs = ["assets/bensound-slowmotion.mp3"]
+currently_playing_song = None
+VOLUME = 25
+
 # Get screen size
 info = pg.display.Info()
 SCREEN_WIDTH, SCREEN_HEIGHT = info.current_w, info.current_h
