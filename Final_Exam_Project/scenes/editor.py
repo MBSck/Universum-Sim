@@ -5,6 +5,7 @@ from Final_Exam_Project.assets.variables import *
 
 # Make start button so simulation commences
 
+
 class Editor(tools.SceneBase):
     """This intializes the mode where you can create Planets and such.
     And drag them around and delete them again"""
@@ -23,11 +24,6 @@ class Editor(tools.SceneBase):
 
             # Checks if the user presses a key
             if event.type == pg.KEYDOWN:
-
-                # Closes the window if 'esc' is pressed
-                if event.key == pg.K_ESCAPE:
-                    self.ss.reset()
-                    self.switch_to_scene(menu.MainMenu())
 
                 # For testing and debugging, toggles the simulation
                 if event.key == pg.K_1:

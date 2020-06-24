@@ -41,6 +41,15 @@ def main(starting_scene, screen=SCREEN, fps=FPS):
                 alt_pressed = pressed_keys[pg.K_LALT] or \
                     pressed_keys[pg.K_RALT]
 
+                # If 'esc' is pressed either returns to main menu or quits
+                if event.key == pg.K_ESCAPE:
+                    if active_scene == menu.MainMenu:
+                        quit_attempt = True
+                    else:
+                        # Switches Scene and resets the SolarSystem
+                        active_scene = active_scene.next
+                        menu.editor.solar.SolarSystem().reset()
+
                 # If 'alt+F4' is pressed quits
                 if event.key == pg.K_F4 and alt_pressed:
                     quit_attempt = True

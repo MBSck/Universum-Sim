@@ -5,6 +5,7 @@ from Final_Exam_Project.assets.variables import *
 
 # Make Reset button for simulation
 # Make two modes mass addition for planets and also
+# Add lines to planets so movement is easily seen
 
 
 class Simulation(tools.SceneBase):
@@ -20,11 +21,6 @@ class Simulation(tools.SceneBase):
 
             # Checks if the user presses a key
             if event.type == pg.KEYDOWN:
-
-                # Closes the window if 'esc' is pressed
-                if event.key == pg.K_ESCAPE:
-                    self.ss.reset()
-                    self.switch_to_scene(menu.MainMenu())
 
                 # For testing and debugging, toggles the simulation
                 if event.key == pg.K_1:
