@@ -43,6 +43,7 @@ def main(starting_scene, screen=SCREEN, fps=FPS):
 
                 # If 'esc' is pressed either returns to main menu or quits
                 if event.key == pg.K_ESCAPE:
+                    # This doesn't work, but why?
                     if active_scene == menu.MainMenu():
                         quit_attempt = True
                     else:

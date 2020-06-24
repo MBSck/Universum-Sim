@@ -11,11 +11,19 @@ class Planet:
         self.mass = mass
         self.radius = radius
         self.v_x, self.v_y = v_x, v_y
-        self.pos_x, self.pos_y = pos_x, pos_y
+        self.pos_x_real, self.pos_y_real = pos_x*PIXEL_REAL, pos_y*PIXEL_INCREMENT
         self.rect_size_x, self.rect_size_y = rect_size_x, rect_size_y
 
     def __repr__(self):
         return self.name
+
+    def pos_x(self):
+        """Gets the pixel position after the physical has been calculated"""
+        return self.pos_x_real/PIXEL_REAL
+
+    def pos_y(self):
+        """Gets the pixel position after the physical has been calculated"""
+        return self.pos_y_real/PIXEL_REAL
 
     @property
     def rect(self):

@@ -1,7 +1,9 @@
 import Final_Exam_Project.functionality.planets as planets
 import Final_Exam_Project.assets.tools as tools
+from Final_Exam_Project.assets.variables import *
 
 # Also add logger to code and display errors correctly
+# Make one pixel correspond to 1/10 au so that acceleration works more realistic
 
 
 class SolarSystem(metaclass=tools.Singleton):
@@ -55,8 +57,8 @@ class SolarSystem(metaclass=tools.Singleton):
         temp_pos_list, temp_vel_list = [], []
         for i, o in enumerate(self.planets_list):
             # Calculates the position and velocity for each step and saves it to the planet
-            temp_pos_x, temp_v_x = tools.verlet_algorithm(o.pos_x, o.v_x, self.planetary_interaction()[i][0])
-            temp_pos_y, temp_v_y = tools.verlet_algorithm(o.pos_y, o.v_y, self.planetary_interaction()[i][1])
+            temp_pos_x, temp_v_x = tools.verlet_algorithm(o.pos_x_real, o.v_x, self.planetary_interaction()[i][0])
+            temp_pos_y, temp_v_y = tools.verlet_algorithm(o.pos_y_real, o.v_y, self.planetary_interaction()[i][1])
 
             # Saves it to a temporary list as to not corrupt positional data for each step
             temp_pos_list.append([temp_pos_x, temp_pos_y])
@@ -67,7 +69,7 @@ class SolarSystem(metaclass=tools.Singleton):
     def update(self):
         """"Updates the calculated data and stores it inside the planets itself"""
         for i, o in enumerate(self.planets_list):
-            o.pos_x, o.pos_y = self.planetary_positions()[0][i]
+            o.pos_x_real, o.pos_y_real = self.planetary_positions()[0][i]
             o.v_x, o.v_y = self.planetary_positions()[1][i]
 
     def reset(self):

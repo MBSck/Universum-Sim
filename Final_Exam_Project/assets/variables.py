@@ -17,7 +17,7 @@ SCREEN_WIDTH, SCREEN_HEIGHT = info.current_w, info.current_h
 MAX_RESOLUTION = (info.current_w, info.current_h)
 
 # Set fps and clock
-FPS, clock = 25, pg.time.Clock()
+FPS, clock = 60, pg.time.Clock()
 
 # Define colors
 BLACK, WHITE = (0, 0, 0), (255, 255, 255)
@@ -40,6 +40,10 @@ gravitational_constant = 6.67408e-11
 
 # One astronomical unit in meters
 au = 149597870.7e03
+
+# Set a Pixel to be roughly equal to 1/10 of an au
+PIXEL_INCREMENT = 1000
+PIXEL_REAL = au/PIXEL_INCREMENT
 
 # make solarsystem objects accesible via options menu via singleton
 
