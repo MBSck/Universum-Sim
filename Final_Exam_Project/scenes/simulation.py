@@ -4,7 +4,7 @@ from Final_Exam_Project.scenes import editor
 from Final_Exam_Project.assets.variables import *
 
 # Make Reset button for simulation
-# Make two modes mass addition for planets and also
+# Make two modes if collide mass addition for planets and also
 # Add lines to planets so movement is easily seen
 
 
@@ -13,7 +13,7 @@ class Simulation(tools.SceneBase):
     def __init__(self):
         tools.SceneBase.__init__(self)
 
-        # Reinitializes the solar system class
+        # Re-initializes the solar system class
         self.ss = solar.SolarSystem()
 
     def process_input(self, events, pressed_keys):

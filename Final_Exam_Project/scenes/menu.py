@@ -32,8 +32,11 @@ class MainMenu(tools.SceneBase):
                     if self.selection[self.counter] == "start":
                         self.switch_to_scene(editor.Editor())
 
-                    if self.selection[self.counter] == "help":
+                    elif self.selection[self.counter] == "help":
                         self.switch_to_scene(helper.Help())
+
+                    elif self.selection[self.counter] == "options":
+                        self.switch_to_scene(options.Options())
 
                     elif self.selection[self.counter] == "quit":
                         self.terminate()

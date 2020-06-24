@@ -1,11 +1,5 @@
 from Final_Exam_Project.assets.variables import *
 
-# make iterators for planets so values can be called
-# optimize with the g in front
-# Light speed optimization final communication speed
-
-# make rect and rect size properties
-
 
 class Planet:
     """This checks the values and the behaviour of the planet"""
@@ -38,7 +32,7 @@ class Planet:
 
 
 if __name__ == "__main__":
-    earth = Planet("Earth", 1000000000, 3000, 10, 15)
+    earth = Planet("Earth", 1e09, 3000, 10, 15)
     satellite = Planet("Satellite", 100, 12, 30, 35)
     print(math.sqrt(20**2+20**2))
     print(gravitational_constant*100/(28.284271247461902**2))

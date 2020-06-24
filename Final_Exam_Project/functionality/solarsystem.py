@@ -1,12 +1,7 @@
 import Final_Exam_Project.functionality.planets as planets
 import Final_Exam_Project.assets.tools as tools
 
-# For testing
-import matplotlib.pyplot as plt
-
-# Make solar system into Singleton
-# Also add logger to code
-# make rect size and radius into properties
+# Also add logger to code and display errors correctly
 
 
 class SolarSystem(metaclass=tools.Singleton):
@@ -93,18 +88,8 @@ if __name__ == "__main__":
     for i in ss.planets_list:
         print(i.pos_x, i.pos_y)
 
-    # Checking trajectories with matplotlib
-    x_list, y_list = [], []
-    for i in range(1):
-        ss.planetary_positions()
-        x_list.append(satellite.pos_x)
-        y_list.append(satellite.pos_y)
-
     for i in ss.planets_list:
         print(i.pos_x, i.pos_y)
-
-    plt.plot(x_list, y_list)
-    plt.show()
 
 
 
