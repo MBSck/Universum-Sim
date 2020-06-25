@@ -1,6 +1,8 @@
 import os
 import pygame as pg
-import time, math
+import time
+import numpy as np
+import decimal
 
 # implement class that keeps check of colors and globals etc.
 
@@ -52,6 +54,12 @@ TIMESTEP = 0.15
 # Set a Pixel to be roughly equal to 1/10 of an au
 PIXEL_INCREMENT = 1e08
 PIXEL_REAL = au/PIXEL_INCREMENT
+
+# exoplanet and stars list/ webscrape later
+generic_name_list = ["Spe", "Arkas", "Arion", "Dimidium", "Earth", "Moon", "Mars",
+                     "Venus", "Jupiter", "Sun", "Merkur", "Saturn", "Ægir", "Dagon",
+                     "Hypatia", "Madriu", "Xolotlan", "Riosar", ]
+
 
 # make solarsystem objects accesible via options menu via singleton
 

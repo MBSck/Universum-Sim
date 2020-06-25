@@ -95,5 +95,12 @@ def verlet_algorithm(position: int, velocity: int, acceleration: int, dt: int = 
     return position, velocity
 
 
+def drange(x, y, jump):
+    """Range funtion for floats"""
+    while x < y:
+        yield float(x)
+        x += decimal.Decimal(jump)
+
+
 if __name__ == "__main__":
     pass

@@ -45,7 +45,7 @@ class Editor(tools.SceneBase):
 
                     elif self.selected is None:
                         # Creates a new object and adds it to the solar system
-                        self.ss.add_planet(solar.planets.Planet("Earth", 1e24, mouse_pos[0], mouse_pos[1]))
+                        self.ss.add_planet(solar.planets.Planet(1e24, mouse_pos[0], mouse_pos[1]))
 
                     else:
                         # Selects planet for variable change if one already exists at this point
@@ -81,12 +81,7 @@ class Editor(tools.SceneBase):
                             mouse_pos[1] + tools.mouse_collison(self.ss.planets_list)[2]
 
     def update(self):
-        # Gets the selected planets values and renders them on the screen
-        if self.selected is not None:
-            # self.menu.draw_variable_input(SCREEN, self.ss.get_planet(self.selected_planet))
-            print(self.ss.get_planet(self.selected), end=", ")
-
-            # Does not work as for some reason if you click on planet it gets looped
+        ...
 
     def render(self, screen):
         # Editor UI
@@ -106,6 +101,10 @@ class Editor(tools.SceneBase):
         self.menu.draw_button(SCREEN, self.menu.start_stop_button, GREEN, "START", self.menu.start_pos[1])
         self.menu.draw_button(SCREEN, self.menu.reset_button, GREEN, "RESET", self.menu.reset_pos[1], 1400)
         self.menu.draw_menu(SCREEN)
+
+        # Gets the selected planets values and renders them on the screen
+        if self.selected is not None:
+            self.menu.draw_variable_input(SCREEN, self.ss.get_planet(self.selected))
 
         # Draws the circles
         for i in self.ss.planets_list:

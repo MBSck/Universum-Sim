@@ -1,17 +1,18 @@
 from Final_Exam_Project.assets.variables import *
+import random as rnd
 
 # Make planets names show under their dots
 
 
 class Planet:
     """This checks the values and the behaviour of the planet"""
-    def __init__(self, name: str, mass: float, pos_x: int, pos_y: int,
+    def __init__(self, mass: float, pos_x: int, pos_y: int,
                  v_x: int = 0, v_y: int = 0, rect_size_x: int = BLOCK_SIZE,
                  rect_size_y: int = BLOCK_SIZE, radius: int = CIRCLE_RADIUS,
-                color: tuple = RED):
+                 color: tuple = RED, name: str = ""):
         """Initializes the planets values"""
         # Make radius property that updates itself as well as tracesize and rect size
-        self.name = name
+        self.name = rnd.choice(generic_name_list)
         self.mass = mass
         self.color = color
         self.trace = []
@@ -115,7 +116,7 @@ class Planet:
 
     def alien_acceleration(self, other):
         """The acceleration this body enacts on another"""
-        distance_squared = math.sqrt((self.pos_x_real - other.pos_x_real) ** 2
+        distance_squared = np.sqrt((self.pos_x_real - other.pos_x_real) ** 2
                                      + (self.pos_y_real - other.pos_y_real) ** 2)
         nominator_x, nominator_y = self.mass * (self.pos_x_real - other.pos_x_real), \
                                    self.mass * (self.pos_y_real - other.pos_y_real)
