@@ -13,12 +13,14 @@ class Planet:
         # Make radius property that updates itself as well as tracesize and rect size
         self.name = name
         self.mass = mass
-        self.__radius = radius
         self.color = color
         self.trace = []
         self.trace_size = BLOCK_SIZE/10
         self.v_x, self.v_y = v_x, v_y
         self.pos_x_real, self.pos_y_real = pos_x*PIXEL_REAL, pos_y*PIXEL_REAL
+
+        # Values used for setters and behind the scenes update, never overwrite!
+        self.__radius = radius
         self.__rect_size_x, self.__rect_size_y = rect_size_x, rect_size_y
 
     def __repr__(self):
@@ -43,6 +45,8 @@ class Planet:
     @property
     def radius(self):
         """Gets the radius"""
+        # Might be wrong as volume doesn't increase with mass linear
+        # Radius should be depending on volume add that and density
         return int(self.__rect_size_x/2)
 
     @radius.setter
@@ -81,6 +85,7 @@ class Planet:
     def collision_addition(self, other):
         """In case of collision adds the two planets together"""
         # Maybe implement mass loss and explosion later on
+        # Think about momentum conservation and volume and radius increase by mass increase
         self.mass = self.mass + other.mass
         self.rect_size_x = self.rect_size_x + other.rect_size_x
         self.rect_size_y = self.rect_size_y + other.rect_size_y
