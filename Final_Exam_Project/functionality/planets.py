@@ -74,7 +74,6 @@ class Planet:
         """Sets the rect_size_y"""
         self.__rect_size_y = rect_size
 
-
     '''
     def draw_trace(self, screen):
         """Draws a trace of all the planets in the solar system"""
@@ -86,9 +85,15 @@ class Planet:
         """In case of collision adds the two planets together"""
         # Maybe implement mass loss and explosion later on
         # Think about momentum conservation and volume and radius increase by mass increase
-        self.mass = self.mass + other.mass
-        self.rect_size_x = self.rect_size_x + other.rect_size_x
-        self.rect_size_y = self.rect_size_y + other.rect_size_y
+        # Collision is bigger than the real size of the circles! Check
+        # Think about addition, doesn't add values up physically correct
+        self.mass += other.mass
+        self.rect_size_x += other.rect_size_x
+        self.rect_size_y += other.rect_size_y
+        self.v_x += other.v_x
+        self.v_y += other.v_y
+        self.pos_x_real = (self.pos_x_real + other.pos_x_real)/2
+        self.pos_y_real = (self.pos_y_real + other.pos_y_real)/2
 
     def alien_acceleration(self, other):
         """The acceleration this body enacts on another"""
