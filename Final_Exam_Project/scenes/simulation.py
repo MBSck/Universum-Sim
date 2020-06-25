@@ -17,7 +17,7 @@ class Simulation(tools.SceneBase):
         self.ss = solar.SolarSystem()
 
         # Initializes the editor menu
-        self.menu = tools.SelectionMenu()
+        self.menu = editor.SelectionMenu()
 
     def process_input(self, events, pressed_keys):
         for event in events:

@@ -12,6 +12,7 @@ black holes and such"""
 # Maybe make zoom function so that you can see all of the system
 # Fix collision problem of planets if collide, then merge
 # Implement sprite classes into code
+# Change all the positions into relative to screen size, so that it works on lower resolution, too
 
 
 def main(starting_scene, screen=SCREEN, fps=FPS):
@@ -65,7 +66,8 @@ def main(starting_scene, screen=SCREEN, fps=FPS):
                 elif event.key == pg.K_F11:
                     pg.display.toggle_fullscreen()
 
-            # Quits if any quit conditions are met and if not takes the events
+            # Quits if any quit conditions are met
+            # and if not takes the events
             if quit_attempt:
                 active_scene.terminate()
             else:

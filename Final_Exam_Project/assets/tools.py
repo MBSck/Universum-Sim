@@ -50,36 +50,6 @@ class SceneBase(abc.ABC):
         pg.quit()
         sys.exit()
 
-
-class SelectionMenu:
-    """Implements selection menu to change the values of the planets"""
-    def __init__(self):
-        self.start_pos = (150, 950)
-        self.stop_pos = (150, 950)
-        self.reset_pos = (1550, 950)
-
-        self.start_stop_button = pg.Rect(self.start_pos[0], self.start_pos[1], 200, 50)
-        self.reset_button = pg.Rect(self.reset_pos[0], self.reset_pos[1], 200, 50)
-
-    def draw_button(self, screen, button_rect, color, text, pos_y, offset_x=0, offset_y=1.5):
-        """Draw button with text on it that is in black"""
-        pg.draw.rect(screen, color, button_rect)
-        button_text = text_format(text, text_size=45, text_color=BLACK)
-        button_rect = button_text.get_rect()
-        screen.blit(button_text, (button_rect[2] + offset_x, pos_y - offset_y))
-
-    def draw_menu(self, screen):
-        """Draws the menu elements"""
-        pg.draw.rect(screen, GREEN, pg.Rect(10, 10, 550, 400), 10)
-
-    def display_variables(self):
-        """Displays the changeable variables of the object"""
-        ...
-
-    def update(self):
-        """Updates the menu screen"""
-        ...
-
 # ----- Methods ------
 
 

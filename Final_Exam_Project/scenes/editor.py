@@ -21,7 +21,7 @@ class Editor(tools.SceneBase):
         self.action = None
 
         # Initializes the editor menu
-        self.menu = tools.SelectionMenu()
+        self.menu = SelectionMenu()
 
     def process_input(self, events, pressed_keys):
         for event in events:
@@ -114,6 +114,69 @@ class Editor(tools.SceneBase):
         clock.tick(FPS)
 
 
+class SelectionMenu:
+    """Implements selection menu to change the values of the planets"""
+    def __init__(self):
+        self.start_pos = (150, 950)
+        self.stop_pos = (150, 950)
+        self.reset_pos = (1550, 950)
+
+        # Sets the position of the buttons
+        self.start_stop_button = pg.Rect(self.start_pos[0], self.start_pos[1], 200, 50)
+        self.reset_button = pg.Rect(self.reset_pos[0], self.reset_pos[1], 200, 50)
+
+    def draw_button(self, screen, button_rect, color, text, pos_y, offset_x=0, offset_y=1.5):
+        """Draw button with text on it that is in black"""
+        # Draws the button, gets the text and then a possible offsets to center text on button position
+        pg.draw.rect(screen, color, button_rect)
+        button_text = tools.text_format(text, text_size=45, text_color=BLACK)
+        button_rect = button_text.get_rect()
+        screen.blit(button_text, (button_rect[2] + offset_x, pos_y - offset_y))
+
+    def draw_menu(self, screen):
+        """Draws the menu elements"""
+        # Draws the menus borders
+        pg.draw.rect(screen, GREEN, pg.Rect(10, 10, 575, 250), 10)
+
+        # Sets the title and text of the menu
+        menu_title = tools.text_format("Stellar Object Menu", 30, GREEN)
+        menu_name = tools.text_format("Name:", 20, GREEN)
+        menu_mass = tools.text_format("Mass:", 20, GREEN)
+        menu_density = tools.text_format("Density:", 20, GREEN)
+        menu_radius = tools.text_format("Radius:", 20, GREEN)
+        menu_velocity_x = tools.text_format("Velocity X:", 20, GREEN)
+        menu_velocity_y = tools.text_format("Velocity Y:", 20, GREEN)
+
+        # Gets the rects
+        menu_title_rect = menu_title.get_rect()
+        menu_name_rect = menu_mass.get_rect()
+        menu_mass_rect = menu_mass.get_rect()
+        menu_radius_rect = menu_radius.get_rect()
+        menu_density_rect = menu_density.get_rect()
+
+        # Displays the text
+        screen.blit(menu_title, (SCREEN_WIDTH / 6.3 - (menu_title_rect[2] / 2),
+                                 SCREEN_HEIGHT / 4.8 - (menu_title_rect[2] / 2)))
+        screen.blit(menu_name, (SCREEN_WIDTH / 25 - (menu_name_rect[2] / 2),
+                                SCREEN_HEIGHT / 10.2 - (menu_name_rect[2] / 2)))
+        screen.blit(menu_mass, (SCREEN_WIDTH / 25 - (menu_name_rect[2] / 2),
+                                   SCREEN_HEIGHT / 8.2 - (menu_mass_rect[2] / 2)))
+        screen.blit(menu_radius, (SCREEN_WIDTH / 25 - (menu_name_rect[2] / 2),
+                                   SCREEN_HEIGHT / 6.5 - (menu_radius_rect[2] / 2)))
+        screen.blit(menu_density, (SCREEN_WIDTH / 25 - (menu_name_rect[2] / 2),
+                                   SCREEN_HEIGHT / 5.4 - (menu_density_rect[2] / 2)))
+        screen.blit(menu_velocity_x, (SCREEN_WIDTH / 25 - (menu_name_rect[2] / 2),
+                                   SCREEN_HEIGHT / 5.1 - (menu_name_rect[2] / 2)))
+        screen.blit(menu_velocity_y, (SCREEN_WIDTH / 25 - (menu_name_rect[2] / 2),
+                                   SCREEN_HEIGHT / 4.5 - (menu_name_rect[2] / 2)))
+
+    def draw_variable_input(self):
+        """Displays the changeable variables of the object"""
+        ...
+
+    def update(self):
+        """Updates the menu screen"""
+        ...
 """
 # Code for resizing objects, adapt later on
 # Checks if mousewheel is scrolled
