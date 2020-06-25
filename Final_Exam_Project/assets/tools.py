@@ -68,6 +68,17 @@ class SelectionMenu:
         button_rect = button_text.get_rect()
         screen.blit(button_text, (button_rect[2] + offset_x, pos_y - offset_y))
 
+    def draw_menu(self, screen):
+        """Draws the menu elements"""
+        pg.draw.rect(screen, GREEN, pg.Rect(10, 10, 550, 400), 10)
+
+    def display_variables(self):
+        """Displays the changeable variables of the object"""
+        ...
+
+    def update(self):
+        """Updates the menu screen"""
+        ...
 
 # ----- Methods ------
 

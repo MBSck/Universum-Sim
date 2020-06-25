@@ -101,6 +101,7 @@ class Editor(tools.SceneBase):
         # Draws the start and reset buttons
         self.menu.draw_button(SCREEN, self.menu.start_stop_button, GREEN, "START", self.menu.start_pos[1])
         self.menu.draw_button(SCREEN, self.menu.reset_button, GREEN, "RESET", self.menu.reset_pos[1], 1400)
+        self.menu.draw_menu(SCREEN)
 
         # Draws the circles
         for i in self.ss.planets_list:
