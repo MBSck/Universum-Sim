@@ -5,7 +5,7 @@ from Final_Exam_Project.scenes import menu
 black holes and such"""
 
 # Start options for planets, like speed etc. should be shown visually by arrow into direction
-# Matrix method?<
+# Matrix method?
 
 # Make objects not being able to leave the screen via drag and also not bigger, add options for bigger screen size
 # Make objects be created at tip of cursor not in the middle
@@ -21,8 +21,8 @@ def main(starting_scene, screen=SCREEN, fps=FPS):
     active_scene = starting_scene
 
     # Music
-    pg.mixer_music.load(songs[0])
-    pg.mixer_music.play(-1)
+    # pg.mixer_music.load(songs[0])
+    # pg.mixer_music.play(-1)
 
     while True:
         # Gets the pressed keys
@@ -48,6 +48,7 @@ def main(starting_scene, screen=SCREEN, fps=FPS):
 
                 # If 'esc' is pressed either returns to main menu or quits
                 if event.key == pg.K_ESCAPE:
+
                     # This doesn't work, but why?
                     if active_scene == menu.MainMenu():
                         quit_attempt = True
@@ -64,13 +65,13 @@ def main(starting_scene, screen=SCREEN, fps=FPS):
                 elif event.key == pg.K_F11:
                     pg.display.toggle_fullscreen()
 
-            # Quits if any quit conditions are met
+            # Quits if any quit conditions are met and if not takes the events
             if quit_attempt:
                 active_scene.terminate()
             else:
                 filtered_events.append(event)
 
-        # Updates the scene with new content
+        # Takes User Input, updates the game for any actions and then renders the screen
         active_scene.process_input(filtered_events, pressed_keys)
         active_scene.update()
         active_scene.render(screen=screen)
@@ -89,7 +90,5 @@ def main(starting_scene, screen=SCREEN, fps=FPS):
 
 
 if __name__ == "__main__":
-
     # Start the main game loop
     main(menu.MainMenu())
-

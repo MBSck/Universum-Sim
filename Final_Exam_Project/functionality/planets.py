@@ -8,17 +8,18 @@ class Planet:
     def __init__(self, name: str, mass: float, pos_x: int, pos_y: int,
                  v_x: int = 0, v_y: int = 0, rect_size_x: int = BLOCK_SIZE,
                  rect_size_y: int = BLOCK_SIZE, radius: int = CIRCLE_RADIUS,
-                 color: tuple = RED):
+                color: tuple = RED):
         """Initializes the planets values"""
+        # Make radius property that updates itself as well as tracesize and rect size
         self.name = name
         self.mass = mass
-        self.radius = radius
+        self.__radius = radius
         self.color = color
         self.trace = []
         self.trace_size = BLOCK_SIZE/10
         self.v_x, self.v_y = v_x, v_y
         self.pos_x_real, self.pos_y_real = pos_x*PIXEL_REAL, pos_y*PIXEL_REAL
-        self.rect_size_x, self.rect_size_y = rect_size_x, rect_size_y
+        self.__rect_size_x, self.__rect_size_y = rect_size_x, rect_size_y
 
     def __repr__(self):
         """Shows the class name if outputted"""
@@ -39,12 +40,50 @@ class Planet:
         """Gets the rect object"""
         return pg.Rect(self.pos_x, self.pos_y, self.rect_size_x, self.rect_size_y)
 
+    @property
+    def radius(self):
+        """Gets the radius"""
+        return int(self.__rect_size_x/2)
+
+    @radius.setter
+    def radius(self, radius):
+        """Sets the radius"""
+        self.__radius = radius
+
+    @property
+    def rect_size_x(self):
+        """Gets the rect size"""
+        return self.__radius*2
+
+    @rect_size_x.setter
+    def rect_size_x(self, rect_size):
+        """Sets the rect_size_x"""
+        self.__rect_size_x = rect_size
+
+    @property
+    def rect_size_y(self):
+        """Gets the rect_size_y"""
+        return self.__radius*2
+
+    @rect_size_y.setter
+    def rect_size_y(self, rect_size):
+        """Sets the rect_size_y"""
+        self.__rect_size_y = rect_size
+
+
     '''
     def draw_trace(self, screen):
         """Draws a trace of all the planets in the solar system"""
         for i, o in enumerate(self.trace):
             pg.draw.circle(screen, self.color, o[i], self.radius)
     '''
+
+    def collision_addition(self, other):
+        """In case of collision adds the two planets together"""
+        # Maybe implement mass loss and explosion later on
+        self.mass = self.mass + other.mass
+        self.rect_size_x = self.rect_size_x + other.rect_size_x
+        self.rect_size_y = self.rect_size_y + other.rect_size_y
 
     def alien_acceleration(self, other):
         """The acceleration this body enacts on another"""

@@ -116,5 +116,3 @@ def verlet_algorithm(position: int, velocity: int, acceleration: int, dt: int = 
 
 if __name__ == "__main__":
     pass
-
-

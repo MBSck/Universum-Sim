@@ -4,10 +4,11 @@ from Final_Exam_Project.scenes import simulation
 from Final_Exam_Project.assets.variables import *
 
 # Think about button usability and about scaling of all the UI elements, with Screen size
+# Implement inelastic collision
 
 
 class Editor(tools.SceneBase):
-    """This intializes the mode where you can create Planets and such.
+    """This initializes the mode where you can create Planets and such.
     And drag them around and delete them again"""
     def __init__(self):
         tools.SceneBase.__init__(self)
@@ -87,16 +88,16 @@ class Editor(tools.SceneBase):
         # Fill screen with black
         screen.fill(BLACK)
 
-        # Sets the text of the non interactable UI elements
+        # Sets the text of the non interaction UI elements
         title = tools.text_format("Editing Mode", 90, GREEN)
 
-        # Gets the game elements of the non interactable UI
+        # Gets the game elements of the non interaction UI
         title_rect = title.get_rect()
 
-        # Sets the position of the non interactable UI elements
+        # Sets the position of the non interaction UI elements
         screen.blit(title, (SCREEN_WIDTH / 2 - (title_rect[2] / 2), 80))
 
-        # Draw menu
+        # Draws the start and reset buttons
         self.menu.draw_button(SCREEN, self.menu.start_stop_button, GREEN, "START", self.menu.start_pos[1])
         self.menu.draw_button(SCREEN, self.menu.reset_button, GREEN, "RESET", self.menu.reset_pos[1], 1400)
 
@@ -129,5 +130,3 @@ elif event.type == pg.MOUSEWHEEL:
                 else:
                     radius[selected] -= 35
 """
-
-

@@ -15,17 +15,20 @@ class SolarSystem(metaclass=tools.Singleton):
         self.max_objects = 10
         self.system_time = 0
 
+        # To display error messages
+        self.error = False
+
     def add_planet(self, *args):
-        """Adds planets or objects to the solarsystem"""
+        """Adds planets or objects to the solar system"""
         if self.number_of_intrastellar_objects() < self.max_objects:
             for i in args:
                 self.planets_list.append(i)
         else:
             # Display some error message
-            ...
+            self.error = True
 
     def remove_planet(self, planet):
-        """Removes planet from the solarsystem"""
+        """Removes planet from the solar system"""
         self.planets_list.remove(planet)
 
     def get_planet(self, planet):
@@ -53,7 +56,7 @@ class SolarSystem(metaclass=tools.Singleton):
         return acceleration_list
 
     def planetary_positions(self):
-        """Utilizes Verlet integration to get the next positions of all planets for a certain timestep period"""
+        """Utilizes Verlet integration to get the next positions of all planets for a certain time step period"""
         temp_pos_list, temp_vel_list = [], []
         for i, o in enumerate(self.planets_list):
             # Calculates the position and velocity for each step and saves it to the planet
@@ -72,7 +75,7 @@ class SolarSystem(metaclass=tools.Singleton):
             o.pos_x_real, o.pos_y_real = self.planetary_positions()[0][i]
             o.v_x, o.v_y = self.planetary_positions()[1][i]
 
-            o.trace.append(o.rect.center)
+            # o.trace.append(o.rect.center)
 
     def reset(self):
         """This resets the class back to its empty state"""
@@ -94,6 +97,3 @@ if __name__ == "__main__":
 
     for i in ss.planets_list:
         print(i.pos_x, i.pos_y)
-
-
-
