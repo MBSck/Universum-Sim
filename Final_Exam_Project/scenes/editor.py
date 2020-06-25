@@ -151,24 +151,24 @@ class SelectionMenu:
         menu_velocity_y = tools.text_format("Velocity Y:", 20, GREEN)
 
         # Gets the rects
-        menu_title_rect = menu_title.get_rect()
-        menu_name_rect = menu_mass.get_rect()
-        menu_mass_rect = menu_mass.get_rect()
-        menu_radius_rect = menu_radius.get_rect()
-        menu_density_rect = menu_density.get_rect()
+        self.menu_title_rect = menu_title.get_rect()
+        self.menu_name_rect = menu_mass.get_rect()
+        self.menu_mass_rect = menu_mass.get_rect()
+        self.menu_radius_rect = menu_radius.get_rect()
+        self.menu_density_rect = menu_density.get_rect()
 
         # Variable that sets all of the values on the leftbound
-        LEFTBOUND = (SCREEN_WIDTH / 30 - (menu_name_rect[2] / 2))
+        LEFTBOUND = (SCREEN_WIDTH / 30 - (self.menu_name_rect[2] / 2))
 
         # Displays the text
-        screen.blit(menu_title, (SCREEN_WIDTH / 6.3 - (menu_title_rect[2] / 2),
-                                 SCREEN_HEIGHT / 4.8 - (menu_title_rect[2] / 2)))
-        screen.blit(menu_name, (LEFTBOUND, SCREEN_HEIGHT / 10.2 - (menu_name_rect[2] / 2)))
-        screen.blit(menu_mass, (LEFTBOUND, SCREEN_HEIGHT / 8.2 - (menu_mass_rect[2] / 2)))
-        screen.blit(menu_radius, (LEFTBOUND, SCREEN_HEIGHT / 6.5 - (menu_radius_rect[2] / 2)))
-        screen.blit(menu_density, (LEFTBOUND, SCREEN_HEIGHT / 5.4 - (menu_density_rect[2] / 2)))
-        screen.blit(menu_velocity_x, (LEFTBOUND, SCREEN_HEIGHT / 5.1 - (menu_name_rect[2] / 2)))
-        screen.blit(menu_velocity_y, (LEFTBOUND, SCREEN_HEIGHT / 4.5 - (menu_name_rect[2] / 2)))
+        screen.blit(menu_title, (SCREEN_WIDTH / 6.3 - (self.menu_title_rect[2] / 2),
+                                 SCREEN_HEIGHT / 4.8 - (self.menu_title_rect[2] / 2)))
+        screen.blit(menu_name, (LEFTBOUND, SCREEN_HEIGHT / 10.2 - (self.menu_name_rect[2] / 2)))
+        screen.blit(menu_mass, (LEFTBOUND, SCREEN_HEIGHT / 8.2 - (self.menu_mass_rect[2] / 2)))
+        screen.blit(menu_radius, (LEFTBOUND, SCREEN_HEIGHT / 6.5 - (self.menu_radius_rect[2] / 2)))
+        screen.blit(menu_density, (LEFTBOUND, SCREEN_HEIGHT / 5.4 - (self.menu_density_rect[2] / 2)))
+        screen.blit(menu_velocity_x, (LEFTBOUND, SCREEN_HEIGHT / 5.1 - (self.menu_name_rect[2] / 2)))
+        screen.blit(menu_velocity_y, (LEFTBOUND, SCREEN_HEIGHT / 4.5 - (self.menu_name_rect[2] / 2)))
 
     def draw_variable_input(self, screen, planet):
         """Displays the changeable variables of the object"""
@@ -177,27 +177,19 @@ class SelectionMenu:
         input_mass = tools.text_format(str(planet.mass), 20, GREEN)
         input_radius = tools.text_format(str(planet.radius), 20, GREEN)
         input_density = tools.text_format(str(planet.density), 20, GREEN)
-        input_velocity_x = tools.text_format(str(planet.v_x), 20, GREEN)
-        input_velocity_y = tools.text_format(str(planet.v_y), 20, GREEN)
-
-        # Gets the rects
-        input_name_rect = input_name.get_rect()
-        input_mass_rect = input_mass.get_rect()
-        input_radius_rect = input_radius.get_rect()
-        input_density_rect = input_density.get_rect()
-        input_velocity_x_rect = input_velocity_x.get_rect()
-        input_velocity_y_rect = input_velocity_y.get_rect()
+        input_velocity_x = tools.text_format(str(int(planet.v_x)), 20, GREEN)
+        input_velocity_y = tools.text_format(str(int(planet.v_y)), 20, GREEN)
 
         # Variable that sets all of the values on the leftbound
-        RIGHTBOUND = (SCREEN_WIDTH / 15 - (input_name_rect[2] / 2))
+        RIGHTBOUND = (SCREEN_WIDTH / 5 - (self.menu_name_rect[2] / 2))
 
         # Displays the text
-        screen.blit(input_name, (RIGHTBOUND, SCREEN_HEIGHT / 10.2 - (input_name_rect[2] / 2)))
-        screen.blit(input_mass, (RIGHTBOUND, SCREEN_HEIGHT / 8.2 - (input_mass_rect[2] / 2)))
-        screen.blit(input_radius, (RIGHTBOUND, SCREEN_HEIGHT / 6.5 - (input_radius_rect[2] / 2)))
-        screen.blit(input_density, (RIGHTBOUND, SCREEN_HEIGHT / 5.4 - (input_density_rect[2] / 2)))
-        screen.blit(input_velocity_x, (RIGHTBOUND, SCREEN_HEIGHT / 5.1 - (input_velocity_x_rect[2] / 2)))
-        screen.blit(input_velocity_y, (RIGHTBOUND, SCREEN_HEIGHT / 4.5 - (input_velocity_y_rect[2] / 2)))
+        screen.blit(input_name, (RIGHTBOUND, SCREEN_HEIGHT / 10.2 - (self.menu_name_rect[2] / 2)))
+        screen.blit(input_mass, (RIGHTBOUND, SCREEN_HEIGHT / 8.2 - (self.menu_mass_rect[2] / 2)))
+        screen.blit(input_radius, (RIGHTBOUND, SCREEN_HEIGHT / 6.5 - (self.menu_radius_rect[2] / 2)))
+        screen.blit(input_density, (RIGHTBOUND, SCREEN_HEIGHT / 5.4 - (self.menu_density_rect[2] / 2)))
+        screen.blit(input_velocity_x, (RIGHTBOUND, SCREEN_HEIGHT / 5.1 - (self.menu_name_rect[2] / 2)))
+        screen.blit(input_velocity_y, (RIGHTBOUND, SCREEN_HEIGHT / 4.5 - (self.menu_name_rect[2] / 2)))
 
     def update(self):
         """Updates the menu screen"""

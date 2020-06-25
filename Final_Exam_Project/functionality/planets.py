@@ -9,7 +9,7 @@ class Planet:
     def __init__(self, mass: float, pos_x: int, pos_y: int,
                  v_x: int = 0, v_y: int = 0, rect_size_x: int = BLOCK_SIZE,
                  rect_size_y: int = BLOCK_SIZE, radius: int = CIRCLE_RADIUS,
-                 color: tuple = RED, name: str = ""):
+                 color: tuple = RED):
         """Initializes the planets values"""
         # Make radius property that updates itself as well as tracesize and rect size
         self.name = rnd.choice(generic_name_list)
