@@ -19,6 +19,7 @@ class Editor(tools.SceneBase):
         # Create variables
         self.selected = None
         self.action = None
+        self.selected_planet = None
 
         # Initializes the editor menu
         self.menu = SelectionMenu()
@@ -49,8 +50,8 @@ class Editor(tools.SceneBase):
                         self.ss.add_planet(solar.planets.Planet("Earth", 1e24, mouse_pos[0], mouse_pos[1]))
 
                     else:
-                        # Display some error message
-                        ...
+                        # Selects planet for variable change if one already exists at this point
+                        self.selected_planet = tools.mouse_collison(self.ss.planets_list)[0]
 
                 # Checks if it is the middle mouse button
                 elif event.button == 2:
@@ -82,6 +83,8 @@ class Editor(tools.SceneBase):
                             mouse_pos[1] + tools.mouse_collison(self.ss.planets_list)[2]
 
     def update(self):
+        # Gets the selected planets values and renders them on the screen
+        # self.menu.draw_variable_input(self.ss.get_planet(self.selected_planet))
         ...
 
     def render(self, screen):
@@ -136,7 +139,7 @@ class SelectionMenu:
     def draw_menu(self, screen):
         """Draws the menu elements"""
         # Draws the menus borders
-        pg.draw.rect(screen, GREEN, pg.Rect(10, 10, 575, 250), 10)
+        pg.draw.rect(screen, GREEN, pg.Rect(10, 10, 575, 230), 10)
 
         # Sets the title and text of the menu
         menu_title = tools.text_format("Stellar Object Menu", 30, GREEN)
@@ -154,23 +157,20 @@ class SelectionMenu:
         menu_radius_rect = menu_radius.get_rect()
         menu_density_rect = menu_density.get_rect()
 
+        # Variable that sets all of the values on the leftbound
+        LEFTBOUND = (SCREEN_WIDTH / 30 - (menu_name_rect[2] / 2))
+
         # Displays the text
         screen.blit(menu_title, (SCREEN_WIDTH / 6.3 - (menu_title_rect[2] / 2),
                                  SCREEN_HEIGHT / 4.8 - (menu_title_rect[2] / 2)))
-        screen.blit(menu_name, (SCREEN_WIDTH / 25 - (menu_name_rect[2] / 2),
-                                SCREEN_HEIGHT / 10.2 - (menu_name_rect[2] / 2)))
-        screen.blit(menu_mass, (SCREEN_WIDTH / 25 - (menu_name_rect[2] / 2),
-                                   SCREEN_HEIGHT / 8.2 - (menu_mass_rect[2] / 2)))
-        screen.blit(menu_radius, (SCREEN_WIDTH / 25 - (menu_name_rect[2] / 2),
-                                   SCREEN_HEIGHT / 6.5 - (menu_radius_rect[2] / 2)))
-        screen.blit(menu_density, (SCREEN_WIDTH / 25 - (menu_name_rect[2] / 2),
-                                   SCREEN_HEIGHT / 5.4 - (menu_density_rect[2] / 2)))
-        screen.blit(menu_velocity_x, (SCREEN_WIDTH / 25 - (menu_name_rect[2] / 2),
-                                   SCREEN_HEIGHT / 5.1 - (menu_name_rect[2] / 2)))
-        screen.blit(menu_velocity_y, (SCREEN_WIDTH / 25 - (menu_name_rect[2] / 2),
-                                   SCREEN_HEIGHT / 4.5 - (menu_name_rect[2] / 2)))
+        screen.blit(menu_name, (LEFTBOUND, SCREEN_HEIGHT / 10.2 - (menu_name_rect[2] / 2)))
+        screen.blit(menu_mass, (LEFTBOUND, SCREEN_HEIGHT / 8.2 - (menu_mass_rect[2] / 2)))
+        screen.blit(menu_radius, (LEFTBOUND, SCREEN_HEIGHT / 6.5 - (menu_radius_rect[2] / 2)))
+        screen.blit(menu_density, (LEFTBOUND, SCREEN_HEIGHT / 5.4 - (menu_density_rect[2] / 2)))
+        screen.blit(menu_velocity_x, (LEFTBOUND, SCREEN_HEIGHT / 5.1 - (menu_name_rect[2] / 2)))
+        screen.blit(menu_velocity_y, (LEFTBOUND, SCREEN_HEIGHT / 4.5 - (menu_name_rect[2] / 2)))
 
-    def draw_variable_input(self):
+    def draw_variable_input(self, planet):
         """Displays the changeable variables of the object"""
         ...
 
