@@ -68,6 +68,11 @@ class Planet:
         self.__radius = radius
 
     @property
+    def density(self):
+        """Gets the density of object"""
+        ...
+
+    @property
     def rect_size_x(self):
         """Gets the rect size"""
         return self.__radius*2

@@ -33,9 +33,8 @@ class SolarSystem(metaclass=tools.Singleton):
 
     def get_planet(self, planet):
         """Gets specific planet from planet list"""
-        for i in self.planets_list:
-            if i == planet:
-                return i
+        if planet in self.planets_list:
+            return planet
 
     def number_of_intrastellar_objects(self):
         """Returns the number of objects in list"""

@@ -19,14 +19,12 @@ class Editor(tools.SceneBase):
         # Create variables
         self.selected = None
         self.action = None
-        self.selected_planet = None
 
         # Initializes the editor menu
         self.menu = SelectionMenu()
 
     def process_input(self, events, pressed_keys):
         for event in events:
-
             # Checks for mouse button press
             if event.type == pg.MOUSEBUTTONDOWN:
                 # Gets the mouse position
@@ -51,7 +49,7 @@ class Editor(tools.SceneBase):
 
                     else:
                         # Selects planet for variable change if one already exists at this point
-                        self.selected_planet = tools.mouse_collison(self.ss.planets_list)[0]
+                        ...
 
                 # Checks if it is the middle mouse button
                 elif event.button == 2:
@@ -84,8 +82,11 @@ class Editor(tools.SceneBase):
 
     def update(self):
         # Gets the selected planets values and renders them on the screen
-        # self.menu.draw_variable_input(self.ss.get_planet(self.selected_planet))
-        ...
+        if self.selected is not None:
+            # self.menu.draw_variable_input(SCREEN, self.ss.get_planet(self.selected_planet))
+            print(self.ss.get_planet(self.selected), end=", ")
+
+            # Does not work as for some reason if you click on planet it gets looped
 
     def render(self, screen):
         # Editor UI
@@ -170,9 +171,34 @@ class SelectionMenu:
         screen.blit(menu_velocity_x, (LEFTBOUND, SCREEN_HEIGHT / 5.1 - (menu_name_rect[2] / 2)))
         screen.blit(menu_velocity_y, (LEFTBOUND, SCREEN_HEIGHT / 4.5 - (menu_name_rect[2] / 2)))
 
-    def draw_variable_input(self, planet):
+    def draw_variable_input(self, screen, planet):
         """Displays the changeable variables of the object"""
-        ...
+        # Sets the rect title via the planets data
+        input_name = tools.text_format(str(planet.name), 20, GREEN)
+        input_mass = tools.text_format(str(planet.mass), 20, GREEN)
+        input_radius = tools.text_format(str(planet.radius), 20, GREEN)
+        input_density = tools.text_format(str(planet.density), 20, GREEN)
+        input_velocity_x = tools.text_format(str(planet.v_x), 20, GREEN)
+        input_velocity_y = tools.text_format(str(planet.v_y), 20, GREEN)
+
+        # Gets the rects
+        input_name_rect = input_name.get_rect()
+        input_mass_rect = input_mass.get_rect()
+        input_radius_rect = input_radius.get_rect()
+        input_density_rect = input_density.get_rect()
+        input_velocity_x_rect = input_velocity_x.get_rect()
+        input_velocity_y_rect = input_velocity_y.get_rect()
+
+        # Variable that sets all of the values on the leftbound
+        RIGHTBOUND = (SCREEN_WIDTH / 15 - (input_name_rect[2] / 2))
+
+        # Displays the text
+        screen.blit(input_name, (RIGHTBOUND, SCREEN_HEIGHT / 10.2 - (input_name_rect[2] / 2)))
+        screen.blit(input_mass, (RIGHTBOUND, SCREEN_HEIGHT / 8.2 - (input_mass_rect[2] / 2)))
+        screen.blit(input_radius, (RIGHTBOUND, SCREEN_HEIGHT / 6.5 - (input_radius_rect[2] / 2)))
+        screen.blit(input_density, (RIGHTBOUND, SCREEN_HEIGHT / 5.4 - (input_density_rect[2] / 2)))
+        screen.blit(input_velocity_x, (RIGHTBOUND, SCREEN_HEIGHT / 5.1 - (input_velocity_x_rect[2] / 2)))
+        screen.blit(input_velocity_y, (RIGHTBOUND, SCREEN_HEIGHT / 4.5 - (input_velocity_y_rect[2] / 2)))
 
     def update(self):
         """Updates the menu screen"""
