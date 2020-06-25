@@ -17,14 +17,17 @@ class Planet:
         self.trace = []
         self.trace_size = BLOCK_SIZE/10
         self.v_x, self.v_y = v_x, v_y
-        self.pos_x_real, self.pos_y_real = pos_x*PIXEL_REAL, pos_y*PIXEL_REAL
 
         # Values used for setters and behind the scenes update, never overwrite!
         self.__radius = radius
+        self.__pos_x, self.__pos_y = pos_x, pos_y
         self.__rect_size_x, self.__rect_size_y = rect_size_x, rect_size_y
 
+        # Gets physical accurate position
+        self.pos_x_real, self.pos_y_real = self.__pos_x*PIXEL_REAL, self.__pos_y*PIXEL_REAL
+
     def __repr__(self):
-        """Shows the class name if outputted"""
+        """Shows the objects name if outputted"""
         return self.name
 
     @property
@@ -32,10 +35,20 @@ class Planet:
         """Gets the pixels x position after the physical value has been calculated"""
         return self.pos_x_real/PIXEL_REAL
 
+    @pos_x.setter
+    def pos_x(self, pos_x):
+        """Sets the pixel x position if needed for UI"""
+        self.__pos_x = pos_x
+
     @property
     def pos_y(self):
         """Gets the pixels y position after the physical value has been calculated"""
         return self.pos_y_real/PIXEL_REAL
+
+    @pos_y.setter
+    def pos_y(self, pos_y):
+        """Sets the pixel y position if needed for UI"""
+        self.__pos_y = pos_y
 
     @property
     def rect(self):
@@ -111,3 +124,4 @@ if __name__ == "__main__":
     satellite = Planet("Satellite", 100, 12, 30, 35)
     print(math.sqrt(20**2+20**2))
     print(gravitational_constant*100/(28.284271247461902**2))
+    help(Planet)

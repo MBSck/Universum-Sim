@@ -74,6 +74,7 @@ class Editor(tools.SceneBase):
                 mouse_pos = event.pos
 
                 if self.selected is not None:
+                    # Does not work right now
                     if self.action == "move":
                         self.ss.get_planet(self.selected).pos_x = \
                             mouse_pos[0] + tools.mouse_collison(self.ss.planets_list)[1]
