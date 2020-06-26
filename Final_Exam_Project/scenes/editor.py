@@ -18,6 +18,7 @@ class Editor(tools.SceneBase):
 
         # Create variables
         self.selected = None
+        self.selected_planet = None
         self.action = None
 
         # Initializes the editor menu
@@ -43,13 +44,13 @@ class Editor(tools.SceneBase):
                     elif self.menu.reset_button.collidepoint(mouse_pos[0], mouse_pos[1]):
                         self.ss.reset()
 
+                    # Creates a new object and adds it to the solar system
                     elif self.selected is None:
-                        # Creates a new object and adds it to the solar system
                         self.ss.add_planet(solar.planets.Planet(1e24, mouse_pos[0], mouse_pos[1]))
 
+                    # Selects planet for variable change if one already exists at this point
                     else:
-                        # Selects planet for variable change if one already exists at this point
-                        ...
+                        self.selected_planet = tools.mouse_collison(self.ss.planets_list)[0]
 
                 # Checks if it is the middle mouse button
                 elif event.button == 2:
@@ -61,17 +62,12 @@ class Editor(tools.SceneBase):
                         self.ss.remove_planet(self.selected)
                         self.selected = None
 
-            # Checks if mouse button is let loose
-            elif event.type == pg.MOUSEBUTTONUP:
-                if event.button == 2:
-                    self.action = None
-                    self.selected = None
-
             # Checks if mouse is moved
             elif event.type == pg.MOUSEMOTION:
                 # Gets the mouse position
                 mouse_pos = event.pos
 
+                # Moves the planets, when mouse is dragged and planet selected
                 if self.selected is not None:
                     # Does not work right now
                     if self.action == "move":
@@ -79,6 +75,12 @@ class Editor(tools.SceneBase):
                             mouse_pos[0] + tools.mouse_collison(self.ss.planets_list)[1]
                         self.ss.get_planet(self.selected).pos_y = \
                             mouse_pos[1] + tools.mouse_collison(self.ss.planets_list)[2]
+
+            # Checks if mouse button is let loose
+            elif event.type == pg.MOUSEBUTTONUP:
+                if event.button == 2:
+                    self.action = None
+                    self.selected = None
 
     def update(self):
         ...
@@ -105,7 +107,8 @@ class Editor(tools.SceneBase):
         # Gets the selected planets values and renders them on the screen
         if self.selected is not None:
             try:
-                self.menu.draw_variable_input(SCREEN, self.ss.get_planet(self.selected))
+                self.menu.draw_variable_input(SCREEN, self.ss.get_planet(self.selected_planet))
+
             except Exception as e:
                 # Implement Logger
                 pass
@@ -198,6 +201,8 @@ class SelectionMenu:
     def update(self):
         """Updates the menu screen"""
         ...
+
+
 """
 # Code for resizing objects, adapt later on
 # Checks if mousewheel is scrolled

@@ -126,8 +126,7 @@ class Planet:
 
 
 if __name__ == "__main__":
-    earth = Planet("Earth", 1e09, 3000, 10, 15)
-    satellite = Planet("Satellite", 100, 12, 30, 35)
-    print(math.sqrt(20**2+20**2))
+    earth = Planet(1e09, 3000, 10, 15)
+    satellite = Planet(100, 12, 30, 35)
+    print(np.sqrt(20**2+20**2))
     print(gravitational_constant*100/(28.284271247461902**2))
-    help(Planet)
