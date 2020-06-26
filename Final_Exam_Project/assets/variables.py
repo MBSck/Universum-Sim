@@ -57,7 +57,7 @@ PIXEL_REAL = au/PIXEL_INCREMENT
 
 # exoplanet and stars list/ web scrape later, whole list and add stars, too!
 generic_name_list = ["Spe", "Arkas", "Arion", "Dimidium", "Earth", "Moon", "Mars",
-                     "Venus", "Jupiter", "Sun", "Merkur", "Saturn", "Ægir", "Dagon",
+                     "Venus", "Jupiter", "Sun", "Merkur", "Saturn", "Aegir", "Dagon",
                      "Hypatia", "Madriu", "Xolotlan", "Riosar", ]
 
 

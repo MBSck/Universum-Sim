@@ -52,9 +52,10 @@ class Editor(tools.SceneBase):
                     elif self.selected is None:
                         self.ss.add_planet(solar.planets.Planet(1e24, mouse_pos[0], mouse_pos[1]))
 
-                    # Selects planet for variable change if one already exists at this point
+                    # Selects planet for variable change if one already exists at this point and sets the text in menu
                     else:
                         self.selected_planet = tools.mouse_collison(self.ss.planets_list)[0]
+                        self.menu.gets_variable_input(self.ss.get_planet(self.selected_planet))
 
                 # Checks if it is the middle mouse button
                 elif event.button == 2:
@@ -109,9 +110,9 @@ class Editor(tools.SceneBase):
         self.menu.draw_menu(SCREEN)
 
         # Gets the selected planets values and renders them on the screen
-        if self.selected is not None:
+        if self.selected_planet is not None:
             try:
-                self.menu.draw_variable_input(SCREEN, self.ss.get_planet(self.selected_planet))
+                self.menu.draw_variable_input(SCREEN)
 
             except Exception as e:
                 # Implement Logger
@@ -187,36 +188,38 @@ class SelectionMenu:
         screen.blit(menu_velocity_x, (self.leftbound, SCREEN_HEIGHT / 5.1 - (self.menu_name_rect[2] / 2)))
         screen.blit(menu_velocity_y, (self.leftbound, SCREEN_HEIGHT / 4.5 - (self.menu_name_rect[2] / 2)))
 
-    def draw_variable_input(self, screen, planet):
-        """Displays the changeable variables of the object"""
+    def gets_variable_input(self, planet):
+        """Gets the variable input that should be displayed"""
         # Sets the rect title via the planets data
-        input_name = tools.text_format(str(planet.name), 20, GREEN)
-        input_mass = tools.text_format(str(planet.mass) + " kg", 20, GREEN)
-        input_radius = tools.text_format(str(int(planet.radius)), 20, GREEN)
-        input_density = tools.text_format(str(planet.density) + " g/m**3", 20, GREEN)
-        input_velocity_x = tools.text_format(str(int(planet.v_x)) + " km/h", 20, GREEN)
-        input_velocity_y = tools.text_format(str(int(planet.v_y)) + " km/h", 20, GREEN)
+        self.input_name = tools.text_format(str(planet.name), 20, GREEN)
+        self.input_mass = tools.text_format(str(planet.mass) + " kg", 20, GREEN)
+        self.input_radius = tools.text_format(str(int(planet.radius)), 20, GREEN)
+        self.input_density = tools.text_format(str(planet.density) + " g/m**3", 20, GREEN)
+        self.input_velocity_x = tools.text_format(str(int(planet.v_x)) + " km/h", 20, GREEN)
+        self.input_velocity_y = tools.text_format(str(int(planet.v_y)) + " km/h", 20, GREEN)
 
         # Sets the rect objects of the variables
-        self.input_name_rect = input_name.get_rect()
-        self.input_mass_rect = input_mass.get_rect()
-        self.input_radius_rect = input_radius.get_rect()
-        self.input_density_rect = input_density.get_rect()
-        self.input_velocity_x_rect = input_velocity_x.get_rect()
-        self.input_velocity_y_rect = input_velocity_y.get_rect()
+        self.input_name_rect = self.input_name.get_rect()
+        self.input_mass_rect = self.input_mass.get_rect()
+        self.input_radius_rect = self.input_radius.get_rect()
+        self.input_density_rect = self.input_density.get_rect()
+        self.input_velocity_x_rect = self.input_velocity_x.get_rect()
+        self.input_velocity_y_rect = self.input_velocity_y.get_rect()
 
+    def draw_variable_input(self, screen):
+        """Displays the changeable variables of the object"""
         # Displays the text
-        screen.blit(input_name, (self.rightbound, SCREEN_HEIGHT / 10.2 - (self.menu_name_rect[2] / 2)))
-        screen.blit(input_mass, (self.rightbound, SCREEN_HEIGHT / 8.2 - (self.menu_mass_rect[2] / 2)))
-        screen.blit(input_radius, (self.rightbound, SCREEN_HEIGHT / 6.5 - (self.menu_radius_rect[2] / 2)))
-        screen.blit(input_density, (self.rightbound, SCREEN_HEIGHT / 5.4 - (self.menu_density_rect[2] / 2)))
-        screen.blit(input_velocity_x, (self.rightbound, SCREEN_HEIGHT / 5.1 - (self.menu_name_rect[2] / 2)))
-        screen.blit(input_velocity_y, (self.rightbound, SCREEN_HEIGHT / 4.5 - (self.menu_name_rect[2] / 2)))
+        screen.blit(self.input_name, (self.rightbound, SCREEN_HEIGHT / 10.2 - (self.menu_name_rect[2] / 2)))
+        screen.blit(self.input_mass, (self.rightbound, SCREEN_HEIGHT / 8.2 - (self.menu_mass_rect[2] / 2)))
+        screen.blit(self.input_radius, (self.rightbound, SCREEN_HEIGHT / 6.5 - (self.menu_radius_rect[2] / 2)))
+        screen.blit(self.input_density, (self.rightbound, SCREEN_HEIGHT / 5.4 - (self.menu_density_rect[2] / 2)))
+        screen.blit(self.input_velocity_x, (self.rightbound, SCREEN_HEIGHT / 5.1 - (self.menu_name_rect[2] / 2)))
+        screen.blit(self.input_velocity_y, (self.rightbound, SCREEN_HEIGHT / 4.5 - (self.menu_name_rect[2] / 2)))
 
     def update(self, mouse_pos):
         """Updates the menu screen"""
         if self.input_name_rect.collidepoint(mouse_pos[0], mouse_pos[1]):
-            self.cursor(self.input_name_rect)
+            print("hello")
 
 
 """
