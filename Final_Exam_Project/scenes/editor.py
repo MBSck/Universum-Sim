@@ -44,6 +44,10 @@ class Editor(tools.SceneBase):
                     elif self.menu.reset_button.collidepoint(mouse_pos[0], mouse_pos[1]):
                         self.ss.reset()
 
+                    # Checks if item in the menu box is clicked
+                    elif self.menu.menu_box.collidepoint(mouse_pos[0], mouse_pos[1]):
+                        self.menu.update(mouse_pos)
+
                     # Creates a new object and adds it to the solar system
                     elif self.selected is None:
                         self.ss.add_planet(solar.planets.Planet(1e24, mouse_pos[0], mouse_pos[1]))
@@ -130,10 +134,19 @@ class SelectionMenu:
         self.start_pos = (150, 950)
         self.stop_pos = (150, 950)
         self.reset_pos = (1550, 950)
+        self.leftbound = 25
+        self.rightbound = 175
+
+        # The menu rect
+        self.menu_box = pg.Rect(10, 10, 575, 230)
 
         # Sets the position of the buttons
         self.start_stop_button = pg.Rect(self.start_pos[0], self.start_pos[1], 200, 50)
         self.reset_button = pg.Rect(self.reset_pos[0], self.reset_pos[1], 200, 50)
+
+    def cursor(self, rect):
+        """Gets a cursor that blinks"""
+        return pg.Rect(rect.topright, (3, rect.height))
 
     def draw_button(self, screen, button_rect, color, text, pos_y, offset_x=0, offset_y=1.5):
         """Draw button with text on it that is in black"""
@@ -146,7 +159,7 @@ class SelectionMenu:
     def draw_menu(self, screen):
         """Draws the menu elements"""
         # Draws the menus borders
-        pg.draw.rect(screen, GREEN, pg.Rect(10, 10, 575, 230), 10)
+        pg.draw.rect(screen, GREEN, self.menu_box, 10)
 
         # Sets the title and text of the menu
         menu_title = tools.text_format("Stellar Object Menu", 30, GREEN)
@@ -164,18 +177,15 @@ class SelectionMenu:
         self.menu_radius_rect = menu_radius.get_rect()
         self.menu_density_rect = menu_density.get_rect()
 
-        # Variable that sets all of the values on the leftbound
-        LEFTBOUND = (SCREEN_WIDTH / 30 - (self.menu_name_rect[2] / 2))
-
         # Displays the text
         screen.blit(menu_title, (SCREEN_WIDTH / 6.3 - (self.menu_title_rect[2] / 2),
                                  SCREEN_HEIGHT / 4.8 - (self.menu_title_rect[2] / 2)))
-        screen.blit(menu_name, (LEFTBOUND, SCREEN_HEIGHT / 10.2 - (self.menu_name_rect[2] / 2)))
-        screen.blit(menu_mass, (LEFTBOUND, SCREEN_HEIGHT / 8.2 - (self.menu_mass_rect[2] / 2)))
-        screen.blit(menu_radius, (LEFTBOUND, SCREEN_HEIGHT / 6.5 - (self.menu_radius_rect[2] / 2)))
-        screen.blit(menu_density, (LEFTBOUND, SCREEN_HEIGHT / 5.4 - (self.menu_density_rect[2] / 2)))
-        screen.blit(menu_velocity_x, (LEFTBOUND, SCREEN_HEIGHT / 5.1 - (self.menu_name_rect[2] / 2)))
-        screen.blit(menu_velocity_y, (LEFTBOUND, SCREEN_HEIGHT / 4.5 - (self.menu_name_rect[2] / 2)))
+        screen.blit(menu_name, (self.leftbound, SCREEN_HEIGHT / 10.2 - (self.menu_name_rect[2] / 2)))
+        screen.blit(menu_mass, (self.leftbound, SCREEN_HEIGHT / 8.2 - (self.menu_mass_rect[2] / 2)))
+        screen.blit(menu_radius, (self.leftbound, SCREEN_HEIGHT / 6.5 - (self.menu_radius_rect[2] / 2)))
+        screen.blit(menu_density, (self.leftbound, SCREEN_HEIGHT / 5.4 - (self.menu_density_rect[2] / 2)))
+        screen.blit(menu_velocity_x, (self.leftbound, SCREEN_HEIGHT / 5.1 - (self.menu_name_rect[2] / 2)))
+        screen.blit(menu_velocity_y, (self.leftbound, SCREEN_HEIGHT / 4.5 - (self.menu_name_rect[2] / 2)))
 
     def draw_variable_input(self, screen, planet):
         """Displays the changeable variables of the object"""
@@ -187,20 +197,26 @@ class SelectionMenu:
         input_velocity_x = tools.text_format(str(int(planet.v_x)) + " km/h", 20, GREEN)
         input_velocity_y = tools.text_format(str(int(planet.v_y)) + " km/h", 20, GREEN)
 
-        # Variable that sets all of the values on the leftbound
-        RIGHTBOUND = (SCREEN_WIDTH / 5 - (self.menu_name_rect[2] / 2))
+        # Sets the rect objects of the variables
+        self.input_name_rect = input_name.get_rect()
+        self.input_mass_rect = input_mass.get_rect()
+        self.input_radius_rect = input_radius.get_rect()
+        self.input_density_rect = input_density.get_rect()
+        self.input_velocity_x_rect = input_velocity_x.get_rect()
+        self.input_velocity_y_rect = input_velocity_y.get_rect()
 
         # Displays the text
-        screen.blit(input_name, (RIGHTBOUND, SCREEN_HEIGHT / 10.2 - (self.menu_name_rect[2] / 2)))
-        screen.blit(input_mass, (RIGHTBOUND, SCREEN_HEIGHT / 8.2 - (self.menu_mass_rect[2] / 2)))
-        screen.blit(input_radius, (RIGHTBOUND, SCREEN_HEIGHT / 6.5 - (self.menu_radius_rect[2] / 2)))
-        screen.blit(input_density, (RIGHTBOUND, SCREEN_HEIGHT / 5.4 - (self.menu_density_rect[2] / 2)))
-        screen.blit(input_velocity_x, (RIGHTBOUND, SCREEN_HEIGHT / 5.1 - (self.menu_name_rect[2] / 2)))
-        screen.blit(input_velocity_y, (RIGHTBOUND, SCREEN_HEIGHT / 4.5 - (self.menu_name_rect[2] / 2)))
+        screen.blit(input_name, (self.rightbound, SCREEN_HEIGHT / 10.2 - (self.menu_name_rect[2] / 2)))
+        screen.blit(input_mass, (self.rightbound, SCREEN_HEIGHT / 8.2 - (self.menu_mass_rect[2] / 2)))
+        screen.blit(input_radius, (self.rightbound, SCREEN_HEIGHT / 6.5 - (self.menu_radius_rect[2] / 2)))
+        screen.blit(input_density, (self.rightbound, SCREEN_HEIGHT / 5.4 - (self.menu_density_rect[2] / 2)))
+        screen.blit(input_velocity_x, (self.rightbound, SCREEN_HEIGHT / 5.1 - (self.menu_name_rect[2] / 2)))
+        screen.blit(input_velocity_y, (self.rightbound, SCREEN_HEIGHT / 4.5 - (self.menu_name_rect[2] / 2)))
 
-    def update(self):
+    def update(self, mouse_pos):
         """Updates the menu screen"""
-        ...
+        if self.input_name_rect.collidepoint(mouse_pos[0], mouse_pos[1]):
+            self.cursor(self.input_name_rect)
 
 
 """
