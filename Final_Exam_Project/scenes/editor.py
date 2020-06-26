@@ -104,7 +104,11 @@ class Editor(tools.SceneBase):
 
         # Gets the selected planets values and renders them on the screen
         if self.selected is not None:
-            self.menu.draw_variable_input(SCREEN, self.ss.get_planet(self.selected))
+            try:
+                self.menu.draw_variable_input(SCREEN, self.ss.get_planet(self.selected))
+            except Exception as e:
+                # Implement Logger
+                pass
 
         # Draws the circles
         for i in self.ss.planets_list:
@@ -174,11 +178,11 @@ class SelectionMenu:
         """Displays the changeable variables of the object"""
         # Sets the rect title via the planets data
         input_name = tools.text_format(str(planet.name), 20, GREEN)
-        input_mass = tools.text_format(str(planet.mass), 20, GREEN)
-        input_radius = tools.text_format(str(planet.radius), 20, GREEN)
-        input_density = tools.text_format(str(planet.density), 20, GREEN)
-        input_velocity_x = tools.text_format(str(int(planet.v_x)), 20, GREEN)
-        input_velocity_y = tools.text_format(str(int(planet.v_y)), 20, GREEN)
+        input_mass = tools.text_format(str(planet.mass) + " kg", 20, GREEN)
+        input_radius = tools.text_format(str(int(planet.radius)), 20, GREEN)
+        input_density = tools.text_format(str(planet.density) + " g/m**3", 20, GREEN)
+        input_velocity_x = tools.text_format(str(int(planet.v_x)) + " km/h", 20, GREEN)
+        input_velocity_y = tools.text_format(str(int(planet.v_y)) + " km/h", 20, GREEN)
 
         # Variable that sets all of the values on the leftbound
         RIGHTBOUND = (SCREEN_WIDTH / 5 - (self.menu_name_rect[2] / 2))
