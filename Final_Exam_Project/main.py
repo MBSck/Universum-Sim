@@ -14,6 +14,7 @@ black holes and such"""
 # Implement sprite classes into code
 # Change all the positions into relative to screen size, so that it works on lower resolution
 
+# Computation really slow -> Fix! (Matrix calculation)
 
 def main(starting_scene, screen=SCREEN, fps=FPS):
     """Runs the scenes and is therefore the main game loop"""
