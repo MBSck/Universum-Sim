@@ -212,12 +212,12 @@ class SelectionMenu:
     def draw_variable_input(self, screen):
         """Displays the changeable variables of the object"""
         # Displays the text
-        screen.blit(self.input_name, (self.rightbound, SCREEN_HEIGHT / 10.2 - (self.input_name_rect[2] / 2)))
-        screen.blit(self.input_mass, (self.rightbound, SCREEN_HEIGHT / 8.2 - (self.input_mass_rect[2] / 2)))
-        screen.blit(self.input_radius, (self.rightbound, SCREEN_HEIGHT / 6.5 - (self.input_radius_rect[2] / 2)))
-        screen.blit(self.input_density, (self.rightbound, SCREEN_HEIGHT / 5.4 - (self.input_density_rect[2] / 2)))
-        screen.blit(self.input_velocity_x, (self.rightbound, SCREEN_HEIGHT / 5.1 - (self.input_velocity_x_rect[2] / 2)))
-        screen.blit(self.input_velocity_y, (self.rightbound, SCREEN_HEIGHT / 4.5 - (self.input_velocity_y_rect[2] / 2)))
+        screen.blit(self.input_name, (self.rightbound, SCREEN_HEIGHT / 10.2 - (self.menu_name_rect[2] / 2)))
+        screen.blit(self.input_mass, (self.rightbound, SCREEN_HEIGHT / 8.2 - (self.menu_name_rect[2] / 2)))
+        screen.blit(self.input_radius, (self.rightbound, SCREEN_HEIGHT / 6.5 - (self.menu_radius_rect[2] / 2)))
+        screen.blit(self.input_density, (self.rightbound, SCREEN_HEIGHT / 5.4 - (self.menu_density_rect[2] / 2)))
+        screen.blit(self.input_velocity_x, (self.rightbound, SCREEN_HEIGHT / 5.1 - (self.menu_name_rect[2] / 2)))
+        screen.blit(self.input_velocity_y, (self.rightbound, SCREEN_HEIGHT / 4.5 - (self.menu_name_rect[2] / 2)))
 
     def update(self, mouse_pos):
         """Updates the menu screen"""
