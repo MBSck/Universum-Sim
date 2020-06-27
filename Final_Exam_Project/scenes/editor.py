@@ -33,6 +33,7 @@ class Editor(tools.SceneBase):
 
                 # Checks if object is selected, returns None if not
                 self.selected = tools.mouse_collison(self.ss.planets_list)[0]
+                self.selected = tools.mouse_collison(self.ss.planets_list)[0]
 
                 # Checks if it is the left mouse button
                 if event.button == 1:
@@ -177,6 +178,8 @@ class SelectionMenu:
         self.menu_mass_rect = menu_mass.get_rect()
         self.menu_radius_rect = menu_radius.get_rect()
         self.menu_density_rect = menu_density.get_rect()
+        self.menu_velocity_x_rect = menu_velocity_x.get_rect()
+        self.menu_velocity_y_rect = menu_velocity_y.get_rect()
 
         # Displays the text
         screen.blit(menu_title, (SCREEN_WIDTH / 6.3 - (self.menu_title_rect[2] / 2),
@@ -185,8 +188,8 @@ class SelectionMenu:
         screen.blit(menu_mass, (self.leftbound, SCREEN_HEIGHT / 8.2 - (self.menu_mass_rect[2] / 2)))
         screen.blit(menu_radius, (self.leftbound, SCREEN_HEIGHT / 6.5 - (self.menu_radius_rect[2] / 2)))
         screen.blit(menu_density, (self.leftbound, SCREEN_HEIGHT / 5.4 - (self.menu_density_rect[2] / 2)))
-        screen.blit(menu_velocity_x, (self.leftbound, SCREEN_HEIGHT / 5.1 - (self.menu_name_rect[2] / 2)))
-        screen.blit(menu_velocity_y, (self.leftbound, SCREEN_HEIGHT / 4.5 - (self.menu_name_rect[2] / 2)))
+        screen.blit(menu_velocity_x, (self.leftbound, SCREEN_HEIGHT / 4.4 - (self.menu_velocity_x_rect[2] / 2)))
+        screen.blit(menu_velocity_y, (self.leftbound, SCREEN_HEIGHT / 4 - (self.menu_velocity_y_rect[2] / 2)))
 
     def gets_variable_input(self, planet):
         """Gets the variable input that should be displayed"""
@@ -209,18 +212,22 @@ class SelectionMenu:
     def draw_variable_input(self, screen):
         """Displays the changeable variables of the object"""
         # Displays the text
-        screen.blit(self.input_name, (self.rightbound, SCREEN_HEIGHT / 10.2 - (self.menu_name_rect[2] / 2)))
-        screen.blit(self.input_mass, (self.rightbound, SCREEN_HEIGHT / 8.2 - (self.menu_mass_rect[2] / 2)))
-        screen.blit(self.input_radius, (self.rightbound, SCREEN_HEIGHT / 6.5 - (self.menu_radius_rect[2] / 2)))
-        screen.blit(self.input_density, (self.rightbound, SCREEN_HEIGHT / 5.4 - (self.menu_density_rect[2] / 2)))
-        screen.blit(self.input_velocity_x, (self.rightbound, SCREEN_HEIGHT / 5.1 - (self.menu_name_rect[2] / 2)))
-        screen.blit(self.input_velocity_y, (self.rightbound, SCREEN_HEIGHT / 4.5 - (self.menu_name_rect[2] / 2)))
+        screen.blit(self.input_name, (self.rightbound, SCREEN_HEIGHT / 10.2 - (self.input_name_rect[2] / 2)))
+        screen.blit(self.input_mass, (self.rightbound, SCREEN_HEIGHT / 8.2 - (self.input_mass_rect[2] / 2)))
+        screen.blit(self.input_radius, (self.rightbound, SCREEN_HEIGHT / 6.5 - (self.input_radius_rect[2] / 2)))
+        screen.blit(self.input_density, (self.rightbound, SCREEN_HEIGHT / 5.4 - (self.input_density_rect[2] / 2)))
+        screen.blit(self.input_velocity_x, (self.rightbound, SCREEN_HEIGHT / 5.1 - (self.input_velocity_x_rect[2] / 2)))
+        screen.blit(self.input_velocity_y, (self.rightbound, SCREEN_HEIGHT / 4.5 - (self.input_velocity_y_rect[2] / 2)))
 
     def update(self, mouse_pos):
         """Updates the menu screen"""
-        if self.input_name_rect.collidepoint(mouse_pos[0], mouse_pos[1]):
-            print("hello")
+        print("hello")
+        try:
+            if self.input_name_rect.collidepoint(mouse_pos[0], mouse_pos[1]):
+                print("input rect")
 
+        except Exception as e:
+            pass
 
 """
 # Code for resizing objects, adapt later on
