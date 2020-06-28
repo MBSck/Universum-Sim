@@ -2,7 +2,9 @@ from Final_Exam_Project.assets.variables import *
 from Final_Exam_Project.scenes import menu
 
 """This is a planet creating tool that leads to a functioning solar system, add some future features like
-black holes and such"""
+black holes and such
+
+I dont't need a grade, but would like comments about my general code, where I could improve"""
 
 # Start options for planets, like speed etc. should be shown visually by arrow into direction
 # Matrix method?
@@ -15,6 +17,7 @@ black holes and such"""
 # Change all the positions into relative to screen size, so that it works on lower resolution
 
 # Computation really slow -> Fix! (Matrix calculation)
+
 
 def main(starting_scene, screen=SCREEN, fps=FPS):
     """Runs the scenes and is therefore the main game loop"""
