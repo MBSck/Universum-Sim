@@ -1,7 +1,7 @@
-import Final_Exam_Project.functionality.solarsystem as solar
-import Final_Exam_Project.assets.tools as tools
-from Final_Exam_Project.scenes import editor
-from Final_Exam_Project.assets.variables import *
+import functionality.solarsystem as solar
+import assets.tools as tools
+from scenes import editor
+from assets.variables import *
 
 # Make Reset button for simulation
 # Make two modes if collide mass addition for planets and also

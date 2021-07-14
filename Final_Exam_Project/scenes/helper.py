@@ -1,6 +1,6 @@
-from Final_Exam_Project.assets.variables import *
-import Final_Exam_Project.assets.tools as tools
-from Final_Exam_Project.scenes import menu
+from assets.variables import *
+import assets.tools as tools
+from scenes import menu
 
 
 class Help(tools.SceneBase):

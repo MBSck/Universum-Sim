@@ -1,4 +1,4 @@
-from Final_Exam_Project.assets.variables import *
+from assets.variables import *
 import random as rnd
 
 # Make planets names show under their dots

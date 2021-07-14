@@ -1,6 +1,6 @@
-import Final_Exam_Project.functionality.planets as planets
-import Final_Exam_Project.assets.tools as tools
-from Final_Exam_Project.assets.variables import *
+import functionality.planets as planets
+import assets.tools as tools
+from assets.variables import *
 
 # Also add logger to code and display errors correctly
 # Make one pixel correspond to 1/10 au so that acceleration works more realistic

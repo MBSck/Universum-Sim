@@ -1,5 +1,5 @@
-from Final_Exam_Project.assets.variables import *
-import Final_Exam_Project.assets.tools as tools
+from assets.variables import *
+import assets.tools as tools
 
 
 class Options(tools.SceneBase):

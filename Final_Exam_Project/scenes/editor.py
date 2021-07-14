@@ -1,7 +1,7 @@
-import Final_Exam_Project.functionality.solarsystem as solar
-import Final_Exam_Project.assets.tools as tools
-from Final_Exam_Project.scenes import simulation
-from Final_Exam_Project.assets.variables import *
+import functionality.solarsystem as solar
+import assets.tools as tools
+from scenes import simulation
+from assets.variables import *
 
 # Think about button usability and about scaling of all the UI elements, with Screen size
 # Implement inelastic collision
