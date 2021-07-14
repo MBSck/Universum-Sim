@@ -4,7 +4,7 @@
 >It is an extremly simplified simulation of planetary bodies' movement
 
 ## Project Status
-Project: _Is not currently being worked on_ 
+_Is not currently being worked on_ 
 
 ## Table of contents
 * [Setup](#Setup)
