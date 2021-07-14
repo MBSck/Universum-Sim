@@ -35,7 +35,7 @@ During Simulation:
 ![During Simulation](./img/during_simulation.png)
 
 # GIF
-![Gif_Simulation](./img/PlanetarySimulation.gif)
+<img src="./img/PlanetSimulation.gif" width="300">
 
 # Contact
 Created by Marten B. Scheuck - feel free to contact me
