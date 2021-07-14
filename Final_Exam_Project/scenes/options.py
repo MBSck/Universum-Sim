@@ -15,5 +15,4 @@ class Options(tools.SceneBase):
 
     def render(self, screen):
         screen.fill(BLACK)
-
         ...
