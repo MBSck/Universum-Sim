@@ -43,4 +43,4 @@ Created by Marten B. Scheuck - feel free to contact me
 
 <!-- Optional -->
 <!-- ## License -->
-<!-- This project is open source and available under the CDDL-1.0(). -->
+<!-- This project is open source and available under the MIT license (https://opensource.org/licenses/MIT). -->
