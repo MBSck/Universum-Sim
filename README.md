@@ -20,7 +20,7 @@ $ sudo apt-get install python3-numpy
 $ sudo apt-get install python3-pygame
 ```
 
-## Features:
+## Features
 Simulating the movement of multiple planetary bodies
 * Place planetary bodies in main menu via left mouse click, remove with right mouse
 * See the attributes of the planetary bodies by left clicking on them
