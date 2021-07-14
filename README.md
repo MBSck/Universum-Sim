@@ -21,6 +21,7 @@ $ sudo apt-get install python3-pygame
 ```
 
 ## Features:
+Simulating the movement of multiple planetary bodies
 * Place planetary bodies in main menu via left mouse click, remove with right mouse
 * See the attributes of the planetary bodies by left clicking on them
 * Press start to simulate their movement (Maximum of 10 bodies, works best around 3)
