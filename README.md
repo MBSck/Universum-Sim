@@ -1,3 +1,4 @@
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 # Universum-Sim
 >This is the final course project of an advanced Python class.
 >It simulates the movement of planetary bodies
