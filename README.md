@@ -1,6 +1,6 @@
-## Advanced Python Course Project
+## Universum-Sim
 >This is the final course project of an advanced Python class.
->Simulates the movement of planetary bodies
+>It simulates the movement of planetary bodies
 
 # Project Status
 Project is: _no longer being worked on_ 
