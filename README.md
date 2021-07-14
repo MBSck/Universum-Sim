@@ -1,32 +1,32 @@
-## Universum-Sim
+# Universum-Sim
 >This is the final course project of an advanced Python class.
 >It simulates the movement of planetary bodies
 
-# Project Status
+## Project Status
 Project is: _no longer being worked on_ 
 Will maybe take up on it again in the future and add functionality
 
-# Table of contents
+## Table of contents
 * [Setup](#Setup)
 * [Features](#Features)
 * [Screenshots](#Screenshots)
 * [GIF](#GIF)
 * [Contact](#Contact)
 
-# Setup
+## Setup
 To run this project install numpy and pygame: (For Ubuntu)
 ```
 $ sudo apt-get install python3-numpy
 $ sudo apt-get install python3-pygame
 ```
 
-# Features:
+## Features:
 * Place planetary bodies in main menu via left mouse click, remove with right mouse
 * See the attributes of the planetary bodies by left clicking on them
 * Press start to simulate their movement (Maximum of 10 bodies, works best around 3)
 * Navigate the menu with the arrow keys and esc
 
-# Screenshots
+## Screenshots
 Start menu:
 ![Start menu](./img/start_menu.png)
 Pre-Simulation screen with planet data:
@@ -34,10 +34,10 @@ Pre-Simulation screen with planet data:
 During Simulation:
 ![During Simulation](./img/during_simulation.png)
 
-# GIF
+## GIF
 <img src="./img/PlanetSimulation.gif" width="800">
 
-# Contact
+## Contact
 Created by Marten B. Scheuck - feel free to contact me
 
 <!-- Optional -->
