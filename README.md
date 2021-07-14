@@ -10,6 +10,8 @@ Will maybe take up on it again in the future and add functionality
 * [Setup](#Setup)
 * [Features](#Features)
 * [Screenshots](#Screenshots)
+* [GIF](#GIF)
+* [Contact](#Contact)
 
 # Setup
 To run this project install numpy and pygame: (For Ubuntu)
@@ -32,8 +34,8 @@ Pre-Simulation screen with planet data:
 During Simulation:
 ![During Simulation](./img/during_simulation.png)
 
-# Video
-![Usage](./img/PlanetarySimulation.mkv)
+# GIF
+![Gif_Simulation](./img/PlanetarySimulation.gif)
 
 # Contact
 Created by Marten B. Scheuck - feel free to contact me
