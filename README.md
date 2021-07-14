@@ -14,7 +14,7 @@ _Is not currently being worked on_
 * [Contact](#Contact)
 
 ## Setup
-To run this project install numpy and pygame (For Ubuntu):
+To run this project install numpy and pygame (For Ubuntu/Debian):
 ```
 $ sudo apt-get install python3-numpy
 $ sudo apt-get install python3-pygame
