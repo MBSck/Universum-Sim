@@ -19,6 +19,10 @@ To run this project install numpy and pygame (For Ubuntu/Debian):
 $ sudo apt-get install python3-numpy
 $ sudo apt-get install python3-pygame
 ```
+Then to start simply run the ```main.py``` module:
+```
+$ python3 main.py
+```
 
 ## Features
 Simulating the movement of multiple planetary bodies
