@@ -28,15 +28,15 @@ Simulating the movement of multiple planetary bodies
 * Navigate the menu with the arrow keys and esc
 
 ## Screenshots
-Start menu:
+### Start menu:
 ![Start menu](./img/start_menu.png)
-Pre-Simulation screen with planet data:
+### Pre-Simulation screen with planet data:
 ![Pre-Simulation](./img/pre_simulation.png)
-During Simulation:
+### During Simulation:
 ![During Simulation](./img/during_simulation.png)
 
 ## GIF
-The simulation in operation:
+### The simulation in operation:
 <img src="./img/PlanetSimulation.gif" width="1100">
 
 ## Contact
