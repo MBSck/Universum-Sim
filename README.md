@@ -36,6 +36,7 @@ During Simulation:
 ![During Simulation](./img/during_simulation.png)
 
 ## GIF
+The simulation in operation:
 <img src="./img/PlanetSimulation.gif" width="1100">
 
 ## Contact
