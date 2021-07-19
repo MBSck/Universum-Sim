@@ -2,15 +2,17 @@ import functionality.planets as planets
 import assets.tools as tools
 from assets.variables import *
 
-# Also add logger to code and display errors correctly
-# Make one pixel correspond to 1/10 au so that acceleration works more realistic
+# TODO: Also add logger to code and display errors correctly
+# TODO: Make one pixel correspond to 1/10 au so that acceleration works more realistic
 
 
 class SolarSystem(metaclass=tools.Singleton):
     """This creates the space in which the objects interact with each other.
     Singleton so it can be used in different functions and keeps all functionality"""
-    def __init__(self):
+
+    def __init__(self) -> None:
         """Initializes the intrastellar objects and their changing attributes"""
+
         self.planets_list = []
         self.max_objects = 10
         self.system_time = 0
@@ -18,8 +20,9 @@ class SolarSystem(metaclass=tools.Singleton):
         # To display error messages
         self.error = False
 
-    def add_planet(self, *args):
+    def add_planet(self, *args) -> None:
         """Adds planets or objects to the solar system"""
+
         if self.number_of_intrastellar_objects() < self.max_objects:
             for i in args:
                 self.planets_list.append(i)
@@ -27,21 +30,25 @@ class SolarSystem(metaclass=tools.Singleton):
             # Display some error message
             self.error = True
 
-    def remove_planet(self, planet):
+    def remove_planet(self, planet) -> None:
         """Removes planet from the solar system"""
+
         self.planets_list.remove(planet)
 
-    def get_planet(self, planet):
+    def get_planet(self, planet) -> None:
         """Gets specific planet from planet list"""
+
         if planet in self.planets_list:
             return planet
 
     def number_of_intrastellar_objects(self):
         """Returns the number of objects in list"""
+
         return len(self.planets_list)
 
     def planetary_interaction(self):
         """Calculates the new accelerations of each of the planets"""
+
         acceleration_list = []
         for i in self.planets_list:
             a_x, a_y = 0, 0
@@ -56,6 +63,7 @@ class SolarSystem(metaclass=tools.Singleton):
 
     def planetary_positions(self):
         """Utilizes Verlet integration to get the next positions of all planets for a certain time step period"""
+
         temp_pos_list, temp_vel_list = [], []
         for i, o in enumerate(self.planets_list):
             # Calculates the position and velocity for each step and saves it to the planet
@@ -68,16 +76,18 @@ class SolarSystem(metaclass=tools.Singleton):
 
         return temp_pos_list, temp_vel_list
 
-    def update(self):
+    def update(self) -> None:
         """"Updates the calculated data and stores it inside the planets itself"""
+
         for i, o in enumerate(self.planets_list):
             o.pos_x_real, o.pos_y_real = self.planetary_positions()[0][i]
             o.v_x, o.v_y = self.planetary_positions()[1][i]
 
             # o.trace.append(o.rect.center)
 
-    def reset(self):
+    def reset(self) -> None:
         """This resets the class back to its empty state"""
+
         self.planets_list = []
         self.system_time = 0
 

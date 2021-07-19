@@ -1,17 +1,16 @@
 from assets.variables import *
-import pygame as pg
-import abc, sys
 
-# Make class that creates empty rectangle for menu option
-# Create menu to change planet names and so on
+"""Useful tools for calculation and display"""
 
-# Useful tools for calculation and display
+# TODO: Make class that creates empty rectangle for menu option
+# TODO: Create menu to change planet names and so on
 
-# ----- Classes ------
+"""-----Classes------"""
 
 
 class Singleton(type):
     """Creates a singleton ~ Global Class"""
+
     _instances = {}
 
     def __call__(cls, *args, **kwargs):
@@ -22,39 +21,48 @@ class Singleton(type):
 
 class SceneBase(abc.ABC):
     """Base class for the different scenes used in the games gui"""
-    def __init__(self):
+
+    def __init__(self) -> None:
         """Sets the actual scene as the class inheriting this"""
+
         self.next = self
 
     @abc.abstractmethod
-    def process_input(self, events, pressed_keys):
+    def process_input(self, events, pressed_keys) -> None:
         """Takes the user input and acts on it"""
+
         pass
 
     @abc.abstractmethod
-    def update(self):
+    def update(self) -> None:
         """Update method for events - takes game logic"""
+
         pass
 
     @abc.abstractmethod
-    def render(self, screen):
+    def render(self, screen) -> None:
         """Renders the screen depending on events and or user input"""
+
         pass
 
-    def switch_to_scene(self, next_scene):
+    def switch_to_scene(self, next_scene) -> None:
         """Switches to the next scene"""
+
         self.next = next_scene
 
-    def terminate(self):
+    def terminate(self) -> None:
         """Terminates the game"""
+
         pg.quit()
         sys.exit()
 
-# ----- Methods ------
+
+"""-----Methods------"""
 
 
 def text_format(text, text_size, text_color, text_font=font):
     """Template for creating text in pygame"""
+
     new_font = pg.font.Font(text_font, text_size)
     new_text = new_font.render(text, 0, text_color)
 
@@ -63,6 +71,7 @@ def text_format(text, text_size, text_color, text_font=font):
 
 def mouse_collison(objects):
     """Gets the position of the mouse and checks if it collides with any objects in the game"""
+
     pos_x, pos_y = pg.mouse.get_pos()
     selected, selected_offset_x, selected_offset_y = None, 0, 0
     # Checks if the mouse collides with element
@@ -84,10 +93,9 @@ def mouse_collison(objects):
 
 def verlet_algorithm(position: int, velocity: int, acceleration: int, dt: int = TIMESTEP):
     """This calculats the second order Taylor solution to the newton DGLs"""
-    # Maybe use scipy.integrate to solve newton DGLs
 
-    # Calcuate verlet for every point and add it to list
-    # Only then update it
+    # TODO: Maybe use scipy.integrate to solve newton DGLs
+    # TODO: Calcuate verlet for every point and add it to list and only then update it
 
     position = position - velocity * dt + (acceleration * (dt**2) * 0.5)
     velocity = velocity + acceleration * dt

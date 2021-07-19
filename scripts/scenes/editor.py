@@ -3,14 +3,17 @@ import assets.tools as tools
 from scenes import simulation
 from assets.variables import *
 
-# Think about button usability and about scaling of all the UI elements, with Screen size
-# Implement inelastic collision
+# TODO: Think about button usability and about scaling of all the UI elements, with Screen size
+# TODO: Implement inelastic collision
 
 
 class Editor(tools.SceneBase):
     """This initializes the mode where you can create Planets and such.
     And drag them around and delete them again"""
-    def __init__(self):
+
+    def __init__(self) -> None:
+        """Initializes the class attributes"""
+
         tools.SceneBase.__init__(self)
 
         # Create solar system
@@ -24,7 +27,9 @@ class Editor(tools.SceneBase):
         # Initializes the editor menu
         self.menu = SelectionMenu()
 
-    def process_input(self, events, pressed_keys):
+    def process_input(self, events, pressed_keys) -> None:
+        """Handles input"""
+
         for event in events:
             # Checks for mouse button press
             if event.type == pg.MOUSEBUTTONDOWN:
@@ -88,11 +93,14 @@ class Editor(tools.SceneBase):
                     self.action = None
                     self.selected = None
 
-    def update(self):
+    def update(self) -> None:
+        """Scene update"""
+
         ...
 
-    def render(self, screen):
-        # Editor UI
+    def render(self, screen) -> None:
+        """Renders the editor's UI"""
+
         # Fill screen with black
         screen.fill(BLACK)
 
@@ -132,7 +140,10 @@ class Editor(tools.SceneBase):
 
 class SelectionMenu:
     """Implements selection menu to change the values of the planets"""
-    def __init__(self):
+
+    def __init__(self) -> None:
+        """Initializes class attributes"""
+
         self.start_pos = (150, 950)
         self.stop_pos = (150, 950)
         self.reset_pos = (1550, 950)
@@ -148,18 +159,21 @@ class SelectionMenu:
 
     def cursor(self, rect):
         """Gets a cursor that blinks"""
+
         return pg.Rect(rect.topright, (3, rect.height))
 
-    def draw_button(self, screen, button_rect, color, text, pos_y, offset_x=0, offset_y=1.5):
+    def draw_button(self, screen, button_rect, color, text, pos_y, offset_x=0, offset_y=1.5) -> None:
         """Draw button with text on it that is in black"""
+
         # Draws the button, gets the text and then a possible offsets to center text on button position
         pg.draw.rect(screen, color, button_rect)
         button_text = tools.text_format(text, text_size=45, text_color=BLACK)
         button_rect = button_text.get_rect()
         screen.blit(button_text, (button_rect[2] + offset_x, pos_y - offset_y))
 
-    def draw_menu(self, screen):
+    def draw_menu(self, screen) -> None:
         """Draws the menu elements"""
+
         # Draws the menus borders
         pg.draw.rect(screen, GREEN, self.menu_box, 10)
 
@@ -191,8 +205,9 @@ class SelectionMenu:
         screen.blit(menu_velocity_x, (self.leftbound, SCREEN_HEIGHT / 4.4 - (self.menu_velocity_x_rect[2] / 2)))
         screen.blit(menu_velocity_y, (self.leftbound, SCREEN_HEIGHT / 4 - (self.menu_velocity_y_rect[2] / 2)))
 
-    def gets_variable_input(self, planet):
+    def gets_variable_input(self, planet) -> None:
         """Gets the variable input that should be displayed"""
+
         # Sets the rect title via the planets data
         self.input_name = tools.text_format(str(planet.name), 20, GREEN)
         self.input_mass = tools.text_format(str(planet.mass) + " kg", 20, GREEN)
@@ -209,8 +224,9 @@ class SelectionMenu:
         self.input_velocity_x_rect = self.input_velocity_x.get_rect()
         self.input_velocity_y_rect = self.input_velocity_y.get_rect()
 
-    def draw_variable_input(self, screen):
+    def draw_variable_input(self, screen) -> None:
         """Displays the changeable variables of the object"""
+
         # Displays the text
         screen.blit(self.input_name, (self.rightbound, SCREEN_HEIGHT / 10.2 - (self.menu_name_rect[2] / 2)))
         screen.blit(self.input_mass, (self.rightbound, SCREEN_HEIGHT / 8.2 - (self.menu_name_rect[2] / 2)))
@@ -219,9 +235,9 @@ class SelectionMenu:
         screen.blit(self.input_velocity_x, (self.rightbound, SCREEN_HEIGHT / 5.1 - (self.menu_name_rect[2] / 2)))
         screen.blit(self.input_velocity_y, (self.rightbound, SCREEN_HEIGHT / 4.5 - (self.menu_name_rect[2] / 2)))
 
-    def update(self, mouse_pos):
+    def update(self, mouse_pos) -> None:
         """Updates the menu screen"""
-        print("hello")
+
         try:
             if self.input_name_rect.collidepoint(mouse_pos[0], mouse_pos[1]):
                 print("input rect")

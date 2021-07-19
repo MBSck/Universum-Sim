@@ -6,17 +6,15 @@ black holes and such
 
 I dont't need a grade, but would like comments about my general code, where I could improve"""
 
-# Start options for planets, like speed etc. should be shown visually by arrow into direction
-# Matrix method?
-
-# Make objects not being able to leave the screen via drag and also not bigger, add options for bigger screen size
-# Make objects be created at tip of cursor not in the middle
-# Maybe make zoom function so that you can see all of the system
-# Fix collision problem of planets if collide, then merge
-# Implement sprite classes into code
-# Change all the positions into relative to screen size, so that it works on lower resolution
-
-# Computation really slow -> Fix! (Matrix calculation)
+# TODO: Start options for planets, like speed etc. should be shown visually by arrow into direction
+# TODO: Matrix method?
+# TODO: Make objects not being able to leave the screen via drag and also not bigger, add options for bigger screen size
+# TODO: Make objects be created at tip of cursor not in the middle
+# TODO: Maybe make zoom function so that you can see all of the system
+# TODO: Fix collision problem of planets if collide, then merge
+# TODO: Implement sprite classes into code
+# TODO: Change all the positions into relative to screen size, so that it works on lower resolution
+# TODO: Computation really slow -> Fix! (Matrix calculation)
 
 
 def main(starting_scene, screen=SCREEN, fps=FPS):

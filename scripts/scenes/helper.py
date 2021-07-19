@@ -5,13 +5,18 @@ from scenes import menu
 
 class Help(tools.SceneBase):
     """Creates the help menu, which explains how to use the simulator"""
-    def __init__(self):
+
+    def __init__(self) -> None:
+        """Initialize class attributes"""
+
         tools.SceneBase.__init__(self)
 
         self.general_pos, self.editor_pos = 240, 480
         self.left_pos = 300
 
-    def process_input(self, events, pressed_keys):
+    def process_input(self, events, pressed_keys) -> None:
+        """Handles input"""
+
         for event in events:
             # Checks if the user presses a key
             if event.type == pg.KEYDOWN:
@@ -19,11 +24,14 @@ class Help(tools.SceneBase):
                 if event.key == pg.K_ESCAPE:
                     self.switch_to_scene(menu.MainMenu())
 
-    def update(self):
+    def update(self) -> None:
+        """Updates scene"""
+
         pass
 
-    def render(self, screen):
-        # Help UI
+    def render(self, screen) -> None:
+        """Renders the helper's UI"""
+
         # Fills screen
         screen.fill(BLACK)
 

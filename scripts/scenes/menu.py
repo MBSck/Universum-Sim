@@ -5,7 +5,10 @@ from scenes import editor, helper, options
 
 class MainMenu(tools.SceneBase):
     """Class that creates the main menu screen"""
-    def __init__(self):
+
+    def __init__(self) -> None:
+        """Initializes attributes"""
+
         tools.SceneBase.__init__(self)
 
         # Sets the counter
@@ -13,7 +16,9 @@ class MainMenu(tools.SceneBase):
         self.selection = {0: "start", 1: "help",
                           2: "options", 3: "quit"}
 
-    def process_input(self, events, pressed_keys):
+    def process_input(self, events, pressed_keys) -> None:
+        """Handles input"""
+
         for event in events:
             if event.type == pg.KEYDOWN:
 
@@ -41,11 +46,14 @@ class MainMenu(tools.SceneBase):
                     elif self.selection[self.counter] == "quit":
                         self.terminate()
 
-    def update(self):
+    def update(self) -> None:
+        """Updates scene"""
+
         pass
 
-    def render(self,  screen):
-        # Menu UI
+    def render(self,  screen) -> None:
+        """Renders the menu's UI"""
+
         # Fills screen
         screen.fill(BLACK)
 

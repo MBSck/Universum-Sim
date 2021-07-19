@@ -3,8 +3,14 @@ import pygame as pg
 import time
 import numpy as np
 import decimal
+import random as rnd
+import abc
+import sys
 
-# implement class that keeps check of colors and globals etc.
+"""Implement class that keeps check of colors and globals etc."""
+
+# TODO: Make solarsystem objects accesible via options menu via singleton
+# TODO: Temporarly sprite host, make functions into classes and use sprite functionality
 
 # Center the application
 os.environ["SDL_VIDEO_CENTERED"] = "1"
@@ -59,8 +65,3 @@ PIXEL_REAL = au/PIXEL_INCREMENT
 generic_name_list = ["Spe", "Arkas", "Arion", "Dimidium", "Earth", "Moon", "Mars",
                      "Venus", "Jupiter", "Sun", "Merkur", "Saturn", "Aegir", "Dagon",
                      "Hypatia", "Madriu", "Xolotlan", "Riosar", ]
-
-
-# make solarsystem objects accesible via options menu via singleton
-
-# Temporarly sprite host, make functions into classes and use sprite functionality
