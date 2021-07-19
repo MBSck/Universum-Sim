@@ -21,6 +21,7 @@ I dont't need a grade, but would like comments about my general code, where I co
 
 def main(starting_scene, screen=SCREEN, fps=FPS):
     """Runs the scenes and is therefore the main game loop"""
+
     pg.init()
     screen.fill(BLACK)
     active_scene = starting_scene
