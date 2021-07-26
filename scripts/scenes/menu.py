@@ -63,14 +63,17 @@ class MainMenu(tools.SceneBase):
             text_start = tools.text_format("START", 75, GREEN)
         else:
             text_start = tools.text_format("START", 75, WHITE)
+
         if self.selection[self.counter] == "help":
             text_help = tools.text_format("HELP", 75, GREEN)
         else:
             text_help = tools.text_format("HELP", 75, WHITE)
+
         if self.selection[self.counter] == "options":
             text_options = tools.text_format("OPTIONS", 75, GREEN)
         else:
             text_options = tools.text_format("OPTIONS", 75, WHITE)
+
         if self.selection[self.counter] == "quit":
             text_quit = tools.text_format("QUIT", 75, GREEN)
         else:

@@ -27,6 +27,7 @@ def main(starting_scene, screen=SCREEN, fps=FPS):
     # Music
     pg.mixer_music.load(songs[0])
     pg.mixer_music.play(-1)
+    pg.mixer.music.set_volume(1.)
 
     while True:
         # Gets the pressed keys
@@ -56,22 +57,25 @@ def main(starting_scene, screen=SCREEN, fps=FPS):
                     # This doesn't work, but why?
                     if active_scene == menu.MainMenu():
                         quit_attempt = True
+
                     else:
                         # Switches Scene and resets the SolarSystem
                         active_scene.next = menu.MainMenu()
                         menu.editor.solar.SolarSystem().reset()
 
                 # If 'alt+F4' is pressed quits
-                elif event.key == pg.K_F4 and alt_pressed:
+                if event.key == pg.K_F4 and alt_pressed:
                     quit_attempt = True
 
-                # If 'F11' is pressed fullscreen toggles on/off
-                elif event.key == pg.K_F11:
+                # If 'F11' is pressed fullscreen tog
+                # gles on/off
+                if event.key == pg.K_F11:
                     pg.display.toggle_fullscreen()
 
             # Quits if any quit conditions are met and if not takes the events
             if quit_attempt:
                 active_scene.terminate()
+
             else:
                 filtered_events.append(event)
 

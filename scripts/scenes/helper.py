@@ -18,10 +18,16 @@ class Help(tools.SceneBase):
         """Handles input"""
 
         for event in events:
+
             # Checks if the user presses a key
             if event.type == pg.KEYDOWN:
+
                 # Closes the window if 'esc' is pressed
                 if event.key == pg.K_ESCAPE:
+                    self.switch_to_scene(menu.MainMenu())
+
+                # returns to main menu with enter
+                if event.key == pg.K_RETURN:
                     self.switch_to_scene(menu.MainMenu())
 
     def update(self) -> None:
@@ -46,6 +52,8 @@ class Help(tools.SceneBase):
         info_mouse_middle = tools.text_format("Middle click and hold drags object", 50, GREEN)
         info_mouse_right = tools.text_format("Right click removes object", 50, GREEN)
 
+        text_back = tools.text_format("BACK", 75, GREEN)
+
         # Sets the UI elements
         title_rect = title.get_rect()
         general_rect = general.get_rect()
@@ -53,6 +61,8 @@ class Help(tools.SceneBase):
         info_left_rect = info_mouse_left.get_rect()
         info_middle_rect = info_mouse_middle.get_rect()
         info_right_rect = info_mouse_right.get_rect()
+
+        back_rect = text_back.get_rect()
 
         # Help Text layout
         screen.blit(title, (SCREEN_WIDTH / 2 - (title_rect[2] / 2), 80))
@@ -63,3 +73,5 @@ class Help(tools.SceneBase):
         screen.blit(info_mouse_left, (SCREEN_WIDTH / 2 - (info_left_rect[2] / 2), self.editor_pos + 130))
         screen.blit(info_mouse_middle, (SCREEN_WIDTH / 2 - (info_middle_rect[2] / 2), self.editor_pos + 260))
         screen.blit(info_mouse_right, (SCREEN_WIDTH / 2 - (info_right_rect[2] / 2), self.editor_pos + 390))
+
+        screen.blit(text_back, (SCREEN_WIDTH / 2 - (back_rect[2] / 2), self.editor_pos + 500))
