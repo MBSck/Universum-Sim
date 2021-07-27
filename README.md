@@ -46,4 +46,4 @@ Simulating the movement of multiple planetary bodies
 ## Contact
 Created by Marten B. Scheuck - feel free to contact me
 
-Music by [Bensound.com](Bensound.com)
+Music by [Bensound.com](https://www.bensound.com)
