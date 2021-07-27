@@ -46,6 +46,4 @@ Simulating the movement of multiple planetary bodies
 ## Contact
 Created by Marten B. Scheuck - feel free to contact me
 
-<!-- Optional -->
-<!-- ## License -->
-<!-- This project is open source and available under the MIT license (https://opensource.org/licenses/MIT). -->
+Music by Bensound.com
