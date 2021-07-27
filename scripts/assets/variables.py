@@ -32,8 +32,15 @@ MAX_RESOLUTION = (info.current_w, info.current_h)
 FPS, clock = 60, pg.time.Clock()
 
 # Define colors
-BLACK, WHITE = (0, 0, 0), (255, 255, 255)
-RED, GREEN, BLUE = (255, 0, 0), (0, 255, 0), (0, 0, 255)
+colors = {"black": (0, 0, 0), "white": (255, 255, 255), "pure_red": (255, 0, 0), "pure_green": (0, 255, 0),
+          "pure_blue": (0, 0, 255), "dark_grey": (192, 192, 192), "light_grey": (224, 244, 244),
+          "dark_red": (51, 0, 0), "dark_green": (0, 51, 0), "dark_blue": (0, 0, 51), "teal": (0, 255, 255),
+          "yellow": (255, 255, 0), "purple": (102, 0, 204), "orange": (255, 128, 0), "pink": (255, 0, 255),
+          "brown": (128, 128, 128)}
+
+# Define primary colors of screen and non-colors
+BLACK, WHITE = colors["black"], colors["white"]
+RED, GREEN, BLUE = colors["pure_red"], colors["pure_green"], colors["pure_blue"]
 
 # Font
 font = "assets/Gameplay.ttf"
