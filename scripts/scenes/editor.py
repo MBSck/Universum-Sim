@@ -80,6 +80,7 @@ class Editor(tools.SceneBase):
 
                 # Moves the planets, when mouse is dragged and planet selected
                 if self.selected is not None:
+
                     # Does not work right now
                     if self.action == "move":
                         self.ss.get_planet(self.selected).pos_x = \

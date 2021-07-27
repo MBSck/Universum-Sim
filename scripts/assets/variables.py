@@ -19,7 +19,7 @@ os.environ["SDL_VIDEO_CENTERED"] = "1"
 SCREEN = pg.display.set_mode((0, 0), pg.FULLSCREEN)
 
 # Implementation for music and setting song that is being played
-songs = ["assets/bensound-slowmotion.mp3"]
+songs = ["slowmotion.mp3", "newdawn.mp3", "deepblue.mp3"]
 currently_playing_song = None
 VOLUME = 0.1
 

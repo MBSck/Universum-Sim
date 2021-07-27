@@ -25,9 +25,9 @@ def main(starting_scene, screen=SCREEN, fps=FPS):
     active_scene = starting_scene
 
     # Music
-    pg.mixer_music.load(songs[0])
+    pg.mixer_music.load(os.path.join("assets/music/", rnd.choice(songs)))
     pg.mixer_music.play(-1)
-    pg.mixer.music.set_volume(1.)
+    pg.mixer.music.set_volume(VOLUME)
 
     while True:
         # Gets the pressed keys
