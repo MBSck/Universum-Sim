@@ -1,6 +1,8 @@
 from assets.variables import *
 
 # TODO: Make planets names show under their dots
+# TODO: Make radius work
+# TODO: Make realistic units work
 
 
 class Planet:
@@ -9,16 +11,24 @@ class Planet:
     def __init__(self, mass: float, pos_x: int, pos_y: int,
                  v_x: int = 0, v_y: int = 0, rect_size_x: int = BLOCK_SIZE,
                  rect_size_y: int = BLOCK_SIZE, radius: int = CIRCLE_RADIUS,
-                 color: tuple = RED) -> None:
+                 color: tuple = None) -> None:
         """Initializes the planets values"""
 
-        # Make radius property that updates itself as well as tracesize and rect size
+        # Make radius property that updates itself as well as trace-size and rect size
         self.name = rnd.choice(generic_name_list)
         self.mass = mass
-        self.color = color
         self.trace = []
         self.trace_size = BLOCK_SIZE/10
         self.v_x, self.v_y = v_x, v_y
+
+        # Get random color or player selected one
+        if color is not None:
+            self.color = color
+        else:
+            self.color = rnd.choice(list(colors.values()))
+
+        # Sets random radius
+        self.radius = rnd.choice(range(1, 25))
 
         # Values used for setters and behind the scenes update, never overwrite!
         self.__radius = radius

@@ -71,3 +71,6 @@ PIXEL_REAL = au/PIXEL_INCREMENT
 generic_name_list = ["Spe", "Arkas", "Arion", "Dimidium", "Earth", "Moon", "Mars",
                      "Venus", "Jupiter", "Sun", "Merkur", "Saturn", "Aegir", "Dagon",
                      "Hypatia", "Madriu", "Xolotlan", "Riosar", ]
+
+if __name__ == "__main__":
+    print(rnd.choice(colors))

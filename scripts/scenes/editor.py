@@ -1,3 +1,5 @@
+import decimal
+
 import functionality.solarsystem as solar
 import assets.tools as tools
 from scenes import simulation
@@ -56,7 +58,8 @@ class Editor(tools.SceneBase):
 
                     # Creates a new object and adds it to the solar system
                     elif self.selected is None:
-                        self.ss.add_planet(solar.planets.Planet(1e24, mouse_pos[0], mouse_pos[1]))
+                        self.ss.add_planet(solar.planets.Planet(
+                            float(f"{rnd.choice(range(1, 101))}e24"), mouse_pos[0], mouse_pos[1]))
 
                     # Selects planet for variable change if one already exists at this point and sets the text in menu
                     else:
