@@ -1,4 +1,6 @@
 # Added by Marten
 venv/
 .idea/
+scripts/assets/__pycache__
+
 

@@ -3,6 +3,7 @@ import assets.tools as tools
 from scenes import menu
 
 # TODO: Make fullscreen toggle mechanic work
+# TODO: Make settings permanent in some file, cfg or something
 
 
 class Options(tools.SceneBase):
@@ -15,8 +16,6 @@ class Options(tools.SceneBase):
 
         # Sets the option's counter
         self.counter = 0
-        self.counter_sound = 1
-        self.counter_fullscreen = 0
 
         # Various lists for the selections
         self.sound_settings = {0: ("--------- 0", 0.), 1: ("| | | ------- 25", 0.25),
@@ -29,6 +28,7 @@ class Options(tools.SceneBase):
 
     def process_input(self, events, pressed_keys) -> None:
         """Handles input"""
+        global volume_setting, fullscreen_setting
 
         for event in events:
             if event.type == pg.KEYDOWN:
@@ -46,24 +46,24 @@ class Options(tools.SceneBase):
                 # Checks if left or right arrow is pressed and changes the sound or fullscreen
                 if (event.key == pg.K_RIGHT) or (event.key == pg.K_LEFT):
                     if self.selection[self.counter] == "Sound":
-                        if (event.key == pg.K_RIGHT) and (self.counter_sound < 4):
-                            self.counter_sound += 1
+                        if (event.key == pg.K_RIGHT) and (volume_setting < 4):
+                            volume_setting += 1
 
                             # sets sound
-                            pg.mixer.music.set_volume(self.sound_settings[self.counter_sound][1])
+                            pg.mixer.music.set_volume(self.sound_settings[volume_setting][1])
 
-                        elif (event.key == pg.K_LEFT) and (self.counter_sound > 0):
-                            self.counter_sound -= 1
+                        elif (event.key == pg.K_LEFT) and (volume_setting > 0):
+                            volume_setting -= 1
 
                             # sets sound
-                            pg.mixer.music.set_volume(self.sound_settings[self.counter_sound][1])
+                            pg.mixer.music.set_volume(self.sound_settings[volume_setting][1])
 
                     elif self.selection[self.counter] == "Fullscreen":
-                        if self.counter_fullscreen == 0:
-                            self.counter_fullscreen = 1
+                        if fullscreen_setting == 0:
+                            fullscreen_setting = 1
 
                         else:
-                            self.counter_fullscreen = 0
+                            fullscreen_setting = 0
 
                         # pg.display.toggle_fullscreen()
 
@@ -85,17 +85,17 @@ class Options(tools.SceneBase):
         title = tools.text_format("OPTIONS", 90, RED)
         if self.selection[self.counter] == "Sound":
             text_sound = tools.text_format("SOUND:", 75, GREEN)
-            text_sound_bar = tools.text_format(self.sound_settings[self.counter_sound][0], 75, GREEN)
+            text_sound_bar = tools.text_format(self.sound_settings[volume_setting][0], 75, GREEN)
         else:
             text_sound = tools.text_format("SOUND:", 75, WHITE)
-            text_sound_bar = tools.text_format(self.sound_settings[self.counter_sound][0], 75, WHITE)
+            text_sound_bar = tools.text_format(self.sound_settings[volume_setting][0], 75, WHITE)
 
         if self.selection[self.counter] == "Fullscreen":
             text_fullscreen = tools.text_format("FULLSCREEN:", 75, GREEN)
-            text_fullscreen_setting = tools.text_format(self.fullscreen_settings[self.counter_fullscreen], 75, GREEN)
+            text_fullscreen_setting = tools.text_format(self.fullscreen_settings[fullscreen_setting], 75, GREEN)
         else:
             text_fullscreen = tools.text_format("FULLSCREEN:", 75, WHITE)
-            text_fullscreen_setting = tools.text_format(self.fullscreen_settings[self.counter_fullscreen], 75, WHITE)
+            text_fullscreen_setting = tools.text_format(self.fullscreen_settings[fullscreen_setting], 75, WHITE)
 
         if self.selection[self.counter] == "Back":
             text_back = tools.text_format("BACK", 75, GREEN)

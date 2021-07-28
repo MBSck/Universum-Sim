@@ -22,11 +22,15 @@ SCREEN = pg.display.set_mode((0, 0), pg.FULLSCREEN)
 songs = ["slowmotion.mp3", "newdawn.mp3", "deepblue.mp3"]
 currently_playing_song = None
 VOLUME = 0.1
+volume_setting = 1
 
 # Get screen size
 info = pg.display.Info()
 SCREEN_WIDTH, SCREEN_HEIGHT = info.current_w, info.current_h
 MAX_RESOLUTION = (info.current_w, info.current_h)
+
+# Fullscreen settings, 0 - Yes, 1 - No
+fullscreen_setting = 0
 
 # Set fps and clock
 FPS, clock = 60, pg.time.Clock()
@@ -43,7 +47,7 @@ BLACK, WHITE = colors["black"], colors["white"]
 RED, GREEN, BLUE = colors["pure_red"], colors["pure_green"], colors["pure_blue"]
 
 # Font
-font = "assets/Gameplay.ttf"
+font = "assets/fonts/Gameplay.ttf"
 
 # Size of the circles/planets
 BLOCK_SIZE = 25
