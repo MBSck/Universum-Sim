@@ -1,4 +1,4 @@
-from assets.variables import *
+from variables import *
 
 """Useful tools for calculation and display"""
 
@@ -103,5 +103,29 @@ def verlet_algorithm(position: int, velocity: int, acceleration: int, dt: int = 
     return position, velocity
 
 
+def runge_kutta_method(f, t0: int, y0: int, h: int = TIMESTEP):
+    """Iterative method that include the Euler-method and yields
+    approximate solutions for ordinary differential equations
+
+    Parameters
+        f: The basic function for runge-kutta, has to accept two params
+        t0 (int): The starting time
+        y0 (int): The starting position
+        h (int): The step-size of the approximation
+
+    Returns:
+        t1 (int): The new time
+        y1 (int): The new position
+    """
+
+    # Gets the k values
+    k1 = f(t0, y0)
+    k2 = f(t0+h/2, y0+h*k1/2)
+    k3 = f(t0+h/2, y0+h*k2/2)
+    k4 = f(t0+h, y0+h*k3)
+
+    return t0+h, y0+h/6*(k1+2*k2+2*k3+k4)
+
+
 if __name__ == "__main__":
-    pass
+    print(runge_kutta_method.__doc__)
