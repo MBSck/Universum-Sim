@@ -1,6 +1,10 @@
 # Added by Marten
 venv/
 .idea/
-scripts/assets/__pycache__
+scripts/__pycache__/
+scripts/scenes/__pycache__/
+scripts/assets/__pycache__/
+scripts/functionality/__pycache__/
+
 
 
