@@ -17,13 +17,12 @@ __author__ = "Marten Scheuck"
 # TODO: Computation really slow -> Fix! (Matrix calculation)
 
 
-def main(starting_scene, screen=SCREEN, fps: int = FPS) -> None:
-    """Starts up the simulation and runs the first scene. Main game loop
+def initialize(screen) -> None:
+    """Initializes the main pygame functionality and the music
 
     Parameters:
-        starting_scene: The starting scene, utilizing the respective Scene class
-        screen: the screen pygame displays on
-        fps (int): The frames per second that are rendered
+        screen
+            the screen pygame displays on
 
     Returns:
         None
@@ -32,62 +31,85 @@ def main(starting_scene, screen=SCREEN, fps: int = FPS) -> None:
     # Initializes pygame and the first scene
     pg.init()
     screen.fill(BLACK)
-    active_scene = starting_scene
 
     # Music
     pg.mixer_music.load(os.path.join("assets/music/", rnd.choice(songs)))
     pg.mixer_music.play(-1)
     pg.mixer.music.set_volume(VOLUME)
 
-    while True:
-        # Gets the pressed keys
-        pressed_keys = pg.key.get_pressed()
 
-        # Event filtering
-        filtered_events = []
+def check_for_user_input(active_scene, pressed_keys):
+    """This is part of the simulations while loop and checks for user input
 
-        # Checks if user pressed alt+f4, 'x' or escape
-        for event in pg.event.get():
-            quit_attempt = False
+    Parameters:
+        active_scene
+            the scene that is active at the moment
+        pressed_keys
+            the keys pressed by the user
+
+    Returns:
+        filtered_events: list
+            a list that encompasses all user events
+    """
+
+    filtered_events = []
+
+    # Checks if user pressed alt+f4, 'x' or escape
+    for event in pg.event.get():
+        quit_attempt = False
+
+        # Checks oif key is pressed
+        if event.type == pg.KEYDOWN:
+
+            # If 'esc' is pressed either returns to main menu or quits
+            if (event.key == pg.K_ESCAPE) and (active_scene != menu.MainMenu()):
+
+                # Switches Scene and resets the SolarSystem
+                active_scene.next = menu.MainMenu()
+                menu.editor.solar.SolarSystem().reset()
+
+            # If 'alt+F4' is pressed quits
+            if event.key == pg.K_F4 and (pressed_keys[pg.K_LALT] or pressed_keys[pg.K_RALT]):
+                quit_attempt = True
 
             # Checks if 'x' on window is pressed
             if event.type == pg.QUIT:
                 quit_attempt = True
 
-            # Checks oif key is pressed
-            elif event.type == pg.KEYDOWN:
+            # If 'F11' is pressed fullscreen toggles
+            if event.key == pg.K_F11:
+                pg.display.toggle_fullscreen()
 
-                # Checks if either the left or right alt key is pressed
-                alt_pressed = pressed_keys[pg.K_LALT] or \
-                    pressed_keys[pg.K_RALT]
+        # Quits if any quit conditions are met and if not takes the events
+        if quit_attempt:
+            active_scene.terminate()
+        else:
+            active_scene.append(event)
 
-                # If 'esc' is pressed either returns to main menu or quits
-                if event.key == pg.K_ESCAPE:
+        return filtered_events
 
-                    # This doesn't work, but why?
-                    if active_scene == menu.MainMenu():
-                        quit_attempt = True
 
-                    else:
-                        # Switches Scene and resets the SolarSystem
-                        active_scene.next = menu.MainMenu()
-                        menu.editor.solar.SolarSystem().reset()
+def main(active_scene, screen=SCREEN, fps: int = FPS) -> None:
+    """Starts up the simulation and runs the first scene. Contains main game loop
 
-                # If 'alt+F4' is pressed quits
-                if event.key == pg.K_F4 and alt_pressed:
-                    quit_attempt = True
+    Parameters:
+        active_scene: The active scene, utilizing the respective Scene class
+        screen: the screen pygame displays on
+        fps (int): The frames per second that are rendered
 
-                # If 'F11' is pressed fullscreen tog
-                # gles on/off
-                if event.key == pg.K_F11:
-                    pg.display.toggle_fullscreen()
+    Returns:
+        None
+    """
 
-            # Quits if any quit conditions are met and if not takes the events
-            if quit_attempt:
-                active_scene.terminate()
+    # Initialize the pygame settings
+    initialize(screen)
 
-            else:
-                filtered_events.append(event)
+    while True:
+        # Gets the pressed keys
+        pressed_keys = pg.key.get_pressed()
+
+        # Gets user input
+        filtered_events = check_for_user_input(active_scene, pressed_keys)
 
         # Takes User Input, updates the game for any actions and then renders the screen
         active_scene.process_input(filtered_events, pressed_keys)
