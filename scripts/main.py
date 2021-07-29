@@ -1,7 +1,7 @@
 from assets.variables import *
 from scenes import menu
 
-__version__ = "0.1 - Alpha"
+__version__ = "0.0.1 - Alpha"
 __author__ = "Marten Scheuck"
 
 """This is simulation tool, which generates physical accurate planetary body simulations"""
