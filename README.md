@@ -4,7 +4,7 @@
 >It is an extremly simplified simulation of planetary bodies' movement
 
 ## Project Status
-_Is not currently being worked on_ 
+_Is currently being worked on_ 
 
 ## Table of contents
 * [Setup](#Setup)
@@ -45,5 +45,6 @@ Simulating the movement of multiple planetary bodies
 
 ## Contact
 Created by Marten B. Scheuck - feel free to contact me
+Contributions by [Lyniat](https://github.com/Lyniat)
 
 Music by [Bensound.com](https://www.bensound.com)
