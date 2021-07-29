@@ -6,13 +6,76 @@ from assets.variables import *
 
 
 class Planet:
-    """This checks the values and the behaviour of the planet"""
+    """This checks the values and the behaviour of the planet
+
+    Attributes
+    ----------
+    name: str
+        the planet's name
+    mass: float
+        the planet's mass
+    trace: list
+        the planet's trace
+    trace_size: int
+        the size of the planet's trace
+    v_x: int
+        the planet's x-velocity
+    v_y: int
+        the planet'S y-velocity
+    color: tuple
+        the planet's color
+    radius: int
+        the planet's radius
+    pos_x: int
+        the planet's x-position
+    pos_y: int
+        the planet's y-position
+    rect_size_x: int
+        the planet's x-rect size
+    rect_size_y: int
+        the planet's y-rect size
+    pos_x_real: int
+        the planet's real x-position on the screen
+    pos_y_real: int
+        the planet's real y-position on the screen
+    density: float
+        the planet's density
+
+    Methods
+    ----------
+    collision_addition(other):
+        Adds two planets together, when they are colliding
+    alien_acceleration(other):
+        The acceleration this body enacts on another
+    """
 
     def __init__(self, mass: float, pos_x: int, pos_y: int,
                  v_x: int = 0, v_y: int = 0, rect_size_x: int = BLOCK_SIZE,
-                 rect_size_y: int = BLOCK_SIZE, radius: int = CIRCLE_RADIUS,
+                 rect_size_y: int = BLOCK_SIZE, radius: int = rnd.choice(range(1, 25)),
                  color: tuple = None) -> None:
-        """Initializes the planets values"""
+        """Initializes the planets values
+
+        Parameters
+        ----------
+        mass: float
+            the planet's mass
+        pos_x: int
+            the planet's x-position
+        pos_y: int
+            the planet's y-position
+        v_x: int
+            the planet's x-velocity
+        v_y: int
+            the planet's y-velocity
+        rect_size_x: int
+            the - for pygame needed - x-rect size of the planet
+        rect_size_y: int
+            the - for pygame needed - y-rect size of the planet
+        radius: int
+            the planet's radius
+        color: tuple
+            the planet's color
+        """
 
         # Make radius property that updates itself as well as trace-size and rect size
         self.name = rnd.choice(generic_name_list)
@@ -27,9 +90,6 @@ class Planet:
         else:
             self.color = rnd.choice(list(colors.values()))
 
-        # Sets random radius
-        self.radius = rnd.choice(range(1, 25))
-
         # Values used for setters and behind the scenes update, never overwrite!
         self.__radius = radius
         self.__pos_x, self.__pos_y = pos_x, pos_y
@@ -37,11 +97,6 @@ class Planet:
 
         # Gets physical accurate position
         self.pos_x_real, self.pos_y_real = self.__pos_x*PIXEL_REAL, self.__pos_y*PIXEL_REAL
-
-    def __repr__(self):
-        """Shows the objects name if outputted"""
-
-        return self.name
 
     @property
     def pos_x(self):
@@ -90,31 +145,65 @@ class Planet:
 
     @property
     def density(self):
-        """Gets the density of object"""
+        """Gets the density of object
 
-        ...
+        Not yet implemented
+        """
+
+        return
 
     @property
     def rect_size_x(self):
-        """Gets the rect size"""
+        """Getter for the x-rect size of the planet
+
+        Returns
+        ----------
+            multiplies the __radius by 2 to get the x-rect size
+        """
 
         return self.__radius*2
 
     @rect_size_x.setter
-    def rect_size_x(self, rect_size) -> None:
-        """Sets the rect_size_x"""
+    def rect_size_x(self, rect_size: int) -> None:
+        """Sets the planet's y-rect size
+
+        Parameters
+        ----------
+        rect_size: int
+            the pygame's planet's rect size
+
+        Returns
+        ----------
+        None
+        """
 
         self.__rect_size_x = rect_size
 
     @property
     def rect_size_y(self):
-        """Gets the rect_size_y"""
+        """Gets the rect_size_y
+
+        Returns
+        ----------
+        rect_size_y: int
+            multiplies the __radius by 2 to get the y-rect size
+        """
 
         return self.__radius*2
 
     @rect_size_y.setter
-    def rect_size_y(self, rect_size) -> None:
-        """Sets the rect_size_y"""
+    def rect_size_y(self, rect_size: int) -> None:
+        """Sets the planet's y-rect size
+
+        Parameters
+        ----------
+        rect_size: int
+            the pygame's planet's rect size
+
+        Returns
+        ----------
+        None
+        """
 
         self.__rect_size_y = rect_size
 
@@ -126,7 +215,17 @@ class Planet:
     '''
 
     def collision_addition(self, other) -> None:
-        """In case of collision adds the two planets together"""
+        """Adds two planets together, when they are colliding
+
+        Parameters
+        ----------
+        other: Planet
+            other planet that is interacting with this one
+
+        Returns
+        ----------
+        None
+        """
 
         # TODO: Maybe implement mass loss and explosion later on
         # TODO: Think about momentum conservation and volume and radius increase by mass increase
@@ -142,10 +241,23 @@ class Planet:
         self.pos_y_real = (self.pos_y_real + other.pos_y_real)/2
 
     def alien_acceleration(self, other):
-        """The acceleration this body enacts on another"""
+        """The acceleration this body enacts on another
+
+        Parameters
+        ----------
+        other: Planet
+            other planet that is interacting with this one
+
+        Returns
+        ----------
+        x-acceleration:
+            the acceleration the planet experiences in the x-direction
+        y-acceleration:
+            the acceleration the planet experiences in the y-direction
+        """
 
         distance_squared = np.sqrt((self.pos_x_real - other.pos_x_real) ** 2
-                                     + (self.pos_y_real - other.pos_y_real) ** 2)
+                                   + (self.pos_y_real - other.pos_y_real) ** 2)
         nominator_x, nominator_y = self.mass * (self.pos_x_real - other.pos_x_real), \
                                    self.mass * (self.pos_y_real - other.pos_y_real)
 

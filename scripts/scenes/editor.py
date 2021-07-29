@@ -7,14 +7,42 @@ from assets.variables import *
 
 # TODO: Think about button usability and about scaling of all the UI elements, with Screen size
 # TODO: Implement inelastic collision
+# TODO: Adapt code for resizing elements
 
 
 class Editor(tools.SceneBase):
     """This initializes the mode where you can create Planets and such.
-    And drag them around and delete them again"""
+    And drag them around and delete them again
+
+    Attributes
+    ----------
+    ss: SolarSystem
+        initializes the SolarSystem class
+    selected: Planet
+        the user's selection, either None or Planet
+    selected_planet: Planet
+        the last by the user selected Planet
+    action: str
+        keeps track of the actions to be executed after user input
+    menu: Scene
+        initializes the menu Scene-class for switching to it later on
+    Methods
+    ----------
+    process_input(events, pressed_keys):
+        Handles input
+    update():
+        Updates scene
+    render(screen):
+        Renders the helper's UI
+    """
 
     def __init__(self) -> None:
-        """Initializes the class attributes"""
+        """Initializes the class attributes
+
+        Returns
+        -----------
+        None
+        """
 
         tools.SceneBase.__init__(self)
 
@@ -30,7 +58,19 @@ class Editor(tools.SceneBase):
         self.menu = SelectionMenu()
 
     def process_input(self, events, pressed_keys) -> None:
-        """Handles input"""
+        """Handles input
+
+        Parameters
+        ----------
+        events: int
+            the different game events
+        pressed_keys: str
+            the keys pressed by the user
+
+        Returns
+        ----------
+        None
+        """
 
         for event in events:
             # Checks for mouse button press
@@ -39,8 +79,8 @@ class Editor(tools.SceneBase):
                 mouse_pos = event.pos
 
                 # Checks if object is selected, returns None if not
-                self.selected = tools.mouse_collison(self.ss.planets_list)[0]
-                self.selected = tools.mouse_collison(self.ss.planets_list)[0]
+                self.selected = tools.mouse_collision(self.ss.planets_list)[0]
+                self.selected = tools.mouse_collision(self.ss.planets_list)[0]
 
                 # Checks if it is the left mouse button
                 if event.button == 1:
@@ -63,7 +103,7 @@ class Editor(tools.SceneBase):
 
                     # Selects planet for variable change if one already exists at this point and sets the text in menu
                     else:
-                        self.selected_planet = tools.mouse_collison(self.ss.planets_list)[0]
+                        self.selected_planet = tools.mouse_collision(self.ss.planets_list)[0]
                         self.menu.gets_variable_input(self.ss.get_planet(self.selected_planet))
 
                 # Checks if it is the middle mouse button
@@ -87,9 +127,9 @@ class Editor(tools.SceneBase):
                     # Does not work right now
                     if self.action == "move":
                         self.ss.get_planet(self.selected).pos_x = \
-                            mouse_pos[0] + tools.mouse_collison(self.ss.planets_list)[1]
+                            mouse_pos[0] + tools.mouse_collision(self.ss.planets_list)[1]
                         self.ss.get_planet(self.selected).pos_y = \
-                            mouse_pos[1] + tools.mouse_collison(self.ss.planets_list)[2]
+                            mouse_pos[1] + tools.mouse_collision(self.ss.planets_list)[2]
 
             # Checks if mouse button is let loose
             elif event.type == pg.MOUSEBUTTONUP:
@@ -98,12 +138,27 @@ class Editor(tools.SceneBase):
                     self.selected = None
 
     def update(self) -> None:
-        """Scene update"""
+        """Updates scene
+
+        Returns
+        ----------
+        None
+        """
 
         ...
 
     def render(self, screen) -> None:
-        """Renders the editor's UI"""
+        """Renders the editor's UI
+
+        Parameters
+        ----------
+        screen
+            the screen pygame displays on
+
+        Returns
+        ----------
+        None
+        """
 
         # Fill screen with black
         screen.fill(BLACK)
@@ -143,10 +198,48 @@ class Editor(tools.SceneBase):
 
 
 class SelectionMenu:
-    """Implements selection menu to change the values of the planets"""
+    """Implements selection menu to change the values of the planets
+
+    Attributes
+    ----------
+    start_pos: int
+        position of the start button
+    stop_pos: int
+        position of the stop button
+    reset_pos: int
+        position of the reset button
+    leftbound: int
+        position to left bind elements
+    rightbound: int
+        position to right bind elements
+    menu_box: pg.Rect
+        rect for the menu - pygame element
+    start_stop_button: pg.Rect
+        rect for the start/stop button - pygame element
+    reset_button: pg.Rect
+        rect for the reset button - pygame element
+
+    Methods
+    ----------
+    cursor(rect):
+        Gets a cursor that blinks
+    draw_button(screen, button_rect, color, text, pos_y, offset_x, offset_y):
+        Draw button with text on it that is in black
+    draw_menu(screen):
+        Draws the menu elements
+    gets_variable_input(planet):
+        Gets the variable input that should be displayed
+    update(mouse_pos):
+        Updates the menu screen
+    """
 
     def __init__(self) -> None:
-        """Initializes class attributes"""
+        """Initializes class attributes
+
+        Returns
+        ----------
+        None
+        """
 
         self.start_pos = (150, 950)
         self.stop_pos = (150, 950)
@@ -161,13 +254,47 @@ class SelectionMenu:
         self.start_stop_button = pg.Rect(self.start_pos[0], self.start_pos[1], 200, 50)
         self.reset_button = pg.Rect(self.reset_pos[0], self.reset_pos[1], 200, 50)
 
-    def cursor(self, rect):
-        """Gets a cursor that blinks"""
+    def cursor(self, rect: pg.Rect):
+        """Gets a cursor that blinks
+
+        Parameters
+        ----------
+        rect: pg.Rect
+            an input rect
+
+        Returns
+        ----------
+        cursor: pg.Rect
+            blinking cursor
+        """
 
         return pg.Rect(rect.topright, (3, rect.height))
 
-    def draw_button(self, screen, button_rect, color, text, pos_y, offset_x=0, offset_y=1.5) -> None:
-        """Draw button with text on it that is in black"""
+    def draw_button(self, screen, button_rect: pg.Rect, color: tuple,
+                    text: str, pos_y: int, offset_x: int = 0, offset_y: int = 1.5) -> None:
+        """Draw button with text on it that is in black
+
+        Parameters
+        ----------
+        screen
+            pygame draws the objects on the screen
+        button_rect: pg.Rect
+            the rect that defines the button
+        color: tuple
+            the button's color
+        text: str
+            the button's text
+        pos_y: int
+            the button's y-position
+        offset_x: int
+            the x-offset of the button
+        offset_y: int
+            the y-offset of the button
+
+        Returns
+        ----------
+        None
+        """
 
         # Draws the button, gets the text and then a possible offsets to center text on button position
         pg.draw.rect(screen, color, button_rect)
@@ -176,7 +303,17 @@ class SelectionMenu:
         screen.blit(button_text, (button_rect[2] + offset_x, pos_y - offset_y))
 
     def draw_menu(self, screen) -> None:
-        """Draws the menu elements"""
+        """Draws the menu elements
+
+        Parameters
+        ----------
+        screen
+            the screen pygame displays on
+
+        Returns
+        ----------
+        None
+        """
 
         # Draws the menus borders
         pg.draw.rect(screen, GREEN, self.menu_box, 10)
@@ -210,7 +347,17 @@ class SelectionMenu:
         screen.blit(menu_velocity_y, (self.leftbound, SCREEN_HEIGHT / 4 - (self.menu_velocity_y_rect[2] / 2)))
 
     def gets_variable_input(self, planet) -> None:
-        """Gets the variable input that should be displayed"""
+        """Gets the variable input that should be displayed
+
+        Parameters
+        ----------
+        planet: Planet
+            gets the planet to display its attributes
+
+        Returns
+        ----------
+        None
+        """
 
         # Sets the rect title via the planets data
         self.input_name = tools.text_format(str(planet.name), 20, GREEN)
@@ -229,7 +376,17 @@ class SelectionMenu:
         self.input_velocity_y_rect = self.input_velocity_y.get_rect()
 
     def draw_variable_input(self, screen) -> None:
-        """Displays the changeable variables of the object"""
+        """Displays the changeable variables of the object
+
+        Parameters
+        ----------
+        screen
+            the screen pygame displays on
+
+        Returns
+        ----------
+        None
+        """
 
         # Displays the text
         screen.blit(self.input_name, (self.rightbound, SCREEN_HEIGHT / 10.2 - (self.menu_name_rect[2] / 2)))
@@ -239,8 +396,18 @@ class SelectionMenu:
         screen.blit(self.input_velocity_x, (self.rightbound, SCREEN_HEIGHT / 5.1 - (self.menu_name_rect[2] / 2)))
         screen.blit(self.input_velocity_y, (self.rightbound, SCREEN_HEIGHT / 4.5 - (self.menu_name_rect[2] / 2)))
 
-    def update(self, mouse_pos) -> None:
-        """Updates the menu screen"""
+    def update(self, mouse_pos: tuple) -> None:
+        """Updates the menu screen
+
+        Parameters
+        ----------
+        mouse_pos: tuple
+            x- and y-position of the mouse cursor
+
+        Returns
+        ---------
+        None
+        """
 
         try:
             if self.input_name_rect.collidepoint(mouse_pos[0], mouse_pos[1]):
@@ -255,7 +422,7 @@ class SelectionMenu:
 elif event.type == pg.MOUSEWHEEL:
     # Checks if wheel is turned upward
     if (event.wheel.y > 0) or (event.wheel.y < 0):
-        selected = mouse_collison(objects, radius)[0]
+        selected = mouse_collision(objects, radius)[0]
         if selected is not None:
             radius[selected] += 35
 

@@ -4,10 +4,32 @@ from scenes import editor, helper, options
 
 
 class MainMenu(tools.SceneBase):
-    """Class that creates the main menu screen"""
+    """Class that creates the main menu screen
+
+    Attributes
+    ----------
+    counter: int
+        keeps track of the user's selection
+    selection: dict
+        uses the counter to get the object of the user's current selection
+
+    Methods
+    ----------
+    process_input(events, pressed_keys):
+        Handles input
+    update():
+        Updates scene
+    render(screen):
+        Renders the helper's UI
+    """
 
     def __init__(self) -> None:
-        """Initializes attributes"""
+        """Initialize class attributes
+
+        Returns
+        ----------
+        None
+        """
 
         tools.SceneBase.__init__(self)
 
@@ -17,7 +39,19 @@ class MainMenu(tools.SceneBase):
                           2: "options", 3: "quit"}
 
     def process_input(self, events, pressed_keys) -> None:
-        """Handles input"""
+        """Handles input
+
+        Parameters
+        ----------
+        events: int
+            the different game events
+        pressed_keys: str
+            the keys pressed by the user
+
+        Returns
+        ----------
+        None
+        """
 
         for event in events:
             if event.type == pg.KEYDOWN:
@@ -47,12 +81,27 @@ class MainMenu(tools.SceneBase):
                         self.terminate()
 
     def update(self) -> None:
-        """Updates scene"""
+        """Updates scene
+
+        Returns
+        ----------
+        None
+        """
 
         pass
 
     def render(self,  screen) -> None:
-        """Renders the menu's UI"""
+        """Renders the menu's UI
+
+        Parameters
+        ----------
+        screen
+            the screen pygame displays on
+
+        Returns
+        ----------
+        None
+        """
 
         # Fills screen
         screen.fill(BLACK)

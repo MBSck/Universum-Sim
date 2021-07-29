@@ -4,10 +4,34 @@ from scenes import menu
 
 
 class Help(tools.SceneBase):
-    """Creates the help menu, which explains how to use the simulator"""
+    """Creates the help menu, which explains how to use the simulator
+
+    Attributes
+    ----------
+    general_pos: int
+        position of the general title
+    editor_pos: int
+        position of the editor title
+    left_pos: int
+        position of the left bound
+
+    Methods
+    ----------
+    process_input(events, pressed_keys):
+        Handles input
+    update():
+        Updates scene
+    render(screen):
+        Renders the helper's UI
+    """
 
     def __init__(self) -> None:
-        """Initialize class attributes"""
+        """Initialize class attributes
+
+        Returns
+        ----------
+        None
+        """
 
         tools.SceneBase.__init__(self)
 
@@ -15,7 +39,19 @@ class Help(tools.SceneBase):
         self.left_pos = 300
 
     def process_input(self, events, pressed_keys) -> None:
-        """Handles input"""
+        """Handles input
+
+        Parameters
+        ----------
+        events: int
+            the different game events
+        pressed_keys: str
+            the keys pressed by the user
+
+        Returns
+        ----------
+        None
+        """
 
         for event in events:
 
@@ -31,12 +67,27 @@ class Help(tools.SceneBase):
                     self.switch_to_scene(menu.MainMenu())
 
     def update(self) -> None:
-        """Updates scene"""
+        """Updates scene
+
+        Returns
+        ----------
+        None
+        """
 
         pass
 
     def render(self, screen) -> None:
-        """Renders the helper's UI"""
+        """Renders the helper's UI
+
+        Parameters
+        ----------
+        screen
+            the screen pygame displays on
+
+        Returns
+        ----------
+        None
+        """
 
         # Fills screen
         screen.fill(BLACK)

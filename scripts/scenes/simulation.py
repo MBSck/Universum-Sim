@@ -9,8 +9,33 @@ from assets.variables import *
 
 
 class Simulation(tools.SceneBase):
-    """This class simulates the planets movement"""
+    """This class simulates the planets movement
+
+    Attributes
+    ----------
+    ss: SolarSystem
+        initializes the SolarSystem class
+    menu: Scene
+        initializes the menu Scene-class for switching to it later on
+
+    Methods
+    ----------
+    process_input(events, pressed_keys):
+        Handles input
+    update():
+        Updates scene
+    render(screen):
+        Renders the helper's UI
+    """
+
     def __init__(self):
+        """Initialize class attributes
+
+        Returns
+        ----------
+        None
+        """
+
         tools.SceneBase.__init__(self)
 
         # Re-initializes the solar system class
@@ -20,6 +45,20 @@ class Simulation(tools.SceneBase):
         self.menu = editor.SelectionMenu()
 
     def process_input(self, events, pressed_keys):
+        """Handles input
+
+        Parameters
+        ----------
+        events: int
+            the different game events
+        pressed_keys: str
+            the keys pressed by the user
+
+        Returns
+        ----------
+        None
+        """
+
         for event in events:
 
             # Checks if mouse button is pressed
@@ -37,6 +76,13 @@ class Simulation(tools.SceneBase):
         self.ss.update()
 
     def update(self):
+        """Updates scene
+
+        Returns
+        ----------
+        None
+        """
+
         # To avoid list iteration conflict remove planets after iteration
         remove_list = []
 
@@ -58,10 +104,21 @@ class Simulation(tools.SceneBase):
                 self.ss.remove_planet(i)
 
     def render(self, screen):
+        """Renders the simulation's UI
+
+        Parameters
+        ----------
+        screen
+            the screen pygame displays on
+
+        Returns
+        ----------
+        None
+        """
+
         # Fill screen with black
         screen.fill(BLACK)
 
-        # Simulation UI
         # Sets the text of the non interaction UI elements
         title = tools.text_format("Simulation", 90, RED)
 

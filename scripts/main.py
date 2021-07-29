@@ -1,10 +1,10 @@
 from assets.variables import *
 from scenes import menu
 
-"""This is a planet creating tool that leads to a functioning solar system, add some future features like
-black holes and such
+__version__ = "0.1 - Alpha"
+__author__ = "Marten Scheuck"
 
-I dont't need a grade, but would like comments about my general code, where I could improve"""
+"""This is simulation tool, which generates physical accurate planetary body simulations"""
 
 # TODO: Start options for planets, like speed etc. should be shown visually by arrow into direction
 # TODO: Matrix method?
@@ -17,9 +17,19 @@ I dont't need a grade, but would like comments about my general code, where I co
 # TODO: Computation really slow -> Fix! (Matrix calculation)
 
 
-def main(starting_scene, screen=SCREEN, fps=FPS):
-    """Runs the scenes and is therefore the main game loop"""
+def main(starting_scene, screen=SCREEN, fps: int = FPS) -> None:
+    """Starts up the simulation and runs the first scene. Main game loop
 
+    Parameters:
+        starting_scene: The starting scene, utilizing the respective Scene class
+        screen: the screen pygame displays on
+        fps (int): The frames per second that are rendered
+
+    Returns:
+        None
+    """
+
+    # Initializes pygame and the first scene
     pg.init()
     screen.fill(BLACK)
     active_scene = starting_scene
@@ -98,5 +108,6 @@ def main(starting_scene, screen=SCREEN, fps=FPS):
 
 
 if __name__ == "__main__":
+
     # Start the main game loop
     main(menu.MainMenu())

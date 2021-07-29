@@ -7,10 +7,36 @@ from scenes import menu
 
 
 class Options(tools.SceneBase):
-    """Options menu to change screen resolution and different stuff"""
+    """Options menu to change screen resolution and different stuff
+
+    Attributes
+    ----------
+    counter: int
+        keeps track of the user's selection
+    sound_settings: dict
+        keeps track of different sound volumes
+    fullscreen_settings: dict
+        has two options either 'Yes' or 'No' that decide on fullscreen- or window-mode
+    selection: dict
+        uses the counter to get the object of the user's current selection
+
+    Methods
+    ----------
+    process_input(events, pressed_keys):
+        Handles input
+    update():
+        Updates scene
+    render(screen):
+        Renders the helper's UI
+    """
 
     def __init__(self) -> None:
-        """Initializes class attributes"""
+        """Initialize class attributes
+
+        Returns
+        ----------
+        None
+        """
 
         tools.SceneBase.__init__(self)
 
@@ -27,7 +53,20 @@ class Options(tools.SceneBase):
         self.selection = {0: "Sound", 1: "Fullscreen", 2: "Back"}
 
     def process_input(self, events, pressed_keys) -> None:
-        """Handles input"""
+        """Handles input
+
+        Parameters
+        ----------
+        events: int
+            the different game events
+        pressed_keys: str
+            the keys pressed by the user
+
+        Returns
+        ----------
+        None
+        """
+
         global volume_setting, fullscreen_setting
 
         for event in events:
@@ -72,12 +111,27 @@ class Options(tools.SceneBase):
                     self.switch_to_scene(menu.MainMenu())
 
     def update(self) -> None:
-        """Updates scene"""
+        """Updates scene
+
+        Returns
+        ----------
+        None
+        """
 
         pass
 
     def render(self, screen) -> None:
-        """Renders option's UI"""
+        """Renders the option's UI
+
+        Parameters
+        ----------
+        screen
+            the screen pygame displays on
+
+        Returns
+        ----------
+        None
+        """
 
         screen.fill(BLACK)
 

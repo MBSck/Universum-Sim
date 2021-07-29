@@ -7,11 +7,47 @@ from assets.variables import *
 
 
 class SolarSystem(metaclass=tools.Singleton):
-    """This creates the space in which the objects interact with each other.
-    Singleton so it can be used in different functions and keeps all functionality"""
+    """This creates the space in which the planets interact with each other. It is a singleton
+    so it can be used in different functions and keeps all its information
+
+    Attributes
+    -----------
+    planets_list: list
+        this list contains all planet class objects
+    max_objects: int
+        this sets the max object count allowed in the planets list
+    system_time: int
+        the starting time for the simulation
+    error: bool
+        set to True, if error occurs
+
+    Methods
+    ----------
+    add_planet(*args):
+        Adds planets to the planet list
+    remove_planet(planet):
+        Removes planet from the solar system
+    get_planet(planet):
+        Gets a specific planet from planet list
+    number_of_intrastellar_objects():
+        Returns the number of objects in list
+    planetary_interaction():
+        Calculates the new accelerations of each of the planets
+    planetary_position():
+        Utilizes verlet integration to get the next positions of all planets for a certain time step period
+    update():
+        Updates the calculated data and stores it inside the planets itself
+    reset():
+        This resets the class back to its empty state
+    """
 
     def __init__(self) -> None:
-        """Initializes the intrastellar objects and their changing attributes"""
+        """Initializes the intra-stellar objects and the class attributes
+
+        Returns
+        ----------
+        None
+        """
 
         self.planets_list = []
         self.max_objects = 10
@@ -21,33 +57,76 @@ class SolarSystem(metaclass=tools.Singleton):
         self.error = False
 
     def add_planet(self, *args) -> None:
-        """Adds planets or objects to the solar system"""
+        """Adds planets to the planet list
+
+        Parameters
+        ----------
+        *args: Planet
+            takes in Planet class objects
+
+        Returns
+        ----------
+        None
+        """
+
+        # TODO: Display some error message
 
         if self.number_of_intrastellar_objects() < self.max_objects:
             for i in args:
                 self.planets_list.append(i)
         else:
-            # Display some error message
             self.error = True
 
     def remove_planet(self, planet) -> None:
-        """Removes planet from the solar system"""
+        """Removes planet from the solar system
+
+        Parameters
+        ----------
+        planet: Planet
+            planet to be removed from the planet list
+
+        Returns
+        ----------
+        None
+        """
 
         self.planets_list.remove(planet)
 
-    def get_planet(self, planet) -> None:
-        """Gets specific planet from planet list"""
+    def get_planet(self, planet):
+        """Gets a specific planet from planet list
 
-        if planet in self.planets_list:
-            return planet
+        Parameters
+        ----------
+        planet: Planet
+            planet to be get from planet list
+
+        Returns
+        ----------
+        planet: Planet
+            planet from planet list or None if not found
+        """
+
+        return planet if planet in self.planets_list else None
 
     def number_of_intrastellar_objects(self):
-        """Returns the number of objects in list"""
+        """Returns the number of objects in list
+
+        Returns
+        ----------
+        planet_list_length: int
+            the length of the planet list
+        """
 
         return len(self.planets_list)
 
     def planetary_interaction(self):
-        """Calculates the new accelerations of each of the planets"""
+        """Calculates the new accelerations of each of the planets
+
+        Returns
+        ----------
+        acceleration_list: list
+            the calculated acceleration of all the planets in the planet list
+        """
 
         acceleration_list = []
         for i in self.planets_list:
@@ -62,7 +141,15 @@ class SolarSystem(metaclass=tools.Singleton):
         return acceleration_list
 
     def planetary_positions(self):
-        """Utilizes Verlet integration to get the next positions of all planets for a certain time step period"""
+        """Utilizes verlet integration to get the next positions of all planets for a certain time step period
+
+        Returns
+        -----------
+        temp_pos_list: list
+            the positions of the planets after the verlet integration
+        temp_vel_list: list
+            the velocity of the planets after the verlet integration
+        """
 
         temp_pos_list, temp_vel_list = [], []
         for i, o in enumerate(self.planets_list):
@@ -77,7 +164,12 @@ class SolarSystem(metaclass=tools.Singleton):
         return temp_pos_list, temp_vel_list
 
     def update(self) -> None:
-        """"Updates the calculated data and stores it inside the planets itself"""
+        """"Updates the calculated data and stores it inside the planets itself
+
+        Returns
+        ----------
+        None
+        """
 
         for i, o in enumerate(self.planets_list):
             o.pos_x_real, o.pos_y_real = self.planetary_positions()[0][i]
@@ -86,7 +178,12 @@ class SolarSystem(metaclass=tools.Singleton):
             # o.trace.append(o.rect.center)
 
     def reset(self) -> None:
-        """This resets the class back to its empty state"""
+        """This resets the class back to its empty state
+
+        Returns
+        -----------
+        None
+        """
 
         self.planets_list = []
         self.system_time = 0
