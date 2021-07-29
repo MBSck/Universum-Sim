@@ -11,7 +11,7 @@ _Is currently being worked on_
 * [Features](#Features)
 * [Screenshots](#Screenshots)
 * [GIF](#GIF)
-* [Contact](#Contact)
+* [Contact](#Contact&Credits)
 
 ## Setup
 To run this project install numpy and pygame (For Ubuntu/Debian):
@@ -43,8 +43,7 @@ Simulating the movement of multiple planetary bodies
 ### The simulation in operation:
 <img src="./img/PlanetSimulation.gif" width="1100">
 
-## Contact
-Created by Marten B. Scheuck - feel free to contact me
-Contributions by [Lyniat](https://github.com/Lyniat)
-
-Music by [Bensound.com](https://www.bensound.com)
+## Contact & Credits
+* Created by Marten B. Scheuck - feel free to contact me
+* Contributions by [Lyniat](https://github.com/Lyniat)
+* Music by [Bensound.com](https://www.bensound.com)
